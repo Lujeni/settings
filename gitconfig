@@ -1,0 +1,58 @@
+[core]
+    excludesfile = ~/.gitignore_global
+
+[user]
+    name = THEBAULT Julien
+    email = julien@thebault.co
+
+[color]
+    branch = auto
+    diff = auto
+    status = auto
+
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red
+    new = green
+
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+
+[push]
+    default = matching
+
+[merge]
+    tool = kdiff
+
+[mergetool "kdiff3"]
+    path = /usr/bin/kdiff3
+    keepBackup = false
+    trustExistCode = false
+
+[alias]
+    st = status -sb
+    # reset
+    r = reset HEAD
+    r1 = reset HEAD^
+    r2 = reset HEAD^^
+    rh = reset HEAD --hard
+    rh1 = reset HEAD^ --hard
+    rh2 = reset HEAD^^ --hard
+    # stash
+    sl = stash list
+    sa = stash apply
+    ss = stash save
+    # others
+    co = checkout
+    gd = diff
+    ll = log --decorate=short --abbrev-commit --oneline --graph --all
+    pr = pull --rebase
+    bta-pack = "!set -e; GIT_DIR=\"$(git rev-parse --git-dir)\"; du -Dxsh \"$GIT_DIR\"; rm -f \"$GIT_DIR\"/objects/pack/tmp_pack_*; [ -d \"$GIT_DIR\"/svn ] && git svn gc; git gc --aggressive --prune=0; rm -f \"$GIT_DIR\"/info/refs \"$GIT_DIR\"/objects/info/packs; find -H \"$GIT_DIR\" -xdev ! -path \"$GIT_DIR/refs\" -empty -delete; du -Dxsh \"$GIT_DIR\";"
