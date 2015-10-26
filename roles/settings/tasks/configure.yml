@@ -1,0 +1,22 @@
+---
+# TODO:
+# keychain
+# hexchat
+# py3status
+# virtualenvwrapper
+# pip
+# git prompt
+
+- name: configure | home basic file
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ home }}/{{ item.dest }}"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0644
+  with_items:
+    - {"src": "bashrc", "dest": ".bashrc"}
+    - {"src": "gitconfig", "dest": ".gitconfig"}
+    - {"src": "gitignore_global", "dest": ".gitignore_global"}
+    - {"src": "nvimrc", "dest": ".nvimrc"}
+    - {"src": "pentadactylrc", "dest": ".pentadactylrc"}

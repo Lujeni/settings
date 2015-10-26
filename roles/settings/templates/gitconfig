@@ -1,3 +1,4 @@
+# {{ ansible_managed }}
 [core]
     excludesfile = ~/.gitignore_global
 
@@ -28,14 +29,6 @@
 
 [push]
     default = matching
-
-[merge]
-    tool = kdiff
-
-[mergetool "kdiff3"]
-    path = /usr/bin/kdiff3
-    keepBackup = false
-    trustExistCode = false
 
 [alias]
     st = status -sb

@@ -1,0 +1,29 @@
+# {{ ansible_managed }}
+if [[ $- != *i* ]] ; then
+	# Shell is non-interactive.  Be done now!
+	return
+fi
+
+# keychain
+keychain 1m
+. ~/.keychain/$HOSTNAME-sh
+
+# virtualenv wrapper
+export WORKON_HOME=~/.virtualenvs
+mkdir -p $WORKON_HOME
+source /usr/bin/virtualenvwrapper.sh
+
+# pip
+export PIP_DOWNLOAD_CACHE="$HOME/tmp/cache"
+
+# prompt
+GIT_PROMPT_THEME=Solarized
+source ~/.bash-git-prompt/gitprompt.sh
+
+if [ -f $HOME/.bashrc_aliases ]; then
+    . $HOME/.bashrc_aliases
+fi
+
+if [ -f $HOME/.bashrc_specific ]; then
+    . $HOME/.bashrc_specific
+fi

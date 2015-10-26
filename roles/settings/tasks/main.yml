@@ -1,0 +1,10 @@
+---
+- include: install.yml
+  tags:
+    - settings
+    - settings_install
+
+- include: configure.yml
+  tags:
+    - settings
+    - settings_configure

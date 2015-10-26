@@ -1,0 +1,10 @@
+---
+- hosts: all
+  gather_facts: no
+  sudo: yes
+  tags:
+    - settings
+    - settings_install
+    - settings_configure
+  roles:
+    - settings

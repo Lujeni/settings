@@ -1,0 +1,76 @@
+" {{ ansible_managed }}
+
+call plug#begin('~/.nvim/plugged')
+    Plug 'lilydjwg/colorizer'
+    Plug 'kien/ctrlp.vim'
+    Plug 'altercation/vim-colors-solarized'
+    Plug 'jnurmine/Zenburn'
+    Plug 'tpope/vim-fugitive'
+    Plug 'chase/vim-ansible-yaml'
+    Plug 'nginx.vim'
+    Plug 'lepture/vim-jinja'
+    Plug 'vim-gitgutter'
+    Plug 'Valloric/YouCompleteMe', { 'for': ['cpp', 'python'], 'do': './install.py --clang-completer' }
+    Plug 'scrooloose/nerdtree'
+    Plug 'scrooloose/syntastic'
+    autocmd! User YouCompleteMe call youcompleteme#Enable()
+call plug#end()
+
+" ctrlp
+let g:ctrlp_cmd = 'CtrlPMRUFiles'
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:100'
+let g:ctrlp_arg_map = 1
+let g:ctrlp_extensions = ['mixed', 'buffertag']
+let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
+
+" terminal
+" This maps Leader + e to exit terminal mode.
+tnoremap <Leader>e <C-\><C-n>
+
+autocmd! bufwritepost .nvimrc source %
+autocmd vimenter * NERDTree
+
+" nerdtree
+let g:nerdtree_tabs_open_on_gui_startup=1
+let g:nerdtree_tabs_open_on_console_startup=1
+
+" global
+filetype off
+filetype indent on
+filetype plugin on
+
+colorscheme zenburn
+syntax on
+
+set autoindent
+set background=light
+set clipboard+=unnamed
+set colorcolumn=79
+set expandtab
+set foldmethod=manual
+set go+=a
+set guifont=Monospace\ 6
+set guioptions+=a
+set hlsearch
+set ls=2
+set modifiable
+set nocompatible
+set number
+set paste
+set shiftwidth=4
+set si
+set siso=1
+set sm
+set softtabstop=4
+set t_Co=256
+set tabstop=4
+set virtualedit=onemore
+
+map <right> <esc>
+map <left> <esc>
+map <up> <esc>
+map <down> <esc>
+imap <right> <esc>
+imap <left> <esc>
+imap <up> <esc>
+imap <down> <esc>

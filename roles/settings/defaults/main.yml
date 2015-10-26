@@ -1,0 +1,53 @@
+---
+home: /home/julien/
+
+user: julien
+
+group: julien
+
+settings_packages:
+  - app-admin/ansible
+  - app-admin/keepassx
+  - app-editors/neovim
+  - app-emulation/virtualbox
+  - app-emulation/virtualbox-guest-additions
+  - app-emulation/virtualbox-modules
+  - app-text/mupdf
+  - dev-python/ipython
+  - dev-python/pip
+  - dev-python/virtualenvwrapper
+  - dev-util/sysdig
+  - media-gfx/scrot
+  - media-gfx/vienior
+  - media-sound/pnmixer
+  - media-video/vlc
+  - mega-gfx/feh
+  - net-dns/bind-tools
+  - net-irc/hexchat
+  - net-misc/remmina
+  - sys-process/htop
+  - sys-process/iotop
+  - www-client/chromium
+  - www-client/firefox-bin
+  - x11-misc/3status
+  - x11-misc/dmenu
+  - x11-misc/i3lock
+  - x11-misc/py3status
+  - x11-misc/xautolock
+  - x11-terms/terminator
+
+settings_keywords:
+  - app-admin/ansible
+  - app-admin/keepassx
+  - app-editors/neovim
+  - app-emulation/virtualbox
+  - app-emulation/virtualbox-guest-additions
+  - app-emulation/virtualbox-modules
+  - dev-python/pip
+  - dev-python/virtualenvwrapper
+  - dev-python/yenc
+  - dev-util/sysdig
+  - x11-misc/py3status
+
+settings_use:
+  - app-editors/neovim python

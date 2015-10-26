@@ -1,0 +1,6 @@
+# {{ ansible_managed }}
+set guioptions=Cbmnrs
+set findcase=ignore
+set hlfind
+set incfind
+set editor='terminator -e "nvim +<line> +\"sil! call cursor(0, <column>)\" <file>"'
