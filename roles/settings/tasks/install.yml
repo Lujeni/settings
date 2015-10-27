@@ -13,6 +13,6 @@
     - keywords
     - use
 
-#- name: install | role's package
-#  portage: package="{{ item }}" newuse=yes update=yes state=installed
-#  with_items: "{{ settings_packages }}"
+- name: install | role's package
+  portage: package="{{ item }}" newuse=yes state=installed
+  with_items: "{{ settings_packages }}"
