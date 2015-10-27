@@ -5,6 +5,7 @@ user: julien
 
 group: julien
 
+# TODO: split packages by category (system, dev...)
 settings_packages:
   - app-admin/ansible
   - app-admin/keepassx
@@ -18,10 +19,10 @@ settings_packages:
   - dev-python/virtualenvwrapper
   - dev-util/sysdig
   - media-gfx/scrot
-  - media-gfx/vienior
+  - media-gfx/viewnior
   - media-sound/pnmixer
   - media-video/vlc
-  - mega-gfx/feh
+  - media-gfx/feh
   - net-dns/bind-tools
   - net-irc/hexchat
   - net-misc/remmina
@@ -29,7 +30,7 @@ settings_packages:
   - sys-process/iotop
   - www-client/chromium
   - www-client/firefox-bin
-  - x11-misc/3status
+  - x11-misc/i3status
   - x11-misc/dmenu
   - x11-misc/i3lock
   - x11-misc/py3status
