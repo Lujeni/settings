@@ -6,7 +6,7 @@ call plug#begin('~/.nvim/plugged')
     Plug 'altercation/vim-colors-solarized'
     Plug 'jnurmine/Zenburn'
     Plug 'tpope/vim-fugitive'
-    Plug 'chase/vim-ansible-yaml'
+    Plug 'pearofducks/ansible-vim'
     Plug 'nginx.vim'
     Plug 'lepture/vim-jinja'
     Plug 'vim-gitgutter'
