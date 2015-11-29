@@ -2,9 +2,7 @@
 # TODO:
 # keychain
 # hexchat
-# py3status
 # virtualenvwrapper
-# pip
 # git prompt
 
 - name: configure | home basic file
@@ -20,3 +18,38 @@
     - {"src": "gitignore_global", "dest": ".gitignore_global"}
     - {"src": "nvimrc", "dest": ".nvimrc"}
     - {"src": "pentadactylrc", "dest": ".pentadactylrc"}
+
+- name: configure | i3 | dir
+  file:
+    path: "{{ home }}/.i3"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0644
+    state: directory
+
+- name: configure | i3 | py3status / config
+  template:
+    src: "i3/{{ item }}"
+    dest: "{{ home }}/.i3/{{ item }}"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0644
+  with_items:
+    - config
+    - i3status.conf
+
+- name: configure | terminator | dir
+  file:
+    path: "{{ home }}/.terminator/"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0644
+    state: directory
+
+- name: configure | terminator | config
+  template:
+    src: "terminator/config"
+    dest: "{{ home }}/.terminator/config"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0644

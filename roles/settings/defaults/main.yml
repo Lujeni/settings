@@ -5,37 +5,38 @@ user: julien
 
 group: julien
 
-# TODO: split packages by category (system, dev...)
 settings_packages:
+  #- dev-util/sysdig
+  #- www-client/chromium
   - app-admin/ansible
   - app-admin/keepassx
+  - app-arch/unp
   - app-editors/neovim
   - app-emulation/virtualbox
   - app-emulation/virtualbox-guest-additions
   - app-emulation/virtualbox-modules
   - app-text/mupdf
-  - dev-python/ipython
+  #- dev-python/ipython
   - dev-python/pip
-  - dev-python/virtualenvwrapper
-  - dev-util/sysdig
+  - media-gfx/feh
   - media-gfx/scrot
   - media-gfx/viewnior
   - media-sound/pnmixer
   - media-video/vlc
-  - media-gfx/feh
   - net-dns/bind-tools
   - net-irc/hexchat
   - net-misc/remmina
   - sys-process/htop
   - sys-process/iotop
-  - www-client/chromium
   - www-client/firefox-bin
-  - x11-misc/i3status
+  - x11-apps/xrandr
   - x11-misc/dmenu
   - x11-misc/i3lock
+  - x11-misc/i3status
   - x11-misc/py3status
   - x11-misc/xautolock
   - x11-terms/terminator
+  - xfce-base/thunar
 
 settings_keywords:
   - app-admin/ansible
@@ -44,11 +45,23 @@ settings_keywords:
   - app-emulation/virtualbox
   - app-emulation/virtualbox-guest-additions
   - app-emulation/virtualbox-modules
+  - dev-libs/libtermkey
+  - dev-libs/libvterm
+  - dev-libs/msgpack
+  - dev-libs/unibilium
+  - dev-lua/messagepack
+  - dev-python/neovim-python-client
   - dev-python/pip
   - dev-python/virtualenvwrapper
   - dev-python/yenc
   - dev-util/sysdig
   - x11-misc/py3status
+  - x11-drivers/xf86-video-virtualbox
 
 settings_use:
   - app-editors/neovim python
+  - dev-lang/python sqlite
+  - sys-libs/zlib minizip
+
+settings_packages_pip:
+  - pew

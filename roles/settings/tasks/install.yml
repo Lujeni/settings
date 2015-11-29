@@ -16,3 +16,7 @@
 - name: install | role's package
   portage: package="{{ item }}" newuse=yes state=installed
   with_items: "{{ settings_packages }}"
+
+- name: install | role's package pip
+  pip: name="{{ item }}"
+  with_items: "{{ settings_packages_pip }}"
