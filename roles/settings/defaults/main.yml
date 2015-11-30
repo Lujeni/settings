@@ -6,6 +6,7 @@ user: julien
 group: julien
 
 settings_packages:
+  #- dev-python/ipython
   #- dev-util/sysdig
   #- www-client/chromium
   - app-admin/ansible
@@ -15,9 +16,10 @@ settings_packages:
   - app-emulation/virtualbox
   - app-emulation/virtualbox-guest-additions
   - app-emulation/virtualbox-modules
+  - app-misc/tmux
   - app-text/mupdf
-  #- dev-python/ipython
   - dev-python/pip
+  - dev-vcs/tig
   - media-gfx/feh
   - media-gfx/scrot
   - media-gfx/viewnior
@@ -25,10 +27,12 @@ settings_packages:
   - media-video/vlc
   - net-dns/bind-tools
   - net-irc/hexchat
+  - net-misc/keychain
   - net-misc/remmina
   - sys-process/htop
   - sys-process/iotop
   - www-client/firefox-bin
+  - www-plugins/adobe-flash
   - x11-apps/xrandr
   - x11-misc/dmenu
   - x11-misc/i3lock
@@ -59,9 +63,13 @@ settings_keywords:
   - x11-drivers/xf86-video-virtualbox
 
 settings_use:
+  - net-misc/remmina freerdp
   - app-editors/neovim python
   - dev-lang/python sqlite
   - sys-libs/zlib minizip
+
+settings_license:
+  - www-plugins/adobe-flash AdobeFlash-11.x
 
 settings_packages_pip:
   - pew

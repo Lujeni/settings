@@ -1,0 +1,5 @@
+# {{ ansible_managed }}
+
+{% for license in settings_license -%}
+    {{ license }}
+{% endfor %}
