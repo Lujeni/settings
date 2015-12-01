@@ -1,6 +1,7 @@
 # {{ ansible_managed }}
 [core]
     excludesfile = ~/.gitignore_global
+    editor = nvim
 
 [user]
     name = THEBAULT Julien
