@@ -6,9 +6,6 @@ user: julien
 group: julien
 
 settings_packages:
-  #- dev-python/ipython
-  #- dev-util/sysdig
-  #- www-client/chromium
   - app-admin/ansible
   - app-admin/keepassx
   - app-arch/unp
@@ -18,7 +15,11 @@ settings_packages:
   - app-emulation/virtualbox-modules
   - app-misc/tmux
   - app-text/mupdf
+  - dev-java/icedtea-bin
+  - dev-python/ipython
   - dev-python/pip
+  - dev-util/sysdig
+  - dev-vcs/tig
   - dev-vcs/tig
   - media-gfx/feh
   - media-gfx/scrot
@@ -31,6 +32,7 @@ settings_packages:
   - net-misc/remmina
   - sys-process/htop
   - sys-process/iotop
+  - www-client/chromium
   - www-client/firefox-bin
   - www-plugins/adobe-flash
   - x11-apps/xrandr
@@ -39,6 +41,7 @@ settings_packages:
   - x11-misc/i3status
   - x11-misc/py3status
   - x11-misc/xautolock
+  - x11-misc/xclip
   - x11-terms/terminator
   - xfce-base/thunar
 
@@ -59,17 +62,23 @@ settings_keywords:
   - dev-python/virtualenvwrapper
   - dev-python/yenc
   - dev-util/sysdig
-  - x11-misc/py3status
   - x11-drivers/xf86-video-virtualbox
+  - x11-misc/py3status
 
 settings_use:
-  - net-misc/remmina freerdp
   - app-editors/neovim python
+  - dev-java/icedtea-bin webstart -cups
   - dev-lang/python sqlite
+  - net-misc/remmina freerdp
+  - sys-fs/udev gudev
   - sys-libs/zlib minizip
 
 settings_license:
   - www-plugins/adobe-flash AdobeFlash-11.x
 
 settings_packages_pip:
+  - ipdb
   - pew
+  - pylint
+  - pymongo
+  - requests
