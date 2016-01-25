@@ -44,6 +44,8 @@ settings_packages:
   - x11-misc/xclip
   - x11-terms/terminator
   - xfce-base/thunar
+  - x11-plugins/pidgin-sipe
+  - x11-plugins/pidgin
 
 settings_keywords:
   - app-admin/ansible
@@ -72,6 +74,7 @@ settings_use:
   - net-misc/remmina freerdp
   - sys-fs/udev gudev
   - sys-libs/zlib minizip
+  - x11-plugins/pigdin-sipe kerberos openssl
 
 settings_license:
   - www-plugins/adobe-flash AdobeFlash-11.x
