@@ -2,17 +2,19 @@
 
 call plug#begin('~/.nvim/plugged')
     Plug 'lilydjwg/colorizer'
-    Plug 'kien/ctrlp.vim'
     Plug 'altercation/vim-colors-solarized'
-    Plug 'jnurmine/Zenburn'
     Plug 'tpope/vim-fugitive'
     Plug 'pearofducks/ansible-vim'
     Plug 'nginx.vim'
     Plug 'lepture/vim-jinja'
     Plug 'vim-gitgutter'
     Plug 'Valloric/YouCompleteMe', { 'for': ['cpp', 'python'], 'do': './install.py --clang-completer' }
-    Plug 'scrooloose/nerdtree'
     Plug 'scrooloose/syntastic'
+    Plug 'jiangmiao/auto-pairs'
+    Plug 'junegunn/seoul256.vim'
+    Plug 'terryma/vim-multiple-cursors'
+    Plug 'tpope/vim-vinegar'
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     autocmd! User YouCompleteMe call youcompleteme#Enable()
 call plug#end()
 
@@ -25,7 +27,8 @@ let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
 
 " terminal
 " This maps Leader + e to exit terminal mode.
-tnoremap <Leader>e <C-\><C-n>
+tnoremap <Esc> <C-\><C-n>
+nnoremap <Leader>p :FZF<cr>
 
 autocmd! bufwritepost .nvimrc source %
 autocmd vimenter * NERDTree
@@ -39,7 +42,10 @@ filetype off
 filetype indent on
 filetype plugin on
 
-colorscheme zenburn
+
+let g:seoul256_background = 236
+colo seoul256
+set background=dark
 syntax on
 
 set autoindent
