@@ -9,12 +9,13 @@ settings_packages:
   - app-admin/ansible
   - app-admin/keepassx
   - app-arch/unp
-  - app-editors/neovim
+  - app-editors/vim
   - app-emulation/virtualbox
   - app-emulation/virtualbox-guest-additions
   - app-emulation/virtualbox-modules
   - app-misc/tmux
   - app-text/mupdf
+  - app-vim/youcompleteme
   - dev-java/icedtea-bin
   - dev-python/ipython
   - dev-python/pip
@@ -42,24 +43,24 @@ settings_packages:
   - x11-misc/py3status
   - x11-misc/xautolock
   - x11-misc/xclip
+  - x11-plugins/pidgin
+  - x11-plugins/pidgin-sipe
   - x11-terms/terminator
   - xfce-base/thunar
-  - x11-plugins/pidgin-sipe
-  - x11-plugins/pidgin
 
 settings_keywords:
   - app-admin/ansible
   - app-admin/keepassx
-  - app-editors/neovim
+  - app-editors/vim
   - app-emulation/virtualbox
   - app-emulation/virtualbox-guest-additions
   - app-emulation/virtualbox-modules
+  - app-vim/youcompleteme
   - dev-libs/libtermkey
   - dev-libs/libvterm
   - dev-libs/msgpack
   - dev-libs/unibilium
   - dev-lua/messagepack
-  - dev-python/neovim-python-client
   - dev-python/pip
   - dev-python/virtualenvwrapper
   - dev-python/yenc
@@ -68,10 +69,11 @@ settings_keywords:
   - x11-misc/py3status
 
 settings_use:
-  - app-editors/neovim python
+  - app-editors/vim python
   - dev-java/icedtea-bin webstart -cups
   - dev-lang/python sqlite
   - net-misc/remmina freerdp
+  - sys-devel/llvm clang
   - sys-fs/udev gudev
   - sys-libs/zlib minizip
   - x11-plugins/pigdin-sipe kerberos openssl
