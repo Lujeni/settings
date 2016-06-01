@@ -5,6 +5,8 @@ user: julien
 
 group: julien
 
+groups: root,wheel,audio,vboxuser,games
+
 settings_packages:
   - app-admin/ansible
   - app-admin/keepassx

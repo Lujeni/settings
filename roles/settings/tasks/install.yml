@@ -11,6 +11,7 @@
   template: src="gentoo/{{ item }}" dest=/etc/portage/package.{{ item }}/lujeni_settings.{{ item }}
   with_items:
     - keywords
+    - license
     - use
 
 - name: install | role's package

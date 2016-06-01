@@ -5,6 +5,12 @@
 # virtualenvwrapper
 # git prompt
 
+- name: configure | group
+  group: name="{{ group }}" state=present
+
+- name: configure | user
+- user: name="{{ user }}" comment="added by ansible" group="{{ group }}" groups="{{ groups }}"
+
 - name: configure | home basic file
   template:
     src: "{{ item.src }}"
