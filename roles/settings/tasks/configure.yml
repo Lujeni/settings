@@ -13,11 +13,11 @@
     group: "{{ group }}"
     mode: 0644
   with_items:
-    - {"src": "bashrc", "dest": ".bashrc"}
-    - {"src": "gitconfig", "dest": ".gitconfig"}
-    - {"src": "gitignore_global", "dest": ".gitignore_global"}
-    - {"src": "nvimrc", "dest": ".nvimrc"}
-    - {"src": "pentadactylrc", "dest": ".pentadactylrc"}
+    - {"src": "home/bashrc.j2", "dest": ".bashrc"}
+    - {"src": "home/gitconfig.j2", "dest": ".gitconfig"}
+    - {"src": "home/gitignore_global.j2", "dest": ".gitignore_global"}
+    - {"src": "home/vimrc.j2", "dest": ".vimrc"}
+    - {"src": "home/pentadactylrc.j2", "dest": ".pentadactylrc"}
 
 - name: configure | i3 | dir
   file:
@@ -35,21 +35,19 @@
     group: "{{ group }}"
     mode: 0644
   with_items:
-    - config
-    - i3status.conf
+    - config.j2
+    - i3status.conf.j2
 
-- name: configure | terminator | dir
-  file:
-    path: "{{ home }}/.terminator/"
-    owner: "{{ user }}"
-    group: "{{ group }}"
-    mode: 0644
-    state: directory
-
-- name: configure | terminator | config
+- name: configure | xinit
   template:
-    src: "terminator/config"
-    dest: "{{ home }}/.terminator/config"
+    src: "xinitrc.j2"
+    dest: "{{ home }}/.xinitrc"
     owner: "{{ user }}"
     group: "{{ group }}"
-    mode: 0644
+
+- name: configure | slim | conf
+  template:
+    src: "slim.conf.j2"
+    dest: "/etc/slim.conf"
+    owner: root
+    group: root

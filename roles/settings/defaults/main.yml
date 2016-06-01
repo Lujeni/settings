@@ -35,6 +35,7 @@ settings_packages:
   - www-client/chromium
   - www-client/firefox-bin
   - www-plugins/adobe-flash
+  - x11-apps/xclock
   - x11-apps/xrandr
   - x11-misc/dmenu
   - x11-misc/i3lock
@@ -42,9 +43,8 @@ settings_packages:
   - x11-misc/py3status
   - x11-misc/xautolock
   - x11-misc/xclip
-  - x11-plugins/pidgin
-  - x11-plugins/pidgin-sipe
-  - x11-terms/terminator
+  - x11-terms/xterm
+  - x11-wm/twm
   - xfce-base/thunar
 
 settings_keywords:

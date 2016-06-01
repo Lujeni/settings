@@ -1,0 +1,46 @@
+# {{ ansible_managed }}
+
+default_path        /bin:/usr/bin:/usr/local/bin
+default_xserver     /usr/bin/X
+xserver_arguments   -nolisten tcp -br -deferglyphs 16 vt07
+
+halt_cmd            /sbin/shutdown -h now
+reboot_cmd          /sbin/shutdown -r now
+console_cmd         /usr/bin/xterm -C -fg white -bg black +sb -T "Console login" -e /bin/sh -c "/bin/cat 
+
+xauth_path         /usr/bin/xauth 
+
+authfile           /var/run/slim.auth
+
+numlock             on
+
+login_cmd           exec /bin/bash -login ~/.xinitrc i3
+
+sessionstart_cmd        /usr/bin/sessreg -a -l :0.0 %user
+sessionstop_cmd     /usr/bin/sessreg -d -l :0.0 %user
+sessions default, i3
+
+daemon  yes
+
+ Available sessions:
+sessiondir      /usr/share/xsessions
+
+screenshot_cmd      import -window root /slim.png
+
+welcome_msg         La Congolexicomatisation des lois du marche
+
+shutdown_msg       The system is halting...
+reboot_msg         The system is rebooting...
+
+default_user        julien
+
+focus_password      yes
+
+current_theme       default
+
+lockfile            /run/slim.pid
+
+# Log file
+logfile             /var/log/slim.log
+ x11-terms/terminator
+

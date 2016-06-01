@@ -4,6 +4,9 @@ if [[ $- != *i* ]] ; then
 	return
 fi
 
+# common alias
+alias git_all_st="for i in *;do pushd $i;git status;popd;done"
+
 # keychain
 keychain 1m
 . ~/.keychain/$HOSTNAME-sh
@@ -11,8 +14,11 @@ keychain 1m
 # pip
 export PIP_DOWNLOAD_CACHE="$HOME/tmp/cache"
 
+# pew
+export WORKON_HOME="$HOME/works/pew/workon/"
+export PROJECT_HOME="$HOME/works/pew/project/"
+
 # prompt
-GIT_PROMPT_THEME=Solarized
 source ~/.bash-git-prompt/gitprompt.sh
 
 if [ -f $HOME/.bashrc_aliases ]; then
@@ -22,3 +28,9 @@ fi
 if [ -f $HOME/.bashrc_specific ]; then
     . $HOME/.bashrc_specific
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# golang part
+export GOPATH=/home/julien/works/go/
+export PATH="$PATH:$GOPATH/bin"
