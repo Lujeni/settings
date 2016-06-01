@@ -5,22 +5,31 @@ user: julien
 
 group: julien
 
+other_groups: "root,wheel"
+
 settings_packages:
   - app-admin/ansible
   - app-admin/keepassx
+  - app-admin/rsyslog
   - app-arch/unp
   - app-editors/vim
   - app-emulation/virtualbox
   - app-emulation/virtualbox-guest-additions
   - app-emulation/virtualbox-modules
   - app-misc/tmux
+  - app-portage/layman
   - app-text/mupdf
+  - app-text/tree
   - app-vim/youcompleteme
+  - app-xemacs/tm
+  - dev-db/mongodb
   - dev-java/icedtea-bin
+  - dev-lang/go
   - dev-python/ipython
   - dev-python/pip
   - dev-vcs/tig
-  - dev-vcs/tig
+  - gnone-extra/nm-applet
+  - mail-client/thunderbird-bin
   - media-gfx/feh
   - media-gfx/scrot
   - media-gfx/viewnior
@@ -29,12 +38,17 @@ settings_packages:
   - net-dns/bind-tools
   - net-irc/hexchat
   - net-misc/keychain
+  - net-misc/networkmanager
+  - net-misc/openvpn
   - net-misc/remmina
+  - net-misc/telnet-bsd
   - sys-process/htop
   - sys-process/iotop
-  - www-client/chromium
   - www-client/firefox-bin
   - www-plugins/adobe-flash
+  - www-servers/nginx
+  - www-servers/uwsgi
+  - x11-apps/xclock
   - x11-apps/xrandr
   - x11-misc/dmenu
   - x11-misc/i3lock
@@ -42,10 +56,11 @@ settings_packages:
   - x11-misc/py3status
   - x11-misc/xautolock
   - x11-misc/xclip
-  - x11-plugins/pidgin
-  - x11-plugins/pidgin-sipe
-  - x11-terms/terminator
+  - x11-terms/xterm
+  - x11-wm/twm
   - xfce-base/thunar
+  - media-sound/alsa-utils
+
 
 settings_keywords:
   - app-admin/ansible
@@ -56,6 +71,7 @@ settings_keywords:
   - app-emulation/virtualbox-guest-additions
   - app-emulation/virtualbox-modules
   - app-vim/youcompleteme
+  - dev-lang/go
   - dev-libs/libtermkey
   - dev-libs/libvterm
   - dev-libs/msgpack
@@ -65,17 +81,28 @@ settings_keywords:
   - dev-python/pip
   - dev-python/virtualenvwrapper
   - dev-python/yenc
+  - www-servers/nginx
+  - www-servers/uwsgi
   - x11-drivers/xf86-video-virtualbox
   - x11-misc/py3status
+  - sys-devel/gcc
 
 settings_use:
+  - app-crypt/pinentry gnome-keyring
   - app-editors/vim python
   - dev-java/icedtea-bin webstart -cups
+  - dev-lang/go gccgo
   - dev-lang/python sqlite
+  - dev-libs/libxml2 icu
+  - media-libs/harfbuzz icu
   - net-misc/remmina freerdp
+  - sys-devel/gcc go
   - sys-devel/llvm clang
   - sys-fs/udev gudev
+  - sys-kernel/genkernel cryptsetup
   - sys-libs/zlib minizip
+  - www-servers/nginx luajit nginx_modules_http_stub_status nginx_modules_http_cache_purge nginx_modules_http_headers_more nginx_modules_http_gzip_static nginx_modules_http_realip nginx_modules_http_lua
+  - www-servers/uwsgi python python_gevent uwsgi_plugins_syslog spooler syslog -uwsgi_plugins_rrdtool -zeromq go
   - x11-plugins/pigdin-sipe kerberos openssl
 
 settings_license:
@@ -87,3 +114,6 @@ settings_packages_pip:
   - pylint
   - pymongo
   - requests
+
+# extra vars
+hexchat_password:

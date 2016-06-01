@@ -1,0 +1,155 @@
+" {{ ansible_managed }}
+if filereadable($HOME.'/.vim/autoload/plug.vim')
+    call plug#begin('~/.vim/plugged')
+        Plug 'scrooloose/nerdtree' 
+        Plug 'scrooloose/syntastic'
+        Plug 'terryma/vim-multiple-cursors'
+        Plug 'tpope/vim-fugitive'
+        Plug 'airblade/vim-gitgutter'
+        Plug 'kien/ctrlp.vim'
+        Plug 'majutsushi/tagbar'
+        Plug 'jstemmer/gotags'
+       "
+        Plug 'junegunn/seoul256.vim'
+        Plug 'lepture/vim-jinja'
+        Plug 'pearofducks/ansible-vim'
+        Plug 'nginx.vim'
+        Plug 'fatih/vim-go'
+        autocmd! User YouCompleteMe call youcompleteme#Enable()
+    call plug#end()
+else
+    !curl -fLo ~/.vim/autoload/plug.vim --create-dirs 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    source $MYVIMRC
+endif
+
+" nerdtree
+let NERDTreeShowHidden=1
+nmap <leader>n :NERDTreeToggle<CR>
+let NERDTreeIgnore=['\.DS_Store', '\~$', '\.swp', '\.pyc']
+let g:nerdtree_tabs_open_on_gui_startup=1
+let g:nerdtree_tabs_open_on_console_startup=1
+
+autocmd! bufwritepost .nvimrc source %
+autocmd! bufwritepost .vimrc source %
+autocmd vimenter * NERDTree
+
+" syntastic
+let g:syntastic_python_checkers = ['flake8']
+
+" global
+filetype off
+filetype indent on
+filetype plugin on
+
+syntax on
+
+colorscheme seoul256
+
+set autoindent
+set clipboard+=unnamed
+set colorcolumn=79
+set expandtab
+" Folding settings
+set foldmethod=indent   "fold based on indent
+set foldnestmax=10      "deepest fold is 10 levels
+set nofoldenable        "dont fold by default
+set foldlevel=1         "this is just what i use
+"`za` - toggles
+"`zc` - closes
+"`zo` - opens
+"`zR` - open all
+"`zM` - close all
+set go+=a
+set guifont=Monospace\ 3
+set guioptions+=a
+set hlsearch
+set ls=2
+set modifiable
+set nocompatible
+set number
+set paste
+set shiftwidth=4
+set si
+set siso=1
+set sm
+set softtabstop=4
+set t_Co=256
+set tabstop=4
+set virtualedit=onemore
+set encoding=utf-8
+set autoread
+
+map <right> <esc>
+map <left> <esc>
+map <up> <esc>
+map <down> <esc>
+imap <right> <esc>
+imap <left> <esc>
+imap <up> <esc>
+imap <down> <esc>
+
+" ----------------------------------------------------------------------------
+" syntastic configuration
+" ----------------------------------------------------------------------------
+" https://github.com/scrooloose/syntastic
+" Syntax checking hacks for vim
+let g:syntastic_python_checkers = ['flake8']
+" XXX http://flake8.readthedocs.org/en/latest/config.html#global
+" let g:syntastic_python_flake8_args = '--ignore=E501,E123,E133,E226,E241,E242'
+autocmd BufRead,BufNewFile,BufWritePost * call MySyntasticCheckChain()
+if !exists("*MySyntasticCheckChain")
+    function MySyntasticCheckChain()
+        :SyntasticCheck
+        :SyntasticSetLoclist
+        :Errors
+    endfunction
+endif
+
+" ----------------------------------------------------------------------------
+" vim-go configuration
+" ----------------------------------------------------------------------------
+"
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_interfaces = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:go_list_type = "quickfix"
+
+nmap <F8> :TagbarToggle<CR>
+
+let g:tagbar_type_go = {  
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }

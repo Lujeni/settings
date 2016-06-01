@@ -1,4 +1,4 @@
-# {{ ansible_managed }}
+# This file is managed by ansible, don't make changes here - they will be overwritten.
 
 set $mod Mod4
 
@@ -10,10 +10,10 @@ font pango:DejaVu Sans Mono 11px
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec terminator
+bindsym $mod+Return exec xterm
 
 # kill focused window
-bindsym $mod+Shift+A kill
+bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
@@ -21,7 +21,7 @@ bindsym $mod+d exec dmenu_run
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
-bindsym $mod+l focus up
+#bindsym $mod+l focus up
 bindsym $mod+m focus right
 
 # alternatively, you can use the cursor keys:
@@ -53,7 +53,7 @@ bindsym $mod+f fullscreen
 
 # change container layout (stacked, tabbed, default)
 bindsym $mod+s layout stacking
-bindsym $mod+z layout tabbed
+bindsym $mod+w layout tabbed
 bindsym $mod+e layout default
 
 # toggle tiling / floating
@@ -170,9 +170,8 @@ client.urgent           $red    $base03 $red    $red
 focus_follows_mouse no
 
 # custom bindings
-#bindsym $mod+Shift+l exec scrot -q 10 -t 10 /tmp/screen_locked.png && i3lock -d -I 10 -t -i /tmp/screen_locked-thumb.png && xset dpms force off
 bindsym $mod+Shift+i exec thunar
-
+bindsym $mod+Shift+x exec scrot -q 10 -t 10 /tmp/screen_locked.png && i3lock -d -i 10 -t -i /tmp/screen_locked-thumb.png
 # screen assignment
 workspace 1 output DP1
 workspace 2 output DP1
@@ -194,7 +193,7 @@ assign [class="remmina"] 10
 for_window [class="Vlc"] floating enable
 
 # auto started apps
-exec dbus-launch nm-applet
+exec sudo nm-applet
 exec pnmixer
 exec hexchat
 exec firefox-bin

@@ -1,4 +1,4 @@
-# {{ ansible_managed }}
+# This file is managed by ansible, don't make changes here - they will be overwritten.
 
 general {
 	color_bad = "#dc322f"
@@ -11,11 +11,10 @@ general {
     interval = 5
 }
 
+order += "mmtro_stats"
 order += "xrandr"
-order += "load"
+order += "battery 0"
 order += "tztime local"
-
-
 
 wireless wlan0 {
         format_up = "W: (%quality at %essid) %ip"
@@ -29,7 +28,7 @@ ethernet eth0 {
 }
 
 battery 0 {
-        format = "%status %percentage %remaining"
+        format = "%status %percentage"
 }
 
 run_watch DHCP {

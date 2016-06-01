@@ -5,6 +5,12 @@
 # virtualenvwrapper
 # git prompt
 
+- name: configure | group
+  group: name="{{ group }}" state=present
+
+- name: configure | user
+  user: name="{{ user }}" comment="added by ansible" group="{{ group }}" groups="{{ other_groups }}" state=present append=yes
+
 - name: configure | home basic file
   template:
     src: "{{ item.src }}"
@@ -13,43 +19,108 @@
     group: "{{ group }}"
     mode: 0644
   with_items:
-    - {"src": "bashrc", "dest": ".bashrc"}
-    - {"src": "gitconfig", "dest": ".gitconfig"}
-    - {"src": "gitignore_global", "dest": ".gitignore_global"}
-    - {"src": "nvimrc", "dest": ".nvimrc"}
-    - {"src": "pentadactylrc", "dest": ".pentadactylrc"}
+    - {"src": "home/bashrc.j2", "dest": ".bashrc"}
+    - {"src": "home/gitconfig.j2", "dest": ".gitconfig"}
+    - {"src": "home/gitignore_global.j2", "dest": ".gitignore_global"}
+    - {"src": "home/vimrc.j2", "dest": ".vimrc"}
+    - {"src": "home/pentadactylrc.j2", "dest": ".pentadactylrc"}
 
 - name: configure | i3 | dir
   file:
     path: "{{ home }}/.i3"
     owner: "{{ user }}"
     group: "{{ group }}"
-    mode: 0644
+    mode: 0755
+    state: directory
+
+- name: configure | pu3status dir
+  file:
+    path: "/etc/py3status.d"
+    owner: root
+    group: julien
+    mode: 0755
     state: directory
 
 - name: configure | i3 | py3status / config
   template:
-    src: "i3/{{ item }}"
+    src: "i3/{{ item }}.j2"
     dest: "{{ home }}/.i3/{{ item }}"
     owner: "{{ user }}"
     group: "{{ group }}"
-    mode: 0644
+    mode: 0755
   with_items:
     - config
     - i3status.conf
 
-- name: configure | terminator | dir
-  file:
-    path: "{{ home }}/.terminator/"
+- name: configure | xinit
+  template:
+    src: "home/xinitrc.j2"
+    dest: "{{ home }}/.xinitrc"
     owner: "{{ user }}"
     group: "{{ group }}"
-    mode: 0644
+
+- name: configure | Xresources
+  template:
+    src: "home/Xresources.j2"
+    dest: "{{ home }}/.Xresources"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+
+- name: configure | slim
+  template:
+    src: "system/slim.conf.j2"
+    dest: "/etc/slim.conf"
+    owner: root
+    group: root
+
+- name: configure | xdm
+  template:
+    src: "system/xdm.j2"
+    dest: "/etc/conf.d/xdm"
+    owner: root
+    group: root
+
+- name: configure | default runlevel
+  service: name="{{ item }}" state=started enabled=yes runlevel=default
+  with_items:
+    - NetworkManager
+    - rsyslog
+    - sshd
+    - xdm
+
+- name: configure | config
+  file:
+    path: "{{ home }}/.config"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0755
     state: directory
 
-- name: configure | terminator | config
-  template:
-    src: "terminator/config"
-    dest: "{{ home }}/.terminator/config"
+- name: configure | config tiers
+  file:
+    path: "{{ home }}/.config/{{ item }}"
     owner: "{{ user }}"
     group: "{{ group }}"
-    mode: 0644
+    mode: 0755
+    state: directory
+  with_items:
+    - hexchat
+    - electron-mattermost
+
+- name: configure | config hexchat
+  copy:
+    src: "{{ item }}"
+    dest: "{{ home }}/.config/hexchat/"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0755
+  with_fileglob:
+    - hexchat/*
+
+- name: configure | config hexchat servlist
+  template:
+    src: "home/hexchat_servlist.conf.j2"
+    dest: "{{ home }}/.config/hexchat/servlist.conf"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0755
