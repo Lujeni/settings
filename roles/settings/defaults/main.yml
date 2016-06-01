@@ -52,6 +52,7 @@ settings_keywords:
   - app-admin/ansible
   - app-admin/keepassx
   - app-editors/vim
+  - app-editors/vim-core
   - app-emulation/virtualbox
   - app-emulation/virtualbox-guest-additions
   - app-emulation/virtualbox-modules
@@ -61,6 +62,7 @@ settings_keywords:
   - dev-libs/msgpack
   - dev-libs/unibilium
   - dev-lua/messagepack
+  - dev-python/packaging
   - dev-python/pip
   - dev-python/virtualenvwrapper
   - dev-python/yenc
