@@ -8,7 +8,7 @@
     - use
 
 - name: install | portage use/keywords file
-  template: src={{ item }} dest=/etc/portage/package.{{ item }}/lujeni_settings.{{ item }}
+  template: src="gentoo/{{ item }}" dest=/etc/portage/package.{{ item }}/lujeni_settings.{{ item }}
   with_items:
     - keywords
     - use

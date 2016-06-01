@@ -20,7 +20,7 @@ settings_packages:
   - dev-python/ipython
   - dev-python/pip
   - dev-vcs/tig
-  - dev-vcs/tig
+  - app-text/tree
   - media-gfx/feh
   - media-gfx/scrot
   - media-gfx/viewnior
