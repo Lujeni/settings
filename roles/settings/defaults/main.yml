@@ -19,7 +19,6 @@ settings_packages:
   - dev-java/icedtea-bin
   - dev-python/ipython
   - dev-python/pip
-  - dev-util/sysdig
   - dev-vcs/tig
   - dev-vcs/tig
   - media-gfx/feh
@@ -66,7 +65,6 @@ settings_keywords:
   - dev-python/pip
   - dev-python/virtualenvwrapper
   - dev-python/yenc
-  - dev-util/sysdig
   - x11-drivers/xf86-video-virtualbox
   - x11-misc/py3status
 
