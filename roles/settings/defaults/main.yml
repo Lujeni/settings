@@ -9,8 +9,10 @@ other_groups: "root,wheel"
 
 settings_packages:
   - app-admin/ansible
+  - app-admin/apg
   - app-admin/keepassx
   - app-admin/rsyslog
+  - app-admin/sysstat
   - app-arch/unp
   - app-editors/vim
   - app-emulation/virtualbox
@@ -22,6 +24,7 @@ settings_packages:
   - app-text/tree
   - app-vim/youcompleteme
   - app-xemacs/tm
+  - deb-db/mysql-workbench
   - dev-db/mongodb
   - dev-java/icedtea-bin
   - dev-lang/go
@@ -33,8 +36,10 @@ settings_packages:
   - media-gfx/feh
   - media-gfx/scrot
   - media-gfx/viewnior
+  - media-sound/alsa-utils
   - media-sound/pnmixer
   - media-video/vlc
+  - net-analyzer/nmap
   - net-dns/bind-tools
   - net-irc/hexchat
   - net-misc/keychain
@@ -56,11 +61,10 @@ settings_packages:
   - x11-misc/py3status
   - x11-misc/xautolock
   - x11-misc/xclip
+  - x11-terms/rxvt-unicode
   - x11-terms/xterm
   - x11-wm/twm
   - xfce-base/thunar
-  - media-sound/alsa-utils
-
 
 settings_keywords:
   - app-admin/ansible
@@ -88,6 +92,7 @@ settings_keywords:
   - sys-devel/gcc
 
 settings_use:
+  - x11-terms/rxvt-unicode 256-color
   - app-crypt/pinentry gnome-keyring
   - app-editors/vim python
   - dev-java/icedtea-bin webstart -cups
