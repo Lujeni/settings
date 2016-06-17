@@ -65,6 +65,7 @@ settings_packages:
   - x11-terms/xterm
   - x11-wm/twm
   - xfce-base/thunar
+  - dev-python/boto
 
 settings_keywords:
   - app-admin/ansible
@@ -92,14 +93,15 @@ settings_keywords:
   - sys-devel/gcc
 
 settings_use:
-  - x11-terms/rxvt-unicode 256-color
   - app-crypt/pinentry gnome-keyring
   - app-editors/vim python
   - dev-java/icedtea-bin webstart -cups
   - dev-lang/go gccgo
   - dev-lang/python sqlite
   - dev-libs/libxml2 icu
+  - dev-libs/openssl -bindist
   - media-libs/harfbuzz icu
+  - net-misc/openssh -bindist
   - net-misc/remmina freerdp
   - sys-devel/gcc go
   - sys-devel/llvm clang
@@ -109,6 +111,7 @@ settings_use:
   - www-servers/nginx luajit nginx_modules_http_stub_status nginx_modules_http_cache_purge nginx_modules_http_headers_more nginx_modules_http_gzip_static nginx_modules_http_realip nginx_modules_http_lua
   - www-servers/uwsgi python python_gevent uwsgi_plugins_syslog spooler syslog -uwsgi_plugins_rrdtool -zeromq go
   - x11-plugins/pigdin-sipe kerberos openssl
+  - x11-terms/rxvt-unicode 256-color
 
 settings_license:
   - www-plugins/adobe-flash AdobeFlash-11.x
