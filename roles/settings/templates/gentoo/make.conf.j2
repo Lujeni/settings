@@ -1,0 +1,29 @@
+CFLAGS="-O2 -pipe"
+CXXFLAGS="${CFLAGS}"
+CHOST="x86_64-pc-linux-gnu"
+
+PORTDIR="/usr/portage"
+DISTDIR="${PORTDIR}/distfiles"
+PKGDIR="${PORTDIR}/packages"
+
+NUSE="-ipv6 -ppp -modemmanager"
+CUSE="crypt cryptsetup"
+CMEDIA="png jpeg alsa cups"
+USE="python bindist mmx sse sse2 X ${CMEDIA} ${NUSE} ${VIDUSE}"
+
+MAKEOPTS="-j{{ settings_makeopts }}"
+
+PORTAGE_NICENESS="19"
+
+ABI_X86="64"
+
+EMERGE_DEFAULT_OPTS="--keep-going=y --jobs=4"
+
+INPUT_DEVICES="evdev keyboard mouse synaptics"
+VIDEO_CARDS="{{ settings_video_cards }}"
+
+GRUB_PLATFORMS="pc"
+
+PYTHON_TARGETS="python2_7 python3_4"
+
+PYTHON_SINGLE_TARGET="python3_4"

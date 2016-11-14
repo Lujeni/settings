@@ -1,0 +1,4 @@
+---
+settings_makeopts: 14
+
+settings_video_cards: "intel i965"
