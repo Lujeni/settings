@@ -11,14 +11,19 @@ settings_packages:
   - app-admin/ansible
   - app-admin/apg
   - app-admin/keepassx
+  - app-admin/mongo-tools
   - app-admin/rsyslog
+  - app-admin/sudo
   - app-admin/sysstat
+  - app-arch/rar
   - app-arch/unp
+  - app-crypt/certbot
   - app-editors/vim
-  - app-emulation/virtualbox
-  - app-emulation/virtualbox-guest-additions
-  - app-emulation/virtualbox-modules
+  - app-emulation/docker
+  - app-misc/ranger
   - app-misc/tmux
+  - app-portage/genlop
+  - app-portage/gentoolkit
   - app-portage/layman
   - app-text/mupdf
   - app-text/tree
@@ -28,44 +33,67 @@ settings_packages:
   - dev-db/mongodb
   - dev-java/icedtea-bin
   - dev-lang/go
+  - dev-python/boto
   - dev-python/ipython
+  - dev-python/mock
   - dev-python/pip
+  - dev-python/virtualenv
+  - dev-ruby/rubygems
+  - dev-vcs/git
   - dev-vcs/tig
   - gnone-extra/nm-applet
   - mail-client/thunderbird-bin
   - media-gfx/feh
+  - media-gfx/imagemagick
   - media-gfx/scrot
   - media-gfx/viewnior
   - media-sound/alsa-utils
   - media-sound/pnmixer
   - media-video/vlc
   - net-analyzer/nmap
+  - net-analyzer/wireshark
   - net-dns/bind-tools
+  - net-fs/cifs-utils
   - net-irc/hexchat
+  - net-misc/dhcp
+  - net-misc/dhcpcd
   - net-misc/keychain
+  - net-misc/memcached
   - net-misc/networkmanager
+  - net-misc/ntp
   - net-misc/openvpn
   - net-misc/remmina
   - net-misc/telnet-bsd
+  - net-misc/whois
+  - net-p2p/deluge
+  - net-wireless/hostapd
+  - sys-apps/pciutils
+  - sys-fs/cryptsetup
+  - sys-fs/dosfstools
+  - sys-kernel/genkernel
+  - sys-libs/ncurses
   - sys-process/htop
   - sys-process/iotop
   - www-client/firefox-bin
   - www-plugins/adobe-flash
-  - www-servers/nginx
-  - www-servers/uwsgi
+  - www-plugins/pentadactyl
   - x11-apps/xclock
   - x11-apps/xrandr
+  - x11-base/xorg-x11
   - x11-misc/dmenu
   - x11-misc/i3lock
   - x11-misc/i3status
   - x11-misc/py3status
+  - x11-misc/slim
   - x11-misc/xautolock
   - x11-misc/xclip
   - x11-terms/rxvt-unicode
+  - x11-terms/st
+  - x11-terms/terminator
   - x11-terms/xterm
+  - x11-wm/i3
   - x11-wm/twm
   - xfce-base/thunar
-  - dev-python/boto
 
 settings_keywords:
   - app-admin/ansible
@@ -86,15 +114,13 @@ settings_keywords:
   - dev-python/pip
   - dev-python/virtualenvwrapper
   - dev-python/yenc
-  - www-servers/nginx
-  - www-servers/uwsgi
+  - sys-devel/gcc
   - x11-drivers/xf86-video-virtualbox
   - x11-misc/py3status
   - sys-devel/gcc
 
 settings_use:
-  - app-crypt/pinentry gnome-keyring
-  - app-editors/vim python
+  - app-editors/vim python -perl -ruby -minimal
   - dev-java/icedtea-bin webstart -cups
   - dev-lang/go gccgo
   - dev-lang/python sqlite
@@ -108,8 +134,6 @@ settings_use:
   - sys-fs/udev gudev
   - sys-kernel/genkernel cryptsetup
   - sys-libs/zlib minizip
-  - www-servers/nginx luajit nginx_modules_http_stub_status nginx_modules_http_cache_purge nginx_modules_http_headers_more nginx_modules_http_gzip_static nginx_modules_http_realip nginx_modules_http_lua
-  - www-servers/uwsgi python python_gevent uwsgi_plugins_syslog spooler syslog -uwsgi_plugins_rrdtool -zeromq go
   - x11-plugins/pigdin-sipe kerberos openssl
   - x11-terms/rxvt-unicode 256-color
 
@@ -123,5 +147,8 @@ settings_packages_pip:
   - pymongo
   - requests
 
-# extra vars
 hexchat_password:
+
+settings_makeopts:
+
+settings_video_cards:

@@ -1,84 +1,61 @@
 " {{ ansible_managed }}
 if filereadable($HOME.'/.vim/autoload/plug.vim')
     call plug#begin('~/.vim/plugged')
+        Plug 'Valloric/YouCompleteMe'
+        Plug 'airblade/vim-gitgutter'
+        Plug 'fatih/vim-go'
+        Plug 'jstemmer/gotags'
+        Plug 'junegunn/seoul256.vim'
+        Plug 'kien/ctrlp.vim'
+        Plug 'lepture/vim-jinja'
+        Plug 'majutsushi/tagbar'
+        Plug 'nvie/vim-flake8'
+        Plug 'pearofducks/ansible-vim'
         Plug 'scrooloose/nerdtree' 
         Plug 'scrooloose/syntastic'
         Plug 'terryma/vim-multiple-cursors'
         Plug 'tpope/vim-fugitive'
-        Plug 'airblade/vim-gitgutter'
-        Plug 'kien/ctrlp.vim'
-        Plug 'majutsushi/tagbar'
-        Plug 'jstemmer/gotags'
-       "
-        Plug 'junegunn/seoul256.vim'
-        Plug 'lepture/vim-jinja'
-        Plug 'pearofducks/ansible-vim'
-        Plug 'nginx.vim'
-        Plug 'fatih/vim-go'
-        autocmd! User YouCompleteMe call youcompleteme#Enable()
     call plug#end()
 else
     !curl -fLo ~/.vim/autoload/plug.vim --create-dirs 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     source $MYVIMRC
 endif
 
-" nerdtree
-let NERDTreeShowHidden=1
-nmap <leader>n :NERDTreeToggle<CR>
-let NERDTreeIgnore=['\.DS_Store', '\~$', '\.swp', '\.pyc']
-let g:nerdtree_tabs_open_on_gui_startup=1
-let g:nerdtree_tabs_open_on_console_startup=1
-
-autocmd! bufwritepost .nvimrc source %
 autocmd! bufwritepost .vimrc source %
 autocmd vimenter * NERDTree
 
-" syntastic
-let g:syntastic_python_checkers = ['flake8']
-
-" global
 filetype off
-filetype indent on
+filetype indent on              " load filetype-specific indent files
 filetype plugin on
 
 syntax on
 
 colorscheme seoul256
 
-set autoindent
-set clipboard+=unnamed
-set colorcolumn=79
-set expandtab
-" Folding settings
-set foldmethod=indent   "fold based on indent
-set foldnestmax=10      "deepest fold is 10 levels
-set nofoldenable        "dont fold by default
-set foldlevel=1         "this is just what i use
-"`za` - toggles
-"`zc` - closes
-"`zo` - opens
-"`zR` - open all
-"`zM` - close all
-set go+=a
 set guifont=Monospace\ 3
-set guioptions+=a
-set hlsearch
-set ls=2
-set modifiable
 set nocompatible
-set number
-set paste
-set shiftwidth=4
-set si
-set siso=1
-set sm
-set softtabstop=4
 set t_Co=256
-set tabstop=4
-set virtualedit=onemore
-set encoding=utf-8
-set autoread
+set autoindent                  " indent when moving to the next line while writing code
+set backspace=2                 " make backspace work list most other apps
+set clipboard=unnamed           " system clipboard
+set colorcolumn=79              " display vertical bar
+set cursorline                  " show a visual line under the cursor's current line
+set encoding=utf-8              " default encoding
+set expandtab                   " expand tabs into spaces
+set foldenable                  " fold by default
+set foldlevel=10                " open most folds by default
+set foldmethod=indent           " fold based on indent
+set foldnestmax=10              " deepest fold is 10 levels
+set hlsearch                    " highlight matches
+set incsearch                   " search as characters are entered
+set number                      " show line numbers
+set shiftwidth=4                " when using the >> or << commands, shift lines by 4 spaces
+set showcmd                     " show command in bottom bar
+set showmatch                   " show the matching part of the pair for [] {} and ()
+set softtabstop=4               " number of spaces in tab when editing
+set tabstop=4                   " number of visual spaces per TAB
 
+nmap <leader>n :NERDTreeToggle<CR>
 map <right> <esc>
 map <left> <esc>
 map <up> <esc>
@@ -88,68 +65,25 @@ imap <left> <esc>
 imap <up> <esc>
 imap <down> <esc>
 
-" ----------------------------------------------------------------------------
-" syntastic configuration
-" ----------------------------------------------------------------------------
-" https://github.com/scrooloose/syntastic
-" Syntax checking hacks for vim
+let mapleader=","               " leader is comma
+
+" CtrlP settings
+let g:ctrlp_match_window = 'bottom,order:ttb'   "order matching files top to bottom with
+let g:ctrlp_switch_buffer = 0                   " always open files in new buffers
+
+" NERDTree settings
+let NERDTreeShowHidden=1
+let NERDTreeIgnore=['\.DS_Store', '\~$', '\.swp', '\.pyc']
+let g:nerdtree_tabs_open_on_gui_startup=1
+let g:nerdtree_tabs_open_on_console_startup=1
+
+" Syntastic settings
 let g:syntastic_python_checkers = ['flake8']
-" XXX http://flake8.readthedocs.org/en/latest/config.html#global
-" let g:syntastic_python_flake8_args = '--ignore=E501,E123,E133,E226,E241,E242'
-autocmd BufRead,BufNewFile,BufWritePost * call MySyntasticCheckChain()
-if !exists("*MySyntasticCheckChain")
-    function MySyntasticCheckChain()
-        :SyntasticCheck
-        :SyntasticSetLoclist
-        :Errors
-    endfunction
-endif
-
-" ----------------------------------------------------------------------------
-" vim-go configuration
-" ----------------------------------------------------------------------------
-"
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
-au FileType go nmap <leader>c <Plug>(go-coverage)
-
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_interfaces = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-let g:go_list_type = "quickfix"
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go']}
 
-nmap <F8> :TagbarToggle<CR>
+" YouCompleteMe settings
+let g:ycm_autoclose_preview_window_after_completion=1
 
-let g:tagbar_type_go = {  
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-\ }
+" Syntastic settings
+let python_highlight_all=1

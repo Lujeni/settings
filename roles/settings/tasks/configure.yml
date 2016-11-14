@@ -1,10 +1,4 @@
 ---
-# TODO:
-# keychain
-# hexchat
-# virtualenvwrapper
-# git prompt
-
 - name: configure | group
   group: name="{{ group }}" state=present
 
@@ -30,7 +24,7 @@
     path: "{{ home }}/.i3"
     owner: "{{ user }}"
     group: "{{ group }}"
-    mode: 0755
+    mode: 0775
     state: directory
 
 - name: configure | pu3status dir
@@ -38,7 +32,7 @@
     path: "/etc/py3status.d"
     owner: root
     group: julien
-    mode: 0755
+    mode: 0775
     state: directory
 
 - name: configure | i3 | py3status / config
@@ -47,7 +41,7 @@
     dest: "{{ home }}/.i3/{{ item }}"
     owner: "{{ user }}"
     group: "{{ group }}"
-    mode: 0755
+    mode: 0775
   with_items:
     - config
     - i3status.conf
@@ -79,6 +73,14 @@
     dest: "/etc/conf.d/xdm"
     owner: root
     group: root
+    
+- name: configure | make.conf
+  template:
+    src: ""
+    dest: "/etc/conf.d/xdm"
+    owner: root
+    group: root
+
 
 - name: configure | default runlevel
   service: name="{{ item }}" state=started enabled=yes runlevel=default
