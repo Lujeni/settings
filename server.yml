@@ -11,6 +11,10 @@
     - gentoo_uwsgi
     - gentoo_uwsgi_configure
     - gentoo_uwsgi_install
+    - blog
+    - blog_configure
+    - blog_install
   roles:
     - gentoo_nginx
     - gentoo_uwsgi
+    - blog

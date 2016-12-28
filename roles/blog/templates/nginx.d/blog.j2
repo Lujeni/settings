@@ -1,0 +1,12 @@
+server {
+    server_name thebault.co;
+
+    access_log /var/log/nginx/blog.log;
+    error_log /var/log/nginx/blog.log;
+
+    root {{ blog_root_dir }}/public/;
+
+    location / {
+        index index.html;
+    }
+}
