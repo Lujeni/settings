@@ -7,7 +7,7 @@ weight: 10
 ---
 
 ### **Introduction**
-I use ansible since 3 years ago.
+I used ansible since 3 years ago.
 In my company, Ansible became the puppet killer and now we try to automate all kinds of stuffs.
 I saved huge amount of time with this framework, so i deciced to be more active in the community to thanks you and maybe inspired others people to use or contribute to Ansible.
 
