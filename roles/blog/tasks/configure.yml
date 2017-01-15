@@ -24,11 +24,9 @@
 
 - name: configure | hugo | avatar
   copy: src="avatar.png" dest="{{ blog_root_dir }}/static/images/" owner=nginx group=nginx mode=0755
-  register: hugo_changed
 
 - name: configure | hugo | avatar fake retina
   copy: src="avatar.png" dest="{{ blog_root_dir }}/static/images/avatar@2x.png" owner=nginx group=nginx mode=0755
-  register: hugo_changed
 
 - name: configure | hugo | serv
   shell: "cd {{ blog_root_dir }} && hugo"
