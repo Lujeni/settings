@@ -8,3 +8,5 @@ blog_use:
 blog_root_dir: /var/www/blog
 
 blog_theme: hugo-cactus-theme
+
+blog_ga:
