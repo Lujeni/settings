@@ -28,6 +28,11 @@
 - name: configure | hugo | avatar fake retina
   copy: src="avatar.png" dest="{{ blog_root_dir }}/static/images/avatar@2x.png" owner=nginx group=nginx mode=0755
 
+- name: configure | hugo | img
+  copy: src="{{ item }}" dest="{{ blog_root_dir }}/static/images/" owner=nginx group=nginx mode=0755
+  with_fileglob:
+    - "static/images/*"
+
 - name: configure | hugo | serv
   shell: "cd {{ blog_root_dir }} && hugo"
   when: "{{ hugo_changed is defined and hugo_changed.changed }}"

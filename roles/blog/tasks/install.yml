@@ -13,7 +13,7 @@
   register: blog_exist
 
 - stat: path="{{ blog_root_dir }}/themes/{{ blog_theme }}"
-  register: blog_theme
+  register: blog_theme_stat
 
 - name: install | hugo site
   shell:  "hugo new site {{ blog_root_dir }}"
@@ -22,4 +22,4 @@
 
 - name: install | hugo theme
   git: repo="https://github.com/digitalcraftsman/hugo-cactus-theme.git" dest="{{ blog_root_dir }}/themes/{{ blog_theme }}"
-  when: "{{ blog_theme is defined and not blog_theme.stat.exists }}"
+  when: "{{ blog_theme is defined and not blog_theme_stat.stat.exists }}"
