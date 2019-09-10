@@ -1,7 +1,2 @@
----
 [all]
-localhost
-heimdall
-
-[http]
-heimdall
+chat

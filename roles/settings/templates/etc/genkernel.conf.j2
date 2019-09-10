@@ -1,0 +1,389 @@
+# {{ ansible_managed }}
+# Configuration file for genkernel
+
+# This file is sourced by genkernel at startup and determines which options
+# we will be using to compile our kernel.  The order of precidence is simple,
+# with the internal settings being least important, configuration file
+# settings next, and command line options being most important.
+
+# =========Common Command Line Option Defaults=========
+
+# Install to $BOOTDIR
+#INSTALL="yes"
+
+# Run 'make oldconfig' before compiling this kernel
+#OLDCONFIG="yes"
+
+# Run 'make menuconfig' before compiling this kernel
+MENUCONFIG="yes"
+
+# Run 'make gconfig' before compiling this kernel
+#GCONFIG="no"
+
+# Run 'make nconfig' (ncurses 'menuconfig') before compiling this kernel
+#NCONFIG="no"
+
+# Run 'make xconfig' before compiling this kernel
+#XCONFIG="no"
+
+# Run 'make mrproper' before compiling this kernel
+#MRPROPER="yes"
+
+# Run 'make clean' before compiling this kernel
+# Only needed if MRPROPER is set to NO because
+# MRPROPER implies 'make clean'.
+#CLEAN="yes"
+
+# Mount BOOTDIR automatically if it isn't mounted
+MOUNTBOOT="yes"
+
+# Make symlinks in BOOTDIR automatically
+#SYMLINK="no"
+
+# Save the new configuration in /etc/kernels upon
+# successfull compilation
+#SAVE_CONFIG="yes"
+
+# Enable color output in genkernel
+NOCOLOR="false"
+
+# Clear build cache dir on gernkernel start
+#CLEAR_CACHEDIR="no"
+
+# Clear all tmp files and caches after genkernel has run
+#POSTCLEAR="no"
+
+# Check for x MB free disk space in BOOTDIR
+#CHECK_FREE_DISK_SPACE_BOOTDIR=0
+
+# Check for x MB free disk space in kernel outputdir
+#CHECK_FREE_DISK_SPACE_KERNELOUTPUTDIR=0
+
+# Genkernel uses an independent configuration for MAKEOPTS, and does not source
+# /etc/portage/make.conf . You can override the default setting by uncommenting
+# and tweaking the following line. Default setting is set up by
+# ${GK_SHARE}/${ARCH_OVERRIDE}/config.sh . The recommended value for -j
+# argument is: <number of processors>*<number of cores per processor>+1
+#MAKEOPTS="$(portageq envvar MAKEOPTS)"
+
+# Run the kernel make at the following NICE level
+#NICE=10
+
+# Add bcache support
+#BCACHE="no"
+
+# Add LVM support
+#LVM="no"
+
+# Add LUKS support
+LUKS="yes"
+
+# Add GnuPG support
+GPG="yes"
+
+# Add in early microcode support: this sets the kernel options for early microcode loading
+# Possible values: empty/"no", "all", "intel", "amd"
+#MICROCODE="all"
+
+# Include early microcode in generated initramfs.
+# This is enabled by default for upgrade compatability, however is obsoleted by
+# sys-boot/grub-2.02-r1, which supports multiple initramfs in the bootloader.
+#MICROCODE_INITRAMFS="yes"
+
+# Add NFS support
+#NFS="no"
+
+# Add DMRAID support
+#DMRAID="no"
+
+# Add SSH support
+#SSH="no"
+
+# Include busybox in the initramfs. If included, busybox is rebuilt
+# if the cached copy is out of date.
+#BUSYBOX="yes"
+
+# Add MDRAID support
+#MDADM="no"
+
+# Specify a custom mdadm.conf.
+# By default the initramfs will be built *without* an mdadm.conf and will auto-detect
+# arrays during bootup.  Usually, this should not be needed.
+#MDADM_CONFIG="/etc/mdadm.conf"
+
+# Add Multipath support
+#MULTIPATH="no"
+
+# Add iSCSI support
+#ISCSI="no"
+
+# Add e2fsprogs support
+#E2FSPROGS="no"
+
+# Include support for unionfs
+#UNIONFS="no"
+
+# Include support for zfs volume management.  If unset, genkernel will attempt
+# to autodetect and enable this when rootfs is on zfs.
+#ZFS="no"
+
+# Add BTRFS support
+#BTRFS="no"
+
+# Add xfsprogs support
+#XFSPROGS="no"
+
+# Install firmware onto root filesystem
+# Will conflict with sys-kernel/linux-firmware package
+#FIRMWARE_INSTALL="no"
+
+# Add firmware(s) to initramfs
+FIRMWARE="no"
+
+# Specify directory to pull from
+#FIRMWARE_DIR="/lib/firmware"
+
+# Specify a space-separated list of firmware files or directories to include,
+# relative to FIRMWARE_DIR.  If empty or unset, the full contents of 
+# FIRMWARE_DIR will be included.
+#FIRMWARE_FILES=""
+
+# Add disklabel support (copies blkid to initramfs)
+DISKLABEL="yes"
+
+# Add new kernel to grub
+# Possible values: empty/"no", "grub", "grub2"
+#BOOTLOADER="no"
+
+# Use sandbox when building initramfs
+#SANDBOX="yes"
+
+# Add boot splash using splashutils
+SPLASH="yes"
+
+# Use this splash theme. If commented out - the "default" name theme is used.
+# Also, SPLASH="yes" needs to be enabled for this one to work.
+# This supersedes the "SPLASH_THEME" option in '/etc/conf.d/splash'.
+SPLASH_THEME="gentoo"
+
+# Run "emerge @module-rebuild" automatically when possible and necessary
+# after kernel and modules have been compiled
+#MODULEREBUILD="yes"
+
+# Run the specified command in the current environment after the kernel and
+# modules have been compiled, useful to rebuild external kernel module
+# (see MODULEREBUILD above) or installing additional
+# files (use 'copy_image_with_preserve dtb path/to/dtb dtb <kernelname>')
+#CMD_CALLBACK=""
+
+
+# =========Keymap Settings=========
+#
+# Force keymap selection at boot
+#DOKEYMAPAUTO="no"
+
+# Enables keymap selection support
+#KEYMAP="yes"
+
+
+# =========Low Level Compile Settings=========
+#
+# GNU Make to use for kernel.  See also the --kernel-make command line option.
+#KERNEL_MAKE="make"
+
+# Compiler to use for the kernel (e.g. distcc).  See also the --kernel-cc
+# command line option.
+#KERNEL_CC="gcc"
+
+# Assembler to use for the kernel.  See also the --kernel-as command line
+# option.
+#KERNEL_AS="as"
+
+# Linker to use for the kernel.  See also the --kernel-ld command line option.
+#KERNEL_LD="ld"
+
+# GNU Make to use for the utilities.  See also the --utils-make command line
+# option.
+#UTILS_MAKE="make"
+
+# C Compiler to use for the utilities (e.g. distcc).  See also the --utils-cc
+# command line option.
+#UTILS_CC="gcc"
+
+# C++ Compiler to use for the utilities (e.g. distcc).  See also the --utils-cxx
+# command line option.
+#UTILS_CXX="g++"
+
+# Assembler to use for the utilities.  See also the --utils-as command line
+# option.
+#UTILS_AS="as"
+
+# Linker to use for the utilities.  See also the --utils-ld command line
+# option.
+#UTILS_LD="ld"
+
+# Target triple (i.e. aarch64-linux-gnu) to build for. If you do not
+# cross-compile, leave blank for auto detection.
+#CROSS_COMPILE=""
+
+# Override default make target (bzImage). See also the --kernel-target
+# command line option. Useful to build a uImage on arm.
+#KERNEL_MAKE_DIRECTIVE_OVERRIDE="fooImage"
+
+# Override default kernel binary path. See also the --kernel-binary
+# command line option. Useful to install a uImage on arm.
+#KERNEL_BINARY_OVERRIDE="arch/foo/boot/bar"
+
+
+# =========GENKERNEL LOCATION CONFIGURATION============
+#
+# Variables:
+#   %%ARCH%%  - Final determined architecture
+#   %%CACHE%% - Final determined cache location
+
+# Set genkernel's temporary work directory
+#TMPDIR="/var/tmp/genkernel"
+
+# Set the boot directory, default is /boot
+#BOOTDIR="/boot"
+
+# Default share directory location
+GK_SHARE="${GK_SHARE:-/usr/share/genkernel}"
+
+# Location of the default cache
+CACHE_DIR="/var/cache/genkernel"
+
+# Location of DISTDIR, where our source tarballs are stored
+DISTDIR="${GK_SHARE}/distfiles"
+
+# Log output file
+LOGFILE="/var/log/genkernel.log"
+
+# Debug Level
+LOGLEVEL=1
+
+
+# =========COMPILED UTILS CONFIGURATION============
+#
+# Default location of kernel source
+DEFAULT_KERNEL_SOURCE="/usr/src/linux"
+
+# Default kernel config (only use to override using
+# arch/%%ARCH%%/kernel-config-${VER}.${PAT} !)
+#DEFAULT_KERNEL_CONFIG="${GK_SHARE}/arch/%%ARCH%%/kernel-config"
+
+# Specifies a user created busybox config
+#BUSYBOX_CONFIG="/path/to/file"
+
+# NOTE: Since genkernel 3.4.41 the version of
+#   busybox, lvm, mdadm, ... have been moved to
+#   /usr/share/genkernel/defaults/software.sh in order to
+#   reduce the merging you have to do during etc-update.
+#   You can still override these settings in here.
+
+
+# =========MISC KERNEL CONFIGURATION============
+#
+# Set kernel filename which will be used when kernel will be installed
+# into BOOTDIR. See man page to learn more about available placeholders.
+#KERNEL_FILENAME="vmlinuz-%%KV%%"
+
+# Set kernel symlink name which will be used when kernel will be installed
+# into BOOTDIR and SYMLINK option is enabled
+#KERNEL_SYMLINK_NAME="kernel"
+
+# This option will set kernel option CONFIG_LOCALVERSION.
+# Use special value "UNSET" to unset already set CONFIG_LOCALVERSION.
+#KERNEL_LOCALVERSION="-%%ARCH%%"
+
+# This option is only valid if kerncache is
+# defined. If there is a valid kerncache no checks
+# will be made against a kernel source tree.
+#KERNEL_SOURCES="yes"
+
+# Build a static (monolithic kernel)
+#BUILD_STATIC="no"
+
+# Make and install kernelz image (PowerPC)
+#GENZIMAGE="no"
+
+# Archive file created using tar containing kernel binary, content
+# of /lib/modules and the kernel config.
+# NOTE: Archive is created before the callbacks are run!
+#KERNCACHE="/path/to/file.tar.xz"
+
+# Prefix to kernel module destination, modules
+# will be installed in <prefix>/lib/modules
+# (.conf equivalent of --module-prefix=<dir>)
+#INSTALL_MOD_PATH=""
+
+
+# =========MISC INITRAMFS CONFIGURATION============
+#
+# Set initramfs filename which will be used when initramfs will be
+# installed into BOOTDIR. See man page to learn more about available
+# placeholders.
+#INITRAMFS_FILENAME="initramfs-%%KV%%.img"
+
+# Set initramfs symlink name which will be used when initramfs will be
+# installed into BOOTDIR and SYMLINK option is enabled
+#INITRAMFS_SYMLINK_NAME="initramfs"
+
+# Copy all compiled kernel modules to the initramfs
+#ALLRAMDISKMODULES="no"
+
+# Copy selected modules to the initramfs based on arch-specific modules_load file
+#RAMDISKMODULES="yes"
+
+# Archive file created using tar containing kernel and initramfs.
+# NOTE: No modules outside of the initramfs will be included!
+#MINKERNPACKAGE="/path/to/file.tar.xz"
+
+# Add additional modules to the initramfs using the module groups defined
+# in /usr/share/genkernel/defaults/modules_load (see this file for
+# more details).  This would be used if, for example, you
+# required an additional crypto module or network device at boot
+# time and did not want to staticly compile these in the kernel.
+# Options take the form AMODULES_{group} where {group} is one of
+# the groups in modules_load (which are in the form MODULES_{group}).
+# Use this with caution.
+#AMODULES_group="module-to-include another-module"
+
+# Override the default modules in the initramfs, for a given group, as defined by
+# /usr/share/genkernel/defaults/modules_load and the per-arch modules_load
+# files. You PROBABLY want to use AMODULES_* above, and NOT MODULES_* here.
+# If you use MODULES_* here, the default and per-arch modules will NOT be used.
+#MODULES_group1="some-module"
+#MODULES_group2="" # Load no modules for this group
+
+# Archive file created using tar containing modules after
+# the callbacks have run
+#MODULESPACKAGE="/path/to/file.tar.xz"
+
+# Directory structure to include in the initramfs,
+# only available on >=2.6 kernels
+#INITRAMFS_OVERLAY=""
+
+# Build the generated initramfs into the kernel instead of
+# keeping it as a separate file
+#INTEGRATED_INITRAMFS="no"
+
+# Compress generated initramfs
+#COMPRESS_INITRD="yes"
+
+# Types of compression: best, xz, lzma, bzip2, gzip, lzop, fastest
+# "best" selects the best available compression method
+# "fastest" selects the fastest available compression method
+#COMPRESS_INITRD_TYPE="best"
+
+# wrap initramfs using mkimage for u-boot bootloader
+# WRAP_INITRD=no
+
+# Create a self-contained env in the initramfs
+#NETBOOT="no"
+
+
+# =========MISC BOOT CONFIGURATION============
+#
+# Specify a default for real_root=
+#REAL_ROOT="/dev/one/two/gentoo"

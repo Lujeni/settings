@@ -1,5 +1,0 @@
-# {{ ansible_managed }}
-
-{% for keyword in settings_keywords -%}
-    {{ keyword }}
-{% endfor %}

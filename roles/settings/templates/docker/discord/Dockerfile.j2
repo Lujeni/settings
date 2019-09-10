@@ -1,0 +1,35 @@
+# {[ ansible_managed }}
+FROM debian:buster-slim
+
+RUN apt update && apt install -y wget
+RUN wget -q "https://discordapp.com/api/download?platform=linux&format=deb" -O /tmp/discord.deb
+
+RUN apt install -y \
+    gconf-service \
+    gconf2 \
+    gvfs-bin \
+    libappindicator1 \
+    libasound2 \
+    libatomic1 \
+    libc++1 \
+    libcap2 \
+    libgconf-2-4 \
+    libgtk2.0-0 \
+    libnotify4 \
+    libnss3 \
+    libx11-xcb1 \
+    libxkbfile1 \
+    libxss1 \
+    libxtst6 \
+    xdg-utils
+
+RUN dpkg -i /tmp/discord.deb
+
+# cleanup
+RUN apt remove --purge -y wget && \
+    apt-get autoremove -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/* /var/tmp/*
+
+ENTRYPOINT ["/usr/bin/discord"]

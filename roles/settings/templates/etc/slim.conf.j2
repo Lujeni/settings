@@ -1,0 +1,11 @@
+# {{ ansible_managed }}
+
+xserver_arguments   -nolisten tcp -br -deferglyphs 16 vt07 -dpi 194
+numlock             on
+login_cmd           exec /bin/bash -login ~/.xinitrc i3
+sessions default, i3
+daemon  yes
+sessiondir      /usr/share/xsessions
+default_user        julien
+focus_password      yes
+current_theme       slim-gentoo-simple

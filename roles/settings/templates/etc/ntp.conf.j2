@@ -1,0 +1,8 @@
+# {{ ansible_managed }}
+{% for server in system_ntp_servers %}
+server {{ server }}
+{% endfor %}
+
+restrict default nomodify nopeer noquery
+restrict 127.0.0.1
+fudge  127.127.1.0 stratum 10

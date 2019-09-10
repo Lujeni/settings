@@ -1,0 +1,20 @@
+- name: post | default runlevel
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+    runlevel: default
+  with_items:
+    - NetworkManager
+    - docker
+    - ntp-client
+    - ntpd
+
+- name: post | boot runlevel
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+    runlevel: boot
+  with_items:
+    - alsasound

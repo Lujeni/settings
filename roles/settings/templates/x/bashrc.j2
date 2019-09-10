@@ -1,0 +1,22 @@
+# {{ ansible_managed }}
+if [[ $- != *i* ]] ; then
+	# Shell is non-interactive.  Be done now!
+	return
+fi
+
+for file in {{ system_sources_files|join(" ") }}; do
+    source "$HOME/.$file"
+done
+unset file
+
+# keychain
+keychain id_rsa
+. ~/.keychain/$HOSTNAME-sh
+
+# yubikey
+if test -f $HOME/.gpg-agent-info && \
+    kill -0 `ps aux | grep gpg-agent` 2>/dev/null; then
+    eval `cat $HOME/.gpg-agent-info`
+else
+    eval `gpg-agent --daemon -s > $HOME/.gpg-agent-info`
+fi

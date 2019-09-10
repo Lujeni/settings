@@ -1,10 +1,20 @@
 ---
-- include: install.yml
+- include: system.yml
   tags:
     - settings
-    - settings_install
+    - settings_system
 
-- include: configure.yml
+- include: x.yml
   tags:
     - settings
-    - settings_configure
+    - settings_x
+    
+- include: docker.yml
+  tags:
+    - settings
+    - settings_docker
+
+- include: post.yml
+  tags:
+    - settings
+    - settings_post

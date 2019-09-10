@@ -1,0 +1,4 @@
+# {{ ansible_managed }}
+NTPCLIENT_CMD="ntpdate"
+NTPCLIENT_OPTS="-s -b -u {{ system_ntp_servers |join(' ') }}"
+rc_use="dns"

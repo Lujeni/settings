@@ -1,0 +1,141 @@
+#!/bin/bash
+# {{ ansible_managed }}
+# Bash wrappers for docker run commands
+# based on https://github.com/jessfraz/dotfiles
+
+export DOCKER_REPO_PREFIX="{{ docker_repo_prefix }}"
+
+dcleanup(){
+	local containers
+	mapfile -t containers < <(docker ps -aq 2>/dev/null)
+	docker rm "${containers[@]}" 2>/dev/null
+	local volumes
+	mapfile -t volumes < <(docker ps --filter status=exited -q 2>/dev/null)
+	docker rm -v "${volumes[@]}" 2>/dev/null
+	local images
+	mapfile -t images < <(docker images --filter dangling=true -q 2>/dev/null)
+	docker rmi "${images[@]}" 2>/dev/null
+}
+
+del_stopped(){
+	local name=$1
+	local state
+	state=$(docker inspect --format {% raw %}"{{.State.Running}}"{% endraw %} "$name" 2>/dev/null)
+
+	if [[ "$state" == "false" ]]; then
+		docker rm "$name"
+	fi
+}
+
+mattermost-desktop(){
+	del_stopped mattermost-desktop
+
+	docker run -d \
+		--memory 2gb \
+        --device /dev/dri \
+        --device /dev/snd \
+        --name mattermost-desktop \
+        --net host \
+        -e "DISPLAY=unix${DISPLAY}" \
+        -v "$HOME/docker/data/mattermost-desktop/:/root/.config/Mattermost" \
+        -v /etc/localtime:/etc/localtime:ro \
+        -v /tmp/.X11-unix:/tmp/.X11-unix \
+        ${DOCKER_REPO_PREFIX}/mattermost-desktop:{{ docker_images_version }} "$@"
+
+	# exit current shell
+	exit 0
+}
+
+discord(){
+    del_stopped discord
+
+    docker run -d \
+		--memory 1gb \
+        --device /dev/dri \
+        --device /dev/snd \
+        --device /dev/video0 \
+        --group-add audio \
+        --group-add video \
+        --name discord \
+        --net host \
+        -e "DISPLAY=unix${DISPLAY}" \
+        -v "$HOME/docker/data/discord/:/root/.config/discord" \
+        -v /etc/hosts:/etc/hosts \
+        -v /etc/localtime:/etc/localtime:ro \
+        -v /tmp/.X11-unix:/tmp/.X11-unix \
+        ${DOCKER_REPO_PREFIX}/discord:{{ docker_images_version }} "$@"
+}
+
+chrome(){
+    del_stopped chrome
+    
+    docker run -d \
+        --device /dev/dri \
+        --device /dev/dri \
+        --device /dev/snd \
+        --device /dev/snd \
+        --device /dev/video0 \
+        --group-add audio \
+        --group-add video \
+        --memory 2gb \
+        --name chrome \
+        --security-opt seccomp:/etc/docker/seccomp-chrome.json \
+        -e "DISPLAY=unix${DISPLAY}" \
+        -v "${HOME}/docker/data/chrome/data:/home/chrome/data" \
+        -v "${HOME}/docker/data/chrome/downloads:/home/chrome/Downloads" \
+        -v /dev/shm:/dev/shm \
+        -v /etc/hosts:/etc/hosts \
+        -v /etc/localtime:/etc/localtime:ro \
+        -v /tmp/.X11-unix:/tmp/.X11-unix \
+        ${DOCKER_REPO_PREFIX}/chrome:{{ docker_images_version }} --user-data-dir=/home/chrome/data
+}
+
+weechat(){
+    del_stopped weechat
+    
+    docker run --rm -it \
+		-v /etc/localtime:/etc/localtime:ro \
+		-v "${HOME}/docker/data/weechat:/home/user/.weechat" \
+		${DOCKER_REPO_PREFIX}/weechat:{{ docker_images_version }}
+}
+
+cheese(){
+	del_stopped cheese
+
+	docker run -d \
+		--device /dev/dri \
+		--device /dev/snd \
+		--device /dev/video0 \
+		--name cheese \
+		-e "DISPLAY=unix${DISPLAY}" \
+		-v "${HOME}/docker/data/cheese:/root/Pictures" \
+		-v /etc/localtime:/etc/localtime:ro \
+		-v /tmp/.X11-unix:/tmp/.X11-unix \
+		${DOCKER_REPO_PREFIX}/cheese:{{ docker_images_version }}
+}
+
+ykperso(){
+	del_stopped ykperso
+
+	docker run --rm -it \
+		--device /dev/bus/usb \
+		--device /dev/usb \
+		--name ykperso \
+		-v /etc/localtime:/etc/localtime:ro \
+		${DOCKER_REPO_PREFIX}/ykperso:{{ docker_images_version }} bash
+}
+
+remmina(){
+	del_stopped remmina
+
+	docker run -d \
+		--name remmina \
+		--net host \
+		-e "DISPLAY=unix${DISPLAY}" \
+		-e GDK_DPI_SCALE \
+		-e GDK_SCALE \
+		-v "${HOME}/docker/data/remmina:/root/.remmina" \
+		-v /etc/localtime:/etc/localtime:ro \
+		-v /tmp/.X11-unix:/tmp/.X11-unix \
+		${DOCKER_REPO_PREFIX}/remmina:{{ docker_images_version }}
+}

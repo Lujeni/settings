@@ -3,71 +3,67 @@ home: /home/julien/
 
 user: julien
 
-group: julien
+group: julien 
 
 other_groups: "root,wheel"
 
-settings_packages:
-  - app-admin/ansible
-  - app-admin/apg
-  - app-admin/keepassx
-  - app-admin/mongo-tools
-  - app-admin/rsyslog
+system_default_locale:
+    locale_gen:
+      - name: "en_US.UTF-8"
+    eselect: "en_US.UTF-8"
+
+system_keymap: "us"
+
+system_global_use:
+  - X
+  - bindist
+  - bindist
+  - crypt
+  - cryptsetup
+  - mmx
+  - sse2
+
+system_packages:
   - app-admin/sudo
   - app-admin/sysstat
   - app-arch/rar
   - app-arch/unp
-  - app-crypt/certbot
+  - app-crypt/ccid # yubikey
+  - app-crypt/gnupg
+  - app-crypt/pinentry # crypt / yubikey
   - app-editors/vim
   - app-emulation/docker
-  - app-misc/ranger
   - app-misc/tmux
   - app-portage/genlop
   - app-portage/gentoolkit
-  - app-portage/layman
-  - app-text/mupdf
   - app-text/tree
-  - app-vim/youcompleteme
-  - app-xemacs/tm
-  - deb-db/mysql-workbench
-  - dev-db/mongodb
   - dev-java/icedtea-bin
   - dev-lang/go
-  - dev-python/boto
+  - dev-perl/pcsc-perl # yubikey
   - dev-python/ipython
-  - dev-python/mock
   - dev-python/pip
   - dev-python/virtualenv
-  - dev-ruby/rubygems
   - dev-vcs/git
-  - dev-vcs/tig
-  - gnone-extra/nm-applet
-  - mail-client/thunderbird-bin
-  - media-gfx/feh
-  - media-gfx/imagemagick
+  - gnome-extra/nm-applet
   - media-gfx/scrot
-  - media-gfx/viewnior
   - media-sound/alsa-utils
   - media-sound/pnmixer
-  - media-video/vlc
-  - net-analyzer/nmap
-  - net-analyzer/wireshark
   - net-dns/bind-tools
-  - net-fs/cifs-utils
-  - net-irc/hexchat
   - net-misc/dhcp
   - net-misc/dhcpcd
   - net-misc/keychain
-  - net-misc/memcached
   - net-misc/networkmanager
   - net-misc/ntp
-  - net-misc/openvpn
-  - net-misc/remmina
   - net-misc/telnet-bsd
   - net-misc/whois
-  - net-p2p/deluge
-  - net-wireless/hostapd
+  - net-vpn/openvpn
+  - sys-apps/exa # ls like
+  - sys-apps/lshw
   - sys-apps/pciutils
+  - sys-apps/pcsc-lite # yubikey
+  - sys-apps/pcsc-tools # yubikey
+  - sys-apps/usbutils
+  - sys-cluster/kubectl
   - sys-fs/cryptsetup
   - sys-fs/dosfstools
   - sys-kernel/genkernel
@@ -76,79 +72,109 @@ settings_packages:
   - sys-process/iotop
   - www-client/firefox-bin
   - www-plugins/adobe-flash
-  - www-plugins/pentadactyl
   - x11-apps/xclock
   - x11-apps/xrandr
+  - x11-base/xorg-drivers
   - x11-base/xorg-x11
   - x11-misc/dmenu
   - x11-misc/i3lock
   - x11-misc/i3status
   - x11-misc/py3status
   - x11-misc/slim
+  - x11-misc/urxvt-perls
+  - x11-misc/wmctrl # libinput
   - x11-misc/xautolock
   - x11-misc/xclip
+  - x11-misc/xdotool # libinput
   - x11-terms/rxvt-unicode
-  - x11-terms/st
-  - x11-terms/terminator
   - x11-terms/xterm
   - x11-wm/i3
   - x11-wm/twm
-  - xfce-base/thunar
+ 
+system_package_use:
+  - app-admin/rsyslog gnutls
+  - app-crypt/gcr gtk
+  - app-crypt/pinentry gnome-keyring
+  - app-editors/vim python -perl -ruby -minimal
+  - dev-lang/python sqlite
+  - dev-libs/glib dbus
+  - media-libs/imlib2 gif png
+  - media-plugins/alsa-plugins pulseaudio
+  - net-wireless/wpa_supplicant dbus
+  - sys-auth/consolekit policykit
+  - sys-auth/polkit consolekit
+  - sys-devel/gcc go
+  - sys-kernel/genkernel cryptsetup
+  - x11-libs/cairo xcb
+  - x11-libs/libxcb xkb
+  - x11-misc/slim branding
+  - x11-terms/rxvt-unicode 256-color blink fading-colors xft gdk-pixbuf
 
-settings_keywords:
-  - app-admin/ansible
-  - app-admin/keepassx
+system_package_keywords:
   - app-editors/vim
   - app-editors/vim-core
-  - app-emulation/virtualbox
-  - app-emulation/virtualbox-guest-additions
-  - app-emulation/virtualbox-modules
-  - app-vim/youcompleteme
-  - dev-lang/go
-  - dev-libs/libtermkey
-  - dev-libs/libvterm
-  - dev-libs/msgpack
-  - dev-libs/unibilium
-  - dev-lua/messagepack
-  - dev-python/packaging
-  - dev-python/pip
-  - dev-python/virtualenvwrapper
-  - dev-python/yenc
-  - sys-devel/gcc
-  - x11-drivers/xf86-video-virtualbox
+  - app-emulation/docker
+  - app-emulation/docker-proxy
+  - dev-perl/pcsc-perl
+  - sys-apps/pcsc-tools
+  - sys-cluster/kubectl
   - x11-misc/py3status
-  - sys-devel/gcc
+ 
+system_input_devices:
+  - evdev
+  - synaptics
 
-settings_use:
-  - app-editors/vim python -perl -ruby -minimal
-  - dev-java/icedtea-bin webstart -cups
-  - dev-lang/go gccgo
-  - dev-lang/python sqlite
-  - dev-libs/libxml2 icu
-  - dev-libs/openssl -bindist
-  - media-libs/harfbuzz icu
-  - net-misc/openssh -bindist
-  - net-misc/remmina freerdp
-  - sys-devel/gcc go
-  - sys-devel/llvm clang
-  - sys-fs/udev gudev
-  - sys-kernel/genkernel cryptsetup
-  - sys-libs/zlib minizip
-  - x11-plugins/pigdin-sipe kerberos openssl
-  - x11-terms/rxvt-unicode 256-color
+system_emerge_options:
+  - "--backtrack=50"
+  - "--jobs={{ ansible_processor_cores }}"
+  - "--keep-going=y"
+  - "--load-average={{ ansible_processor_cores / 2 }}"
+  - "--quiet"
+  - "--with-bdeps=y"
 
-settings_license:
-  - www-plugins/adobe-flash AdobeFlash-11.x
+system_ntp_servers:
+  - 0.fr.pool.ntp.org
+  - 1.fr.pool.ntp.org
+  - 2.fr.pool.ntp.org
+  - 3.fr.pool.ntp.org
 
-settings_packages_pip:
-  - ipdb
-  - pew
-  - pylint
-  - pymongo
-  - requests
+irc_1000mercis_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          65666239623234313131633465343339616634346138633339326262393030643939323935303064
+          3233336334366433643836356339346534363431393735380a636161353838653034373430363864
+          36613038633762353536363431633231373133336239393933306633613461363562336137306365
+          6438633363356539360a393431333431316631396564396566386464373939333936643761396634
+          3238
 
-hexchat_password:
+docker_repo_prefix: lujeni
 
-settings_makeopts:
+docker_images:
+  - cheese
+  - chrome
+  - discord
+  - kubectl
+  - kubens
+  - mattermost-desktop
+  - remmina
+  - weechat
+  - ykperso
 
-settings_video_cards:
+docker_images_version: 1.0.0
+
+system_dotfiles:
+  - {"src": "x/bash_profile.j2", "dest": ".bash_profile"}
+  - {"src": "x/bashrc.j2", "dest": ".bashrc"}
+  - {"src": "x/dockerfunc.j2", "dest": ".dockerfunc"}
+  - {"src": "x/exports.j2", "dest": ".exports"}
+  - {"src": "x/gitconfig.j2", "dest": ".gitconfig"}
+  - {"src": "x/gitignore_global.j2", "dest": ".gitignore_global"}
+  - {"src": "x/pentadactylrc.j2", "dest": ".pentadactylrc"}
+  - {"src": "x/ssh_config.j2", "dest": ".ssh/config"}
+  - {"src": "x/vimrc.j2", "dest": ".vimrc"}
+
+system_sources_files:
+  - bash-git-prompt/gitprompt.sh
+  - completion_kubectx
+  - completion_kubens
+  - dockerfunc
+  - exports

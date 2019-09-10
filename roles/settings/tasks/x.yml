@@ -1,0 +1,130 @@
+- name: x | i3 dir
+  file:
+    path: "{{ home }}/.config/.i3"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0775
+    state: directory
+
+- name: x | py3status dir
+  file:
+    path: "/etc/py3status.d"
+    owner: root
+    group: "{{ group }}"
+    mode: 0775
+    state: directory
+    
+- name: x | default dir
+  file:
+    path: "{{ home }}/{{ item }}"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0775
+    state: directory
+  loop:
+    - go
+    - repos
+    - tmp
+    - venv
+    - works
+
+- name: x | i3 /py3status / config
+  template:
+    src: "x/{{ item }}.j2"
+    dest: "{{ home }}/.config/i3/{{ item }}"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0775
+  with_items:
+    - config
+    - i3status.conf
+
+- name: x | xinit
+  template:
+    src: "x/xinitrc.j2"
+    dest: "{{ home }}/.xinitrc"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0644
+
+- name: x | Xresources
+  template:
+    src: "x/Xresources.j2"
+    dest: "{{ home }}/.Xresources"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0644
+
+- name: x | slim
+  template:
+    src: "etc/slim.conf.j2"
+    dest: "/etc/slim.conf"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: x | xdm
+  template:
+    src: "etc/conf.d/xdm.j2"
+    dest: "/etc/conf.d/xdm"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: x | home basic file
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ home }}/{{ item.dest }}"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0644
+  loop: "{{ system_dotfiles }}"
+
+- name: x | git prompt
+  shell: "git clone https://github.com/magicmonty/bash-git-prompt.git {{ home }}/.bash-git-prompt --depth=1"
+  failed_when: false # dirty, maybe check if the file exists
+  changed_when: false
+
+- name: x | gnupg dir for yubi
+  file:
+    path: "{{ home }}/.gnupg"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0700
+    state: directory
+
+- name: x | gnupg agent for yubi
+  template:
+    src: "x/gpg-agent.conf.j2"
+    dest: "{{ home }}/.gnupg/gpg-agent.conf"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0400
+
+- name: x | kubectx clone
+  git:
+    repo: https://github.com/ahmetb/kubectx
+    dest: /opt/kubectx
+    update: yes
+
+- name: x | kubectx binary
+  file:
+    src: "/opt/kubectx/{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
+    owner: root
+    group: "{{ group }}"
+    state: link
+  loop:
+    - kubens
+    - kubectx
+
+- name: x | kubectx completion
+  file:
+    src: "/opt/kubectx/completion/{{ item }}.bash"
+    dest: "{{ home }}/.completion_{{ item }}"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    state: link
+  loop:
+    - kubens
+    - kubectx

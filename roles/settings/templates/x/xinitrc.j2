@@ -1,0 +1,6 @@
+# {{ ansible_managed }}
+setxkbmap us intl
+xrandr --dpi 194
+xrandr -s 1920x1080
+[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
+exec i3
