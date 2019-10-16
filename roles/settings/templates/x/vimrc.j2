@@ -6,10 +6,16 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+    Plug 'SirVer/ultisnips'
+    Plug 'pearofducks/ansible-vim'
+    Plug 'tmhedberg/SimpylFold'
     Plug 'Valloric/YouCompleteMe'
     Plug 'airblade/vim-gitgutter'
     Plug 'fatih/vim-go'
+    Plug 'honza/vim-snippets'
     Plug 'jstemmer/gotags'
+    Plug 'junegunn/fzf'
+    Plug 'junegunn/fzf.vim'
     Plug 'junegunn/seoul256.vim'
     Plug 'kien/ctrlp.vim'
     Plug 'lepture/vim-jinja'
@@ -24,6 +30,9 @@ call plug#end()
 
 autocmd! bufwritepost .vimrc source %
 autocmd vimenter * NERDTree
+
+au BufRead,BufNewFile */role/*.yml set filetype=yaml.ansible
+au BufRead,BufNewFile */role/*.yaml set filetype=yaml.ansible
 
 filetype off
 filetype indent on              " load filetype-specific indent files
@@ -44,7 +53,7 @@ set cursorline                  " show a visual line under the cursor's current 
 set encoding=utf-8              " default encoding
 set expandtab                   " expand tabs into spaces
 set foldenable                  " fold by default
-set foldlevel=10                " open most folds by default
+set foldlevel=99                " open most folds by default
 set foldmethod=indent           " fold based on indent
 set foldnestmax=10              " deepest fold is 10 levels
 set hlsearch                    " highlight matches
@@ -85,6 +94,11 @@ let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go']}
 
 " YouCompleteMe settings
 let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " Syntastic settings
 let python_highlight_all=1
+
+" SimpylFold
+let g:SimpylFold_docstring_preview=1
+

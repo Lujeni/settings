@@ -128,3 +128,11 @@
   loop:
     - kubens
     - kubectx
+
+- name: x | kubectl aliases based on ahmetb
+  get_url:
+    url: https://rawgit.com/ahmetb/kubectl-alias/master/.kubectl_aliases
+    dest: "{{ home }}/.kubectl_aliases"
+    mode: 0400
+    owner: "{{ user }}"
+    group: "{{ group }}"

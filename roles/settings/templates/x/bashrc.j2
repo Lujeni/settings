@@ -9,10 +9,6 @@ for file in {{ system_sources_files|join(" ") }}; do
 done
 unset file
 
-# keychain
-keychain id_rsa
-. ~/.keychain/$HOSTNAME-sh
-
 # yubikey
 if test -f $HOME/.gpg-agent-info && \
     kill -0 `ps aux | grep gpg-agent` 2>/dev/null; then

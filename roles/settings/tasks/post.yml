@@ -4,7 +4,7 @@
     state: started
     enabled: yes
     runlevel: default
-  with_items:
+  loop:
     - NetworkManager
     - docker
     - ntp-client
@@ -16,5 +16,5 @@
     state: started
     enabled: yes
     runlevel: boot
-  with_items:
+  loop:
     - alsasound

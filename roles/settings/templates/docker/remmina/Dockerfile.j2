@@ -1,0 +1,16 @@
+# {{ ansible_managed }}
+# NOTE: much more straighforward on ubuntu rather than Debian
+FROM ubuntu:16.04
+
+RUN apt-get update && apt-get install -y \
+    software-properties-common \
+    --no-install-recommends && \
+    apt-add-repository ppa:remmina-ppa-team/remmina-next && \
+    apt-get update && apt-get install -y \
+    hicolor-icon-theme \
+    remmina \
+    remmina-plugin-rdp \
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
+
+ENTRYPOINT ["remmina"]

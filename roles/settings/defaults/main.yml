@@ -37,6 +37,7 @@ system_packages:
   - app-portage/genlop
   - app-portage/gentoolkit
   - app-text/tree
+  - app-vim/youcompleteme::ahyangyi-overlay
   - dev-java/icedtea-bin
   - dev-lang/go
   - dev-perl/pcsc-perl # yubikey
@@ -97,6 +98,7 @@ system_package_use:
   - app-crypt/pinentry gnome-keyring
   - app-editors/vim python -perl -ruby -minimal
   - dev-lang/python sqlite
+  - dev-libs/boost python # youcompleteme
   - dev-libs/glib dbus
   - media-libs/imlib2 gif png
   - media-plugins/alsa-plugins pulseaudio
@@ -115,8 +117,10 @@ system_package_keywords:
   - app-editors/vim-core
   - app-emulation/docker
   - app-emulation/docker-proxy
-  - dev-perl/pcsc-perl
-  - sys-apps/pcsc-tools
+  - =app-vim/youcompleteme-99999999 **
+  - dev-perl/pcsc-perl # yubikey
+  - dev-python/sh # youcompleteme
+  - sys-apps/pcsc-tools # yubikey
   - sys-cluster/kubectl
   - x11-misc/py3status
  
@@ -171,6 +175,7 @@ system_dotfiles:
   - {"src": "x/pentadactylrc.j2", "dest": ".pentadactylrc"}
   - {"src": "x/ssh_config.j2", "dest": ".ssh/config"}
   - {"src": "x/vimrc.j2", "dest": ".vimrc"}
+  - {"src": "x/func.j2", "dest": ".func"}
 
 system_sources_files:
   - bash-git-prompt/gitprompt.sh
@@ -178,3 +183,5 @@ system_sources_files:
   - completion_kubens
   - dockerfunc
   - exports
+  - func
+  - kubectl_aliases

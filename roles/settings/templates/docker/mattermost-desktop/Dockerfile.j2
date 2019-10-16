@@ -30,6 +30,8 @@ RUN apt install -y \
     libxtst6 \
     xdg-utils
 
+RUN mkdir /root/Downloads
+
 # cleanup
 RUN apt remove --purge -y wget && \
     apt-get autoremove -y && \

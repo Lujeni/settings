@@ -19,7 +19,7 @@
     mode: 0755
     owner: root
     group: root
-  with_items:
+  loop:
     - keywords
     - license
     - mask
@@ -32,7 +32,7 @@
     mode: 0644
     owner: root
     group: root
-  with_items:
+  loop:
     - keywords
     - license
     - use
@@ -137,6 +137,11 @@
     group: root
     owner: root
     mode: 0644
+    
+- name: system | add overlay
+  layman:
+    name: ahyangyi-overlay # youcompleteme
+    state: updated
 
 - name: system | install packages
   portage:
@@ -160,3 +165,11 @@
     group: root
     owner: root
     mode: 0644
+
+- name: system | smux
+  template:
+    src: usr/bin/smux.j2
+    dest: /usr/bin/smux
+    group: root
+    owner: root
+    mode: 0775

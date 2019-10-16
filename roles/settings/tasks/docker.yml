@@ -18,6 +18,17 @@
     mode: 0644
   loop: "{{ docker_images }}"
   
+- name: docker | deploy | mattermost extra directory
+  file:
+    path: "{{ home }}/docker/data/mattermost-desktop/{{ item }}"
+    group: "{{ group }}" # NOTE: chrome user in Docker image
+    owner: "{{ user }}" # NOTE: chrome user in Docker image
+    mode: 0755
+    state: directory
+  loop:
+    - config
+    - downloads
+   
 - name: docker | deploy | chrome extra directory
   file:
     path: "{{ home }}/docker/data/chrome/{{ item }}"
