@@ -5,7 +5,7 @@ user: julien
 
 group: julien 
 
-other_groups: "root,wheel"
+other_groups: "root,wheel,audio,video,plugdev,docker,ntp,users"
 
 system_default_locale:
     locale_gen:
@@ -30,6 +30,7 @@ system_packages:
   - app-arch/unp
   - app-crypt/ccid # yubikey
   - app-crypt/gnupg
+  - app-crypt/libu2f-host # yubikey
   - app-crypt/pinentry # crypt / yubikey
   - app-editors/vim
   - app-emulation/docker
@@ -64,6 +65,7 @@ system_packages:
   - sys-apps/pcsc-lite # yubikey
   - sys-apps/pcsc-tools # yubikey
   - sys-apps/usbutils
+  - sys-auth/pam_u2f # yubikey
   - sys-cluster/kubectl
   - sys-fs/cryptsetup
   - sys-fs/dosfstools
@@ -166,19 +168,21 @@ docker_images:
 docker_images_version: 1.0.0
 
 system_dotfiles:
+  - {"src": "x/bash_aliases.j2", "dest": ".bash_aliases"}
   - {"src": "x/bash_profile.j2", "dest": ".bash_profile"}
   - {"src": "x/bashrc.j2", "dest": ".bashrc"}
   - {"src": "x/dockerfunc.j2", "dest": ".dockerfunc"}
   - {"src": "x/exports.j2", "dest": ".exports"}
+  - {"src": "x/func.j2", "dest": ".func"}
   - {"src": "x/gitconfig.j2", "dest": ".gitconfig"}
   - {"src": "x/gitignore_global.j2", "dest": ".gitignore_global"}
   - {"src": "x/pentadactylrc.j2", "dest": ".pentadactylrc"}
   - {"src": "x/ssh_config.j2", "dest": ".ssh/config"}
   - {"src": "x/vimrc.j2", "dest": ".vimrc"}
-  - {"src": "x/func.j2", "dest": ".func"}
 
 system_sources_files:
   - bash-git-prompt/gitprompt.sh
+  - bash_aliases
   - completion_kubectx
   - completion_kubens
   - dockerfunc
