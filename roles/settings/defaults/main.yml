@@ -5,6 +5,7 @@ user: julien
 
 group: julien 
 
+#other_groups: "root,wheel"
 other_groups: "root,wheel,audio,video,plugdev,docker,ntp,users"
 
 system_default_locale:
