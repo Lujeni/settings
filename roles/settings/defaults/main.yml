@@ -25,6 +25,7 @@ system_global_use:
   - sse2
 
 system_packages:
+  - app-admin/helm
   - app-admin/sudo
   - app-admin/sysstat
   - app-arch/rar
@@ -38,6 +39,7 @@ system_packages:
   - app-misc/tmux
   - app-portage/genlop
   - app-portage/gentoolkit
+  - app-text/dos2unix
   - app-text/tree
   - app-vim/youcompleteme::ahyangyi-overlay
   - dev-java/icedtea-bin
@@ -84,6 +86,7 @@ system_packages:
   - x11-misc/i3lock
   - x11-misc/i3status
   - x11-misc/py3status
+  - x11-misc/redshift
   - x11-misc/slim
   - x11-misc/urxvt-perls
   - x11-misc/wmctrl # libinput
@@ -112,6 +115,7 @@ system_package_use:
   - sys-kernel/genkernel cryptsetup
   - x11-libs/cairo xcb
   - x11-libs/libxcb xkb
+  - x11-misc/redshift gtk
   - x11-misc/slim branding
   - x11-terms/rxvt-unicode 256-color blink fading-colors xft gdk-pixbuf
 
