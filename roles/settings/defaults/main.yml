@@ -101,13 +101,14 @@ system_packages:
 system_package_use:
   - app-admin/rsyslog gnutls
   - app-crypt/gcr gtk
-  - app-crypt/pinentry gnome-keyring
+  - app-crypt/pinentry gnome-keyring gtk
   - app-editors/vim python -perl -ruby -minimal
   - dev-lang/python sqlite
   - dev-libs/boost python # youcompleteme
   - dev-libs/glib dbus
   - media-libs/imlib2 gif png
   - media-plugins/alsa-plugins pulseaudio
+  - net-misc/sshpass
   - net-wireless/wpa_supplicant dbus
   - sys-auth/consolekit policykit
   - sys-auth/polkit consolekit

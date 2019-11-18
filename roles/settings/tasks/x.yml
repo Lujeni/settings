@@ -101,6 +101,10 @@
     group: "{{ group }}"
     mode: 0400
 
+- name: x | gnupg agent / pinentry use gtk
+  shell: "eselect pinentry set pinentry-gtk-2"
+  changed_when: false
+
 - name: x | kubectx clone
   git:
     repo: https://github.com/ahmetb/kubectx
