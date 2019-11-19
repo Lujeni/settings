@@ -173,3 +173,11 @@
     group: root
     owner: root
     mode: 0775
+
+- name: system | docker
+  template:
+    src: etc/conf.d/docker.j2
+    dest: /etc/conf.d/docker
+    group: root
+    owner: root
+    mode: 0775
