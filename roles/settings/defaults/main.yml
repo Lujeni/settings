@@ -31,6 +31,7 @@ system_packages:
   - app-arch/rar
   - app-arch/unp
   - app-crypt/ccid # yubikey
+  - app-crypt/cfssl
   - app-crypt/gnupg
   - app-crypt/libu2f-host # yubikey
   - app-crypt/pinentry # crypt / yubikey
@@ -49,6 +50,7 @@ system_packages:
   - dev-python/pip
   - dev-python/virtualenv
   - dev-vcs/git
+  - dev-vcs/tig
   - gnome-extra/nm-applet
   - media-gfx/scrot
   - media-sound/alsa-utils
@@ -85,12 +87,14 @@ system_packages:
   - x11-misc/dmenu
   - x11-misc/i3lock
   - x11-misc/i3status
+  - app-misc/jq
   - x11-misc/py3status
   - x11-misc/redshift
   - x11-misc/slim
   - x11-misc/urxvt-perls
   - x11-misc/wmctrl # libinput
   - x11-misc/xautolock
+  - media-gfx/graphviz
   - x11-misc/xclip
   - x11-misc/xdotool # libinput
   - x11-terms/rxvt-unicode
@@ -99,6 +103,8 @@ system_packages:
   - x11-wm/twm
  
 system_package_use:
+  - media-libs/gd truetype jpeg png fontconfig # graphviz
+  - dev-python/mysqlclient
   - app-admin/rsyslog gnutls
   - app-crypt/gcr gtk
   - app-crypt/pinentry gnome-keyring gtk
