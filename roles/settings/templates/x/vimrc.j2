@@ -7,11 +7,10 @@ endif
 
 call plug#begin('~/.vim/plugged')
     Plug 'SirVer/ultisnips'
-    Plug 'pearofducks/ansible-vim'
-    Plug 'tmhedberg/SimpylFold'
     Plug 'Valloric/YouCompleteMe'
     Plug 'airblade/vim-gitgutter'
     Plug 'fatih/vim-go'
+    Plug 'hashivim/vim-terraform'
     Plug 'honza/vim-snippets'
     Plug 'jstemmer/gotags'
     Plug 'junegunn/fzf'
@@ -22,9 +21,11 @@ call plug#begin('~/.vim/plugged')
     Plug 'majutsushi/tagbar'
     Plug 'nvie/vim-flake8'
     Plug 'pearofducks/ansible-vim'
+    Plug 'pearofducks/ansible-vim'
     Plug 'scrooloose/nerdtree' 
     Plug 'scrooloose/syntastic'
     Plug 'terryma/vim-multiple-cursors'
+    Plug 'tmhedberg/SimpylFold'
     Plug 'tpope/vim-fugitive'
 call plug#end()
 
@@ -102,3 +103,7 @@ let python_highlight_all=1
 " SimpylFold
 let g:SimpylFold_docstring_preview=1
 
+" Terraform
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
+let g:terraform_fold_sections=1

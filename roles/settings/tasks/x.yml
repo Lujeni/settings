@@ -140,3 +140,30 @@
     mode: 0400
     owner: "{{ user }}"
     group: "{{ group }}"
+
+- name: x | create virtualenv ansible
+  pip:
+    name: ansible
+    virtualenv: "{{ home }}/venv/ansible"
+
+- name: x | create virtualenv terraform
+  pip:
+    name: terrascan
+    virtualenv: "{{ home }}/venv/terraform"
+
+- stat:
+    path: /usr/local/bin/tflint
+  register: tflint_install
+
+- name: x | terraform-lin
+  copy:
+    src: install_tflint.sh
+    dest: /tmp
+    owner: root
+    group: root
+    mode: '0755'
+  when: tflint_install.stat.isreg is not defined
+
+- name: x | install terraform-lint
+  command: "sh /tmp/install_tflint.sh"
+  when: tflint_install.stat.isreg is not defined
