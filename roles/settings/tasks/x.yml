@@ -155,7 +155,7 @@
     path: /usr/local/bin/tflint
   register: tflint_install
 
-- name: x | terraform-lin
+- name: x | terraform-lint
   copy:
     src: install_tflint.sh
     dest: /tmp
