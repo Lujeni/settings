@@ -142,3 +142,18 @@ remmina(){
 		-v /tmp/.X11-unix:/tmp/.X11-unix \
 		${DOCKER_REPO_PREFIX}/remmina:{{ docker_images_version }}
 }
+
+terraform(){
+	del_stopped terraform
+
+	docker run -it --rm \
+        --name terraform \
+        --net host \
+        -v "${HOME}/.aws:/root/.aws:ro" \
+        -v "$(pwd):/usr/src/repo" \
+        -v /tmp:/tmp \
+        --workdir /usr/src/repo \
+        --log-driver none \
+        -e SSH_AUTH_SOCK \
+        ${DOCKER_REPO_PREFIX}/terraform:{{ docker_images_version }} "$@"
+}
