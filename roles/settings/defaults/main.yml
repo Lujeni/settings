@@ -28,6 +28,7 @@ system_packages:
   - app-admin/helm
   - app-admin/sudo
   - app-admin/sysstat
+  - app-admin/terraform
   - app-arch/rar
   - app-arch/unp
   - app-crypt/ccid # yubikey
@@ -37,6 +38,7 @@ system_packages:
   - app-crypt/pinentry # crypt / yubikey
   - app-editors/vim
   - app-emulation/docker
+  - app-misc/jq
   - app-misc/tmux
   - app-portage/genlop
   - app-portage/gentoolkit
@@ -52,6 +54,7 @@ system_packages:
   - dev-vcs/git
   - dev-vcs/tig
   - gnome-extra/nm-applet
+  - media-gfx/graphviz
   - media-gfx/scrot
   - media-sound/alsa-utils
   - media-sound/pnmixer
@@ -87,14 +90,12 @@ system_packages:
   - x11-misc/dmenu
   - x11-misc/i3lock
   - x11-misc/i3status
-  - app-misc/jq
   - x11-misc/py3status
   - x11-misc/redshift
   - x11-misc/slim
   - x11-misc/urxvt-perls
   - x11-misc/wmctrl # libinput
   - x11-misc/xautolock
-  - media-gfx/graphviz
   - x11-misc/xclip
   - x11-misc/xdotool # libinput
   - x11-terms/rxvt-unicode
@@ -103,8 +104,6 @@ system_packages:
   - x11-wm/twm
  
 system_package_use:
-  - media-libs/gd truetype jpeg png fontconfig # graphviz
-  - dev-python/mysqlclient
   - app-admin/rsyslog gnutls
   - app-crypt/gcr gtk
   - app-crypt/pinentry gnome-keyring gtk
@@ -112,6 +111,8 @@ system_package_use:
   - dev-lang/python sqlite
   - dev-libs/boost python # youcompleteme
   - dev-libs/glib dbus
+  - dev-python/mysqlclient
+  - media-libs/gd truetype jpeg png fontconfig # graphviz
   - media-libs/imlib2 gif png
   - media-plugins/alsa-plugins pulseaudio
   - net-misc/sshpass
@@ -127,11 +128,12 @@ system_package_use:
   - x11-terms/rxvt-unicode 256-color blink fading-colors xft gdk-pixbuf
 
 system_package_keywords:
+  - =app-vim/youcompleteme-99999999 **
+  - app-admin/terraform
   - app-editors/vim
   - app-editors/vim-core
   - app-emulation/docker
   - app-emulation/docker-proxy
-  - =app-vim/youcompleteme-99999999 **
   - dev-perl/pcsc-perl # yubikey
   - dev-python/sh # youcompleteme
   - sys-apps/pcsc-tools # yubikey
