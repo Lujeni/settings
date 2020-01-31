@@ -157,3 +157,11 @@ terraform-dock(){
         -e SSH_AUTH_SOCK \
         ${DOCKER_REPO_PREFIX}/terraform:{{ docker_images_version }} "$@"
 }
+
+aws(){
+    docker run -it --rm \
+        -v "${HOME}/.aws:/root/.aws" \
+        --log-driver none \
+        --name aws \
+        ${DOCKER_REPO_PREFIX}/aws:{{ docker_images_version}} "$@"
+}

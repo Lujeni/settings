@@ -171,6 +171,7 @@ irc_1000mercis_password: !vault |
 docker_repo_prefix: lujeni
 
 docker_images:
+  - aws
   - cheese
   - chrome
   - discord
