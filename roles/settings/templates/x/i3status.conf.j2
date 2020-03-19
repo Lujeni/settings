@@ -1,13 +1,13 @@
 # {{ ansible_managed }}
 
 general {
-	color_bad = "#dc322f"
-	color_degraded = "#cb4b16"
-	color_good = "#859900"
-	color_separator = "#586e75"
-	colors = true
-	interval = 10
-	output_format = "i3bar"
+    color_bad = "#dc322f"
+    color_degraded = "#cb4b16"
+    color_good = "#859900"
+    color_separator = "#586e75"
+    colors = true
+    interval = 10
+    output_format = "i3bar"
     interval = 5
 }
 
@@ -20,4 +20,5 @@ order += "tztime local"
 xrandr {
     cache_timeout = 5
     fallback = true
+    force_on_change = ["eDP1+DP1", "eDP1"]
 }
