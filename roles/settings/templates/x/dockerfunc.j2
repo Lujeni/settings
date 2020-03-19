@@ -165,3 +165,19 @@ aws(){
         --name aws \
         ${DOCKER_REPO_PREFIX}/aws:{{ docker_images_version}} "$@"
 }
+
+
+dbeaver(){
+	del_stopped dbeaver
+
+	docker run -d \
+		--name dbeaver \
+		--net host \
+		-e "DISPLAY=unix${DISPLAY}" \
+		-e GDK_DPI_SCALE \
+		-e GDK_SCALE \
+		-v "${HOME}/docker/data/dbeaver:/root" \
+		-v /etc/localtime:/etc/localtime:ro \
+		-v /tmp/.X11-unix:/tmp/.X11-unix \
+		${DOCKER_REPO_PREFIX}/dbeaver:{{ docker_images_version }} dbeaver
+}
