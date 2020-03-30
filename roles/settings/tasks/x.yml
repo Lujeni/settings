@@ -151,6 +151,14 @@
     name: terrascan
     virtualenv: "{{ home }}/venv/terraform"
 
+- name: x | create virtualenv aws-google-auth
+  pip:
+    name: "{{ item }}"
+    virtualenv: "{{ home }}/venv/aws-google-auth"
+  loop:
+    - aws-google-auth
+    - python-u2flib-host
+
 - stat:
     path: /usr/local/bin/tflint
   register: tflint_install
