@@ -181,3 +181,18 @@ dbeaver(){
 		-v /tmp/.X11-unix:/tmp/.X11-unix \
 		${DOCKER_REPO_PREFIX}/dbeaver:{{ docker_images_version }} dbeaver
 }
+
+keepass(){
+	del_stopped keepass
+
+	docker run -d \
+		--name keepass \
+		--net host \
+		-e "DISPLAY=unix${DISPLAY}" \
+		-e GDK_DPI_SCALE \
+		-e GDK_SCALE \
+		-v "${HOME}/docker/data/keepass:/root" \
+		-v /etc/localtime:/etc/localtime:ro \
+		-v /tmp/.X11-unix:/tmp/.X11-unix \
+		${DOCKER_REPO_PREFIX}/keepass:{{ docker_images_version }}
+}

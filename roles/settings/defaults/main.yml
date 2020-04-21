@@ -176,6 +176,7 @@ docker_images:
   - chrome
   - dbeaver
   - discord
+  - keepass
   - kubectl
   - kubens
   - mattermost-desktop
