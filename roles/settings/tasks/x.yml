@@ -159,6 +159,11 @@
     - aws-google-auth
     - python-u2flib-host
 
+- name: x | create virtualenv cruft
+  pip:
+    name: cruft
+    virtualenv: "{{ home }}/venv/cruft"
+
 - stat:
     path: /usr/local/bin/tflint
   register: tflint_install
