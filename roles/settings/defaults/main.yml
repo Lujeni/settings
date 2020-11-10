@@ -172,6 +172,7 @@ docker_repo_prefix: lujeni
 
 docker_images:
   - aws
+  - azure
   - cheese
   - chrome
   - dbeaver

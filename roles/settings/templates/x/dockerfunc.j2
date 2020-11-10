@@ -158,6 +158,21 @@ terraform-dock(){
         ${DOCKER_REPO_PREFIX}/terraform:{{ docker_images_version }} "$@"
 }
 
+azure(){
+	del_stopped azure
+
+	docker run -it --rm \
+        --name azure \
+        --net host \
+        -v "${HOME}/.ssh:/root/.ssh mcr.microsoft.com/azure-cli" \
+        -v "$(pwd):/usr/src/repo" \
+        -v /tmp:/tmp \
+        --workdir /usr/src/repo \
+        --log-driver none \
+        -e SSH_AUTH_SOCK \
+        ${DOCKER_REPO_PREFIX}/azure:{{ docker_images_version }} "$@"
+}
+
 aws(){
     docker run -it --rm \
         -v "${HOME}/.aws:/root/.aws" \
