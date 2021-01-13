@@ -1,3 +1,7 @@
-FROM hashicorp/terraform:0.12.26
+FROM hashicorp/terraform:0.13.2
 
 RUN mkdir /root/.aws
+RUN touch /root/.vault-token
+
+ENTRYPOINT ["sh"]
+

@@ -211,3 +211,19 @@ keepass(){
 		-v /tmp/.X11-unix:/tmp/.X11-unix \
 		${DOCKER_REPO_PREFIX}/keepass:{{ docker_images_version }}
 }
+
+robomongo(){
+	del_stopped robomongo
+
+	docker run -d \
+		--name robomongo \
+		--net host \
+		-e "DISPLAY=unix${DISPLAY}" \
+		-e GDK_DPI_SCALE \
+		-e GDK_SCALE \
+		-v "${HOME}/docker/data/robomongo:/root/.3T" \
+        -v "${HOME}/docker/data/robomongo/config:/root/.config/3T" \
+		-v /etc/localtime:/etc/localtime:ro \
+		-v /tmp/.X11-unix:/tmp/.X11-unix \
+		${DOCKER_REPO_PREFIX}/robomongo:{{ docker_images_version }} robomongo
+}

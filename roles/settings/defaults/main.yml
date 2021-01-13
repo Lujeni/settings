@@ -182,6 +182,7 @@ docker_images:
   - kubens
   - mattermost-desktop
   - remmina
+  - robomongo
   - terraform
   - weechat
   - ykperso
@@ -198,7 +199,7 @@ system_dotfiles:
   - {"src": "x/gitconfig.j2", "dest": ".gitconfig"}
   - {"src": "x/gitignore_global.j2", "dest": ".gitignore_global"}
   - {"src": "x/pentadactylrc.j2", "dest": ".pentadactylrc"}
-  - {"src": "x/ssh_config.j2", "dest": ".ssh/config"}
+  #  - {"src": "x/ssh_config.j2", "dest": ".ssh/config"}
   - {"src": "x/vimrc.j2", "dest": ".vimrc"}
 
 system_sources_files:
