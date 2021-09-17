@@ -150,6 +150,7 @@ terraform-dock(){
         --name terraform \
         --net host \
         -v "${HOME}/.aws:/root/.aws:ro" \
+        -v "${HOME}/.vault-token:/root/.vault-token:ro" \
         -v "$(pwd):/usr/src/repo" \
         -v /tmp:/tmp \
         --workdir /usr/src/repo \
@@ -176,6 +177,7 @@ azure(){
 aws(){
     docker run -it --rm \
         -v "${HOME}/.aws:/root/.aws" \
+        -v "${HOME}/.vault-token:/root/.vault-token:ro" \
         --log-driver none \
         --name aws \
         ${DOCKER_REPO_PREFIX}/aws:{{ docker_images_version}} "$@"
@@ -219,11 +221,11 @@ robomongo(){
 		--name robomongo \
 		--net host \
 		-e "DISPLAY=unix${DISPLAY}" \
-		-e GDK_DPI_SCALE \
+        -v "${HOME}/docker/data/robomongo/certificates/:/root/certificates/" \
 		-e GDK_SCALE \
 		-v "${HOME}/docker/data/robomongo:/root/.3T" \
         -v "${HOME}/docker/data/robomongo/config:/root/.config/3T" \
 		-v /etc/localtime:/etc/localtime:ro \
 		-v /tmp/.X11-unix:/tmp/.X11-unix \
-		${DOCKER_REPO_PREFIX}/robomongo:{{ docker_images_version }} robomongo
+		${DOCKER_REPO_PREFIX}/robomongo:{{ docker_images_version }} /opt/robo3t/bin/robo3t
 }
