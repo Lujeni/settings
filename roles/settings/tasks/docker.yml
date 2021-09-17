@@ -1,3 +1,27 @@
+- name: docker | install
+  apt:
+    package: "{{ item }}"
+    state: latest
+  loop:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+
+- name: docker | adding existing user to docker group
+  user:
+    name: "{{ user }}"
+    groups: docker
+    append: yes
+
+- name: docker | enabled
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  loop:
+    - docker
+    - containerd
+
 - name: docker | data
   file:
     path: "{{ home }}/docker/{{ item[0] }}/{{ item[1] }}"
@@ -48,14 +72,14 @@
     owner: "{{ user }}"
     mode: 0644
 
-- name: docker | deploy | chrome seccomp
-  template:
-    src: "docker/chrome/seccomp.json"
-    dest: "/etc/docker/seccomp-chrome.json"
-    group: "{{ group }}"
-    owner: "{{ user }}"
-    mode: 0644
-
+      #- name: docker | deploy | chrome seccomp
+      #  template:
+      #    src: "docker/chrome/seccomp.json"
+      #    dest: "/etc/docker/seccomp-chrome.json"
+      #    group: "{{ group }}"
+      #    owner: "{{ user }}"
+      #    mode: 0644
+      #
 - name: docker | deploy | chrome volume rights
   file:
     path: "{{ home }}/docker/data/chrome/"

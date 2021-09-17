@@ -1,0 +1,34 @@
+- name: i3 | install
+  apt:
+    package: "{{ item }}"
+    state: latest
+  loop:
+    - i3
+    - py3status
+
+- name: i3 | configuration directory
+  file:
+    path: "{{ home }}/.config/i3"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0775
+    state: directory
+
+- name: i3 | py3status directory
+  file:
+    path: "/etc/py3status.d"
+    owner: root
+    group: "{{ group }}"
+    mode: 0775
+    state: directory
+
+- name: i3 | py3status configuration
+  template:
+    src: "i3/{{ item }}.j2"
+    dest: "{{ home }}/.config/i3/{{ item }}"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0775
+  loop:
+    - config
+    - i3status.conf

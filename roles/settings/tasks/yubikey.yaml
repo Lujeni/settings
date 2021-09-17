@@ -1,0 +1,34 @@
+- name: yubikey | install
+  apt:
+    package: "{{ item }}"
+    state: latest
+  loop:
+    - cryptsetup
+    - dirmngr
+    - gnupg-agent
+    - gnupg2
+    - hopenpgp-tools
+    - libpcsclite-dev
+    - libssl-dev
+    - pcscd
+    - scdaemon
+    - secure-delete
+    - swig
+    - wget
+    - yubikey-personalization
+
+- name: yubikey | gnupg dir for yubi
+  file:
+    path: "{{ home }}/.gnupg"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0700
+    state: directory
+
+- name: yubikey | gnupg agent for yubi
+  template:
+    src: "yubikey/gpg-agent.conf.j2"
+    dest: "{{ home }}/.gnupg/gpg-agent.conf"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0400

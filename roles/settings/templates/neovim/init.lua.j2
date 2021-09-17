@@ -1,0 +1,49 @@
+local Plug = vim.fn['plug#']
+local cmd = vim.cmd
+local has = vim.fn.has
+local opt = vim.opt
+local try_require = require('common').try_require
+
+vim.call('plug#begin', '~/.config/nvim/plugged')
+    -- themes
+    Plug 'Mofiqul/dracula.nvim'
+    Plug 'sainnhe/edge'
+
+    -- tree / sidebar
+    Plug 'kyazdani42/nvim-tree.lua'
+    Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'ryanoasis/vim-devicons'
+
+    -- git
+    Plug 'lewis6991/gitsigns.nvim'
+
+    -- fuzzy search
+    Plug 'nvim-telescope/telescope.nvim'
+
+    -- bottom bar
+    -- Plug 'ojroques/nvim-hardline'
+    -- Plug 'glepnir/galaxyline.nvim'
+    Plug 'hoob3rt/lualine.nvim'
+
+    -- enforce default settings
+    Plug 'tpope/vim-sensible'
+
+    -- parsers
+    Plug 'nvim-treesitter/nvim-treesitter'
+
+    -- auto-completion
+    Plug 'hrsh7th/cmp-buffer'
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/nvim-cmp'
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'ray-x/lsp_signature.nvim'
+vim.call('plug#end')
+
+try_require('options')
+
+try_require('mappings')
+
+{% for plugin in neovim_plugin %}
+try_require('plugins.{{ plugin }}')
+{% endfor %}

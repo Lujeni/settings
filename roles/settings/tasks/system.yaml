@@ -1,0 +1,45 @@
+- name: system | install apt key
+  ansible.builtin.apt_key:
+    url: "{{ item }}"
+  loop: "{{ system_apt_key }}"
+
+- name: system | install apt repository
+  ansible.builtin.apt_repository:
+    repo: "{{ item }}"
+    state: present
+  loop: "{{ system_apt_repository }}"
+
+- name: system | install packages
+  apt:
+    package: "{{ item }}"
+    state: latest
+  loop: "{{ system_package }}"
+
+- name: system | default dir
+  file:
+    path: "{{ home }}/{{ item }}"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0775
+    state: directory
+  loop:
+    - go
+    - repos
+    - tmp
+    - venv
+    - works
+
+- name: system | profile.d custom
+  template:
+    src: "etc/profile.d/lujeni.sh.j2"
+    dest: "/etc/profile.d/lujeni.sh"
+    owner: "root"
+    group: "root"
+    mode: 0775
+
+- name: system | root user
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: '^{{ user }}'
+    line: "{{ user }}  ALL = NOPASSWD: ALL"

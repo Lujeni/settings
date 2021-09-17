@@ -1,6 +1,7 @@
 ---
 - hosts: all
   gather_facts: yes
-  sudo: yes
+  become: yes
+  become_user: root
   roles:
     - settings

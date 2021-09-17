@@ -1,0 +1,65 @@
+- name: neovim | ppa
+  ansible.builtin.apt_repository:
+    repo: ppa:neovim-ppa/unstable 
+
+- name: neovim | install
+  apt:
+    package: "{{ item }}"
+    state: latest
+  loop:
+    - neovim
+
+- name: neovim | install pyright
+  community.general.snap:
+    name: pyright
+    classic: yes
+
+- name: neovim | install pylsp
+  pip:
+    name: python-lsp-server
+
+- name: neovim | configuration directory
+  file:
+    path: "{{ home }}/.config/nvim"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0775
+    state: directory
+
+- name: neovim | configuration directory lua
+  file:
+    path: "{{ home }}/.config/nvim/lua"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0775
+    state: directory
+
+- name: neovim | configuration directory lua plugins
+  file:
+    path: "{{ home }}/.config/nvim/lua/plugins"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0775
+    state: directory
+
+- name: neovim | files
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ home }}/{{ item.dest }}"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0775
+  loop:
+    - {"src": "neovim/init.lua.j2", "dest": ".config/nvim/init.lua"}
+    - {"src": "neovim/lua/common.lua.j2", "dest": ".config/nvim/lua/common.lua"}
+    - {"src": "neovim/lua/options.lua.j2", "dest": ".config/nvim/lua/options.lua"}
+    - {"src": "neovim/lua/mappings.lua.j2", "dest": ".config/nvim/lua/mappings.lua"}
+
+- name: neovim | files plugin
+  template:
+    src: "neovim/lua/plugins/{{ item }}.lua.j2"
+    dest: "{{ home }}/.config/nvim/lua/plugins/{{ item }}.lua"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0775
+  loop: "{{ neovim_plugin }}"

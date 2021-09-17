@@ -1,0 +1,82 @@
+- name: home | dot file
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ home }}/{{ item.dest }}"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0644
+  loop:
+    - {"src": "dotfile/Xresources.j2", "dest": ".Xresources"}
+    - {"src": "dotfile/bash_aliases.j2", "dest": ".bash_aliases"}
+    - {"src": "dotfile/bash_profile.j2", "dest": ".bash_profile"}
+    - {"src": "dotfile/bashrc.j2", "dest": ".bashrc"}
+    - {"src": "dotfile/dockerfunc.j2", "dest": ".dockerfunc"}
+    - {"src": "dotfile/exports.j2", "dest": ".exports"}
+    - {"src": "dotfile/func.j2", "dest": ".func"}
+    - {"src": "dotfile/gitconfig.j2", "dest": ".gitconfig"}
+    - {"src": "dotfile/gitignore_global.j2", "dest": ".gitignore_global"}
+    - {"src": "dotfile/ssh_config.j2", "dest": ".ssh/config"}
+
+- name: home | git prompt
+  shell: "git clone https://github.com/magicmonty/bash-git-prompt.git {{ home }}/.bash-git-prompt --depth=1"
+  failed_when: false # dirty, maybe check if the file exists
+  changed_when: false
+
+- name: home | nerd-fonts
+  shell: "git clone https://github.com/ryanoasis/nerd-fonts.git {{ home }}/nerd-fonts --depth=1"
+  failed_when: false # dirty, maybe check if the file exists
+  changed_when: false
+
+- name: home | kubectx clone
+  git:
+    repo: https://github.com/ahmetb/kubectx
+    dest: /opt/kubectx
+    update: yes
+
+- name: home | kubectx binary
+  file:
+    src: "/opt/kubectx/{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
+    owner: root
+    group: "{{ group }}"
+    state: link
+  loop:
+    - kubens
+    - kubectx
+
+- name: home | kubectx completion
+  file:
+    src: "/opt/kubectx/completion/{{ item }}.bash"
+    dest: "{{ home }}/.completion_{{ item }}"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    state: link
+  loop:
+    - kubens
+    - kubectx
+
+- name: home | kubectl aliases based on ahmetb
+  get_url:
+    url: https://rawgit.com/ahmetb/kubectl-alias/master/.kubectl_aliases
+    dest: "{{ home }}/.kubectl_aliases"
+    mode: 0400
+    owner: "{{ user }}"
+    group: "{{ group }}"
+
+- name: home | create virtualenv ansible
+  pip:
+    name: ansible
+    virtualenv: "{{ home }}/venv/ansible"
+
+- name: home | create virtualenv aws-google-auth
+  pip:
+    name: "{{ item }}"
+    virtualenv: "{{ home }}/venv/aws-google-auth"
+  loop:
+    - aws-google-auth
+    - python-u2flib-host
+
+- name: home | create virtualenv cruft
+  pip:
+    name: cruft
+    virtualenv: "{{ home }}/venv/cruft"

@@ -1,20 +1,40 @@
 ---
-- include: system.yml
+- include: system.yaml
   tags:
     - settings
     - settings_system
 
-- include: x.yml
+- include: i3.yaml
   tags:
     - settings
-    - settings_x
-    
+    - settings_i3
+
+- include: home.yaml
+  tags:
+    - settings
+    - settings_home
+
+- include: neovim.yaml
+  tags:
+    - settings
+    - settings_neovim
+
+- include: yubikey.yaml
+  tags:
+    - settings
+    - settings_yubikey
+
+- include: terraform.yaml
+  tags:
+    - settings
+    - settings_terraform
+
 - include: docker.yml
   tags:
     - settings
     - settings_docker
 
-- include: post.yml
+- include: elixir.yaml
   tags:
     - settings
-    - settings_post
+    - settings_elixir

@@ -1,0 +1,26 @@
+- name: alacritty | ppa
+  ansible.builtin.apt_repository:
+    repo: ppa:aslatter/ppa
+
+- name: alacritty | install
+  apt:
+    package: "{{ item }}"
+    state: latest
+  loop:
+    - alacritty
+
+- name: alacritty | configuration directory
+  file:
+    path: "{{ home }}/.config/alacritty"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0775
+    state: directory
+
+- name: alacritty | configuration file
+  template:
+    src: "alacritty/alacritty.yml.j2"
+    dest: "{{ home }}/.config/alacritty/alacritty.yml"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0775

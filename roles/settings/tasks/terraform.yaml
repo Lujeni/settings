@@ -1,0 +1,21 @@
+- name: terraform | create virtualenv terraform
+  pip:
+    name: terrascan
+    virtualenv: "{{ home }}/venv/terraform"
+
+- stat:
+    path: /usr/local/bin/tflint
+  register: tflint_install
+
+- name: terraform | terraform-lint
+  copy:
+    src: install_tflint.sh
+    dest: /tmp
+    owner: root
+    group: root
+    mode: '0755'
+  when: tflint_install.stat.isreg is not defined
+
+- name: terraform | install terraform-lint
+  command: "sh /tmp/install_tflint.sh"
+  when: tflint_install.stat.isreg is not defined

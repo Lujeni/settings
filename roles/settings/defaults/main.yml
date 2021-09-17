@@ -1,185 +1,57 @@
 ---
-home: /home/julien/
+home: /home/lujeni
 
-user: julien
+user: lujeni
 
-group: julien 
+group: lujeni
 
-#other_groups: "root,wheel"
-other_groups: "root,wheel,audio,video,plugdev,docker,ntp,users"
+system_apt_key:
+  - "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
+  - "https://baltocdn.com/helm/signing.asc"
+  - "https://download.docker.com/linux/ubuntu/gpg"
 
-system_default_locale:
-    locale_gen:
-      - name: "en_US.UTF-8"
-    eselect: "en_US.UTF-8"
+system_apt_repository:
+  - "deb https://apt.kubernetes.io/ kubernetes-xenial main"
+  - "deb https://baltocdn.com/helm/stable/debian/ all main"
+  - "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
 
-system_keymap: "us"
-
-system_global_use:
-  - X
-  - bindist
-  - bindist
-  - crypt
-  - cryptsetup
-  - mmx
-  - sse2
-
-system_packages:
-  - app-admin/helm
-  - app-admin/sudo
-  - app-admin/sysstat
-  - app-admin/terraform
-  - app-arch/rar
-  - app-arch/unp
-  - app-crypt/ccid # yubikey
-  - app-crypt/cfssl
-  - app-crypt/gnupg
-  - app-crypt/libu2f-host # yubikey
-  - app-crypt/pinentry # crypt / yubikey
-  - app-editors/vim
-  - app-emulation/docker
-  - app-misc/jq
-  - app-misc/tmux
-  - app-portage/eix
-  - app-portage/genlop
-  - app-portage/gentoolkit
-  - app-text/dos2unix
-  - app-text/tree
-  - app-vim/youcompleteme::ahyangyi-overlay
-  - dev-java/icedtea-bin
-  - dev-lang/go
-  - dev-perl/pcsc-perl # yubikey
-  - dev-python/pip
-  - dev-python/virtualenv
-  - dev-vcs/git
-  - dev-vcs/tig
-  - gnome-extra/nm-applet
-  - media-gfx/graphviz
-  - media-gfx/scrot
-  - media-sound/alsa-utils
-  - media-sound/pnmixer
-  - net-dns/bind-tools
-  - net-misc/dhcp
-  - net-misc/dhcpcd
-  - net-misc/keychain
-  - net-misc/networkmanager
-  - net-misc/ntp
-  - net-misc/telnet-bsd
-  - net-misc/whois
-  - net-vpn/openvpn
-  - sys-apps/exa # ls like
-  - sys-apps/lshw
-  - sys-apps/pciutils
-  - sys-apps/pcsc-lite # yubikey
-  - sys-apps/pcsc-tools # yubikey
-  - sys-apps/usbutils
-  - sys-auth/pam_u2f # yubikey
-  - sys-cluster/kubectl
-  - sys-fs/cryptsetup
-  - sys-fs/dosfstools
-  - sys-kernel/genkernel
-  - sys-libs/ncurses
-  - sys-process/htop
-  - sys-process/iotop
-  - www-client/firefox-bin
-  - www-plugins/adobe-flash
-  - x11-apps/xclock
-  - x11-apps/xrandr
-  - x11-base/xorg-drivers
-  - x11-base/xorg-x11
-  - x11-misc/dmenu
-  - x11-misc/i3lock
-  - x11-misc/i3status
-  - x11-misc/py3status
-  - x11-misc/redshift
-  - x11-misc/slim
-  - x11-misc/urxvt-perls
-  - x11-misc/wmctrl # libinput
-  - x11-misc/xautolock
-  - x11-misc/xclip
-  - x11-misc/xdotool # libinput
-  - x11-terms/rxvt-unicode
-  - x11-terms/xterm
-  - x11-wm/i3
-  - x11-wm/twm
- 
-system_package_use:
-  - app-admin/rsyslog gnutls
-  - app-crypt/gcr gtk
-  - app-crypt/pinentry gnome-keyring gtk
-  - app-editors/vim python -perl -ruby -minimal
-  - dev-lang/python sqlite
-  - dev-libs/boost python # youcompleteme
-  - dev-libs/glib dbus
-  - dev-python/mysqlclient
-  - media-libs/gd truetype jpeg png fontconfig # graphviz
-  - media-libs/imlib2 gif png
-  - media-plugins/alsa-plugins pulseaudio
-  - net-libs/zeromq drafts
-  - net-misc/sshpass
-  - net-wireless/wpa_supplicant dbus
-  - sys-auth/consolekit policykit
-  - sys-auth/polkit consolekit
-  - sys-devel/gcc go
-  - sys-kernel/genkernel cryptsetup
-  - x11-libs/cairo xcb
-  - x11-libs/libxcb xkb
-  - x11-misc/redshift gtk
-  - x11-misc/slim branding
-  - x11-terms/rxvt-unicode 256-color blink fading-colors xft gdk-pixbuf
-
-system_package_keywords:
-  - =app-vim/youcompleteme-99999999 **
-  - app-admin/terraform
-  - app-editors/vim
-  - app-editors/vim-core
-  - app-emulation/docker
-  - app-emulation/docker-proxy
-  - dev-lang/go
-  - dev-perl/pcsc-perl # yubikey
-  - dev-python/sh # youcompleteme
-  - sys-apps/pcsc-tools # yubikey
-  - sys-cluster/kubectl
-  - x11-misc/py3status
- 
-system_input_devices:
-  - evdev
-  - synaptics
-
-system_emerge_options:
-  - "--backtrack=50"
-  - "--jobs={{ ansible_processor_cores }}"
-  - "--keep-going=y"
-  - "--load-average={{ ansible_processor_cores / 2 }}"
-  - "--quiet"
-  - "--with-bdeps=y"
-
-system_ntp_servers:
-  - 0.fr.pool.ntp.org
-  - 1.fr.pool.ntp.org
-  - 2.fr.pool.ntp.org
-  - 3.fr.pool.ntp.org
-
-irc_1000mercis_password: !vault |
-          $ANSIBLE_VAULT;1.1;AES256
-          65666239623234313131633465343339616634346138633339326262393030643939323935303064
-          3233336334366433643836356339346534363431393735380a636161353838653034373430363864
-          36613038633762353536363431633231373133336239393933306633613461363562336137306365
-          6438633363356539360a393431333431316631396564396566386464373939333936643761396634
-          3238
+system_package:
+  - ansible
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - feh
+  - git
+  - gnupg
+  - golang
+  - helm
+  - htop
+  - iotop
+  - jq
+  - keychain
+  - kubectl
+  - libclipboard-perl # urxvt
+  - lsb-release
+  - openvpn
+  - pip
+  - pnmixer
+  - rxvt-unicode
+  - scrot
+  - ssh
+  - tig
+  - tree
+  - unp
+  - virtualenv
+  - xclip
 
 docker_repo_prefix: lujeni
 
 docker_images:
   - aws
-  - azure
   - cheese
   - chrome
   - dbeaver
   - discord
-  - keepass
-  - kubectl
-  - kubens
   - mattermost-desktop
   - remmina
   - robomongo
@@ -188,19 +60,6 @@ docker_images:
   - ykperso
 
 docker_images_version: 1.0.0
-
-system_dotfiles:
-  - {"src": "x/bash_aliases.j2", "dest": ".bash_aliases"}
-  - {"src": "x/bash_profile.j2", "dest": ".bash_profile"}
-  - {"src": "x/bashrc.j2", "dest": ".bashrc"}
-  - {"src": "x/dockerfunc.j2", "dest": ".dockerfunc"}
-  - {"src": "x/exports.j2", "dest": ".exports"}
-  - {"src": "x/func.j2", "dest": ".func"}
-  - {"src": "x/gitconfig.j2", "dest": ".gitconfig"}
-  - {"src": "x/gitignore_global.j2", "dest": ".gitignore_global"}
-  - {"src": "x/pentadactylrc.j2", "dest": ".pentadactylrc"}
-  #  - {"src": "x/ssh_config.j2", "dest": ".ssh/config"}
-  - {"src": "x/vimrc.j2", "dest": ".vimrc"}
 
 system_sources_files:
   - bash-git-prompt/gitprompt.sh
@@ -211,3 +70,14 @@ system_sources_files:
   - exports
   - func
   - kubectl_aliases
+
+neovim_plugin:
+  - cmp
+  - gitsigns
+  - lsp_config_pylsp
+  - lspconfig
+  - lualine
+  - nerdtree
+  - telescope
+  - tree
+  - treesitter
