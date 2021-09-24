@@ -8,6 +8,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
     -- themes
     Plug 'Mofiqul/dracula.nvim'
     Plug 'sainnhe/edge'
+    Plug 'arcticicestudio/nord-vim'
 
     -- tree / sidebar
     Plug 'kyazdani42/nvim-tree.lua'
@@ -33,17 +34,31 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
     Plug 'nvim-treesitter/nvim-treesitter'
 
     -- auto-completion
-    Plug 'hrsh7th/cmp-buffer'
-    Plug 'hrsh7th/cmp-nvim-lsp'
-    Plug 'hrsh7th/nvim-cmp'
     Plug 'neovim/nvim-lspconfig'
-    Plug 'ray-x/lsp_signature.nvim'
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/cmp-buffer'
+    Plug 'hrsh7th/nvim-cmp'
+    -- vsnip
+    Plug 'hrsh7th/cmp-vsnip'
+    Plug 'hrsh7th/vim-vsnip'
+
+    Plug 'glepnir/lspsaga.nvim'
+
+    -- preview
+    Plug 'rmagatti/goto-preview'
+
 vim.call('plug#end')
 
 try_require('options')
 
 try_require('mappings')
 
-{% for plugin in neovim_plugin %}
-try_require('plugins.{{ plugin }}')
-{% endfor %}
+try_require('plugins.cmp')
+try_require('plugins.gitsigns')
+try_require('plugins.lsp_config_pylsp')
+try_require('plugins.lspconfig')
+--try_require('plugins.lualine')
+try_require('plugins.telescope')
+try_require('plugins.tree')
+try_require('plugins.treesitter')
+try_require('plugins.gotopreview')

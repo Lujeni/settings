@@ -74,10 +74,10 @@ system_sources_files:
 neovim_plugin:
   - cmp
   - gitsigns
+  - gotopreview
   - lsp_config_pylsp
   - lspconfig
   - lualine
-  - nerdtree
   - telescope
   - tree
   - treesitter
