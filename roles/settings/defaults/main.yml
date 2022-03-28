@@ -78,6 +78,7 @@ neovim_plugin:
   - lsp_config_pylsp
   - lspconfig
   - lualine
+  - rust
   - telescope
   - tree
   - treesitter
