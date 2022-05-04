@@ -6,14 +6,13 @@ local try_require = require('common').try_require
 
 vim.call('plug#begin', '~/.config/nvim/plugged')
     -- themes
-    Plug 'Mofiqul/dracula.nvim'
-    Plug 'sainnhe/edge'
     Plug 'arcticicestudio/nord-vim'
 
     -- tree / sidebar
     Plug 'kyazdani42/nvim-tree.lua'
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'nvim-lua/plenary.nvim'
+    Plug 'dstein64/nvim-scrollview'
     Plug 'ryanoasis/vim-devicons'
 
     -- git
@@ -23,9 +22,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
     Plug 'nvim-telescope/telescope.nvim'
 
     -- bottom bar
-    -- Plug 'ojroques/nvim-hardline'
-    -- Plug 'glepnir/galaxyline.nvim'
-    Plug 'hoob3rt/lualine.nvim'
+    Plug 'feline-nvim/feline.nvim'
 
     -- enforce default settings
     Plug 'tpope/vim-sensible'
@@ -65,8 +62,6 @@ try_require('options')
 try_require('mappings')
 
 try_require('plugins.cmp')
-
---try_require('plugins.lualine')
 try_require('plugins.gitsigns')
 try_require('plugins.gotopreview')
 try_require('plugins.lsp_config_pylsp')
@@ -74,5 +69,3 @@ try_require('plugins.lspconfig')
 try_require('plugins.telescope')
 try_require('plugins.tree')
 try_require('plugins.treesitter')
-try_require('plugins.rust')
-
