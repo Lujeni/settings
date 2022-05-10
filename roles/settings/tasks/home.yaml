@@ -68,14 +68,6 @@
     name: ansible
     virtualenv: "{{ home }}/venv/ansible"
 
-- name: home | create virtualenv aws-google-auth
-  pip:
-    name: "{{ item }}"
-    virtualenv: "{{ home }}/venv/aws-google-auth"
-  loop:
-    - aws-google-auth
-    - python-u2flib-host
-
 - name: home | create virtualenv cruft
   pip:
     name: cruft
