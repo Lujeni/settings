@@ -6,12 +6,14 @@ alias ansible-vault="source ~/venv/ansible/bin/activate && ansible-vault --vault
 
 alias apg="apg -n 3 -m 15 -x 15 -M CLN"
 alias cruft="source ~/venv/cruft/bin/activate && cruft"
+alias ssh='TERM=xterm-256color ssh'
 
 # no generic
 alias ansible-1m="cd ~/works/repos/numberly/team-infrastructure/ansible"
 alias dmp="cd ~/works/repos/numberly/team-dmp/"
+alias nmp="cd ~/works/repos/numberly/team-nmp/backend"
+alias data-ops="cd ~/works/repos/numberly/team-data-ops"
 alias github="cd ~/perso/repos/github/lujeni"
-alias aws="/usr/local/bin/aws"
 
 # terraform
 alias terrascan="source ~/venv/terraform/bin/activate && terrascan"
@@ -19,7 +21,21 @@ alias terrascan="source ~/venv/terraform/bin/activate && terrascan"
 alias terraform-1m="cd ~/works/repos/numberly/team-infrastructure/terraform-numberly"
 alias terraform-diva="cd ~/works/repos/numberly/team-infrastructure/terraform-diva"
 
-# aws-google-auth
-alias aws-google-auth="source ~/venv/aws-google-auth/bin/activate && aws-google-auth"
-alias aws-diva-production="aws-google-auth -u julien.thebault@numberly.com -I C04he5wkr -S 97839510104 -R eu-west-3 -d 28800 --account diva-production --profile diva-production --role-arn arn:aws:iam::307361919139:role/AdminWithSAML"
-alias aws-numberly-production="aws-google-auth -u julien.thebault@numberly.com -I C04he5wkr -S 97839510104 -R eu-west-3 -d 28800 --account 1000mercis --profile default --role-arn arn:aws:iam::569381709489:role/AdminWithSAML"
+# aws-google-saml
+alias aws-numberly-production='gsts --aws-role-arn arn:aws:iam::569381709489:role/AdminWithSAML --sp-id 97839510104 --idp-id C04he5wkr --username julien.thebault@numberly.com --aws-session-duration 43200 --aws-profile default'
+alias aws-diva-staging='gsts --aws-role-arn arn:aws:iam::315989535748:role/AdminWithSAML --sp-id 97839510104 --idp-id C04he5wkr --username julien.thebault@numberly.com --aws-session-duration 43200 --aws-profile diva-staging'
+
+# azure auth
+alias az-uea-production="az aks get-credentials --name nbly-production-kubernetes1 --resource-group rg-dubai --overwrite-existing"
+
+# kubernetes
+alias stern-par5="stern --context kubernetes1-pr-par5"
+alias stern-pa7="stern --context k8s-pr-1"
+alias kubectl-par5="kubectl --context kubernetes1-pr-par5"
+alias kubectl-pa7="kubectl --context k8s-pr-1"
+
+# kerberos
+alias kerberos-jthe="kinit jthe -kt /home/lujeni/works/certificates/keytabs/jthe.keytab"
+
+# vault
+alias vault-login='VAULT_ADDR=https://vault1.numberly.in:8200 vault login -method=ldap username=jthe'
