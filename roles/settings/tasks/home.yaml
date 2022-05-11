@@ -63,6 +63,28 @@
     owner: "{{ user }}"
     group: "{{ group }}"
 
+- name: home | krew deploy
+  template:
+    src: "opt/krew.sh.j2"
+    dest: "/opt/krew.sh"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0755
+
+- name: home | krew install
+  ansible.builtin.shell: /opt/krew.sh
+  become: yes
+  become_user: "{{ user }}"
+
+#- name: home | krew plugins
+#  ansible.builtin.command: "kubectl krew install {{ item }}"
+#  loop:
+#    - deprecations
+#    - outdated
+#    - view-secret
+#  become: yes
+#  become_user: "{{ user }}"
+
 - name: home | create virtualenv ansible
   pip:
     name: ansible

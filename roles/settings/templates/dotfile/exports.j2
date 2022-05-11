@@ -20,3 +20,6 @@ export GOPATH="$HOME/go/"
 # yubikey
 export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+
+#
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
