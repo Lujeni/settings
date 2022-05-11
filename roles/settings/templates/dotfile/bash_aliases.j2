@@ -22,8 +22,8 @@ alias terraform-1m="cd ~/works/repos/numberly/team-infrastructure/terraform-numb
 alias terraform-diva="cd ~/works/repos/numberly/team-infrastructure/terraform-diva"
 
 # aws-google-saml
-alias aws-numberly-production='gsts --aws-role-arn arn:aws:iam::569381709489:role/AdminWithSAML --sp-id 97839510104 --idp-id C04he5wkr --username julien.thebault@numberly.com --aws-session-duration 43200 --aws-profile default'
-alias aws-diva-staging='gsts --aws-role-arn arn:aws:iam::315989535748:role/AdminWithSAML --sp-id 97839510104 --idp-id C04he5wkr --username julien.thebault@numberly.com --aws-session-duration 43200 --aws-profile diva-staging'
+alias aws-numberly-production='docker exec chrome gsts --aws-role-arn arn:aws:iam::569381709489:role/AdminWithSAML --sp-id 97839510104 --idp-id C04he5wkr --username julien.thebault@numberly.com --aws-session-duration 43200 --aws-profile default'
+alias aws-diva-staging='docker exec chrome gsts --aws-role-arn arn:aws:iam::315989535748:role/AdminWithSAML --sp-id 97839510104 --idp-id C04he5wkr --username julien.thebault@numberly.com --aws-session-duration 43200 --aws-profile diva-staging'
 
 # azure auth
 alias az-uea-production="az aks get-credentials --name nbly-production-kubernetes1 --resource-group rg-dubai --overwrite-existing"
