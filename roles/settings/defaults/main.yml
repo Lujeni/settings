@@ -43,6 +43,8 @@ system_package:
   - unp
   - virtualenv
   - xclip
+  - libffi-dev # pyenv
+  - libsqlite3-dev # pyenv
 
 docker_repo_prefix: lujeni
 
