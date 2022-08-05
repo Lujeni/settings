@@ -45,6 +45,10 @@ system_package:
   - xclip
   - libffi-dev # pyenv
   - libsqlite3-dev # pyenv
+  - libncurses-dev # pyenv
+  - libbz2-dev # pyenv
+  - libreadline-dev # pyenv
+  - lzma-dev # pyenv
 
 docker_repo_prefix: lujeni
 
