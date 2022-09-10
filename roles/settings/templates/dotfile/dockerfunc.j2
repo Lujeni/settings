@@ -231,3 +231,17 @@ robomongo(){
 		-v /tmp/.X11-unix:/tmp/.X11-unix \
 		${DOCKER_REPO_PREFIX}/robomongo:{{ docker_images_version }} /opt/robo3t/bin/robo3t
 }
+
+dmongo(){
+    docker run -it \
+        -p 27017:27017 \
+        --net host \
+        mongo
+}
+
+dmemcached(){
+    docker run -it \
+        -p 11211:11211 \
+        --net host \
+        memcached
+}
