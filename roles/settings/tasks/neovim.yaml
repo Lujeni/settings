@@ -51,15 +51,3 @@
     mode: 0775
   loop:
     - {"src": "neovim/init.lua.j2", "dest": ".config/nvim/init.lua"}
-    - {"src": "neovim/lua/common.lua.j2", "dest": ".config/nvim/lua/common.lua"}
-    - {"src": "neovim/lua/options.lua.j2", "dest": ".config/nvim/lua/options.lua"}
-    - {"src": "neovim/lua/mappings.lua.j2", "dest": ".config/nvim/lua/mappings.lua"}
-
-- name: neovim | files plugin
-  template:
-    src: "neovim/lua/plugins/{{ item }}.lua.j2"
-    dest: "{{ home }}/.config/nvim/lua/plugins/{{ item }}.lua"
-    owner: "{{ user }}"
-    group: "{{ group }}"
-    mode: 0775
-  loop: "{{ neovim_plugin }}"

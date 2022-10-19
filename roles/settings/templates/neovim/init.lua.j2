@@ -1,71 +1,362 @@
-local Plug = vim.fn['plug#']
 local cmd = vim.cmd
+local execute = vim.api.nvim_command
+local fn = vim.fn
+local has = vim.fn.has
 local has = vim.fn.has
 local opt = vim.opt
-local try_require = require('common').try_require
+local vim = vim
 
-vim.call('plug#begin', '~/.config/nvim/plugged')
-    -- themes
-    Plug 'arcticicestudio/nord-vim'
+function set_keymap(mode, from, to)
+    local opts = { noremap = true, silent = false }
+    vim.api.nvim_set_keymap(mode, from, to, opts)
+end
+
+function nvim_set_keymap(mode, from, to, opts)
+    vim.api.nvim_set_keymap(mode, from, to, opts)
+end
+
+-----------------------------------------------------------------------------------------------------------------------
+-- PACKER
+-----------------------------------------------------------------------------------------------------------------------
+-- auto-install
+local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+if fn.empty(fn.glob(install_path)) > 0 then
+  PACKER_BOOTSTRAP = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+  print("Installing packer close and reopen Neovim...")
+end
+require('packer').startup(function(use)
+    -- package manager
+    use 'wbthomason/packer.nvim'
 
     -- tree / sidebar
-    Plug 'kyazdani42/nvim-tree.lua'
-    Plug 'kyazdani42/nvim-web-devicons'
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'dstein64/nvim-scrollview'
-    Plug 'ryanoasis/vim-devicons'
-
-    -- git
-    Plug 'lewis6991/gitsigns.nvim'
-
-    -- fuzzy search
-    Plug 'nvim-telescope/telescope.nvim'
-
-    -- bottom bar
-    Plug 'feline-nvim/feline.nvim'
-
-    -- enforce default settings
-    Plug 'tpope/vim-sensible'
-
-    -- parsers
-    Plug 'nvim-treesitter/nvim-treesitter'
+    use {'kyazdani42/nvim-tree.lua'}
+    use {'kyazdani42/nvim-web-devicons'}
+    use {'nvim-lua/plenary.nvim'}
+    use {'dstein64/nvim-scrollview'}
 
     -- auto-completion
-    Plug 'hrsh7th/cmp-buffer'
-    Plug 'hrsh7th/cmp-nvim-lsp'
-    Plug 'hrsh7th/cmp-path'
-    Plug 'hrsh7th/nvim-cmp'
-    Plug 'neovim/nvim-lspconfig'
+    use {'hrsh7th/cmp-buffer'}
+    use {'hrsh7th/cmp-nvim-lsp'}
+    use {'hrsh7th/cmp-path'}
+    use {'hrsh7th/nvim-cmp'}
+    use {'hrsh7th/cmp-cmdline'}
+    use {'neovim/nvim-lspconfig'}
 
-    -- vsnip
-    Plug 'hrsh7th/cmp-vsnip'
-    Plug 'hrsh7th/vim-vsnip'
-
-    Plug 'glepnir/lspsaga.nvim'
+    -- snippets
+    use {'rafamadriz/friendly-snippets'}
+    use {'L3MON4D3/LuaSnip'}
 
     -- preview
-    Plug 'rmagatti/goto-preview'
+    use {'rmagatti/goto-preview'}
 
-    -- go
-    Plug 'fatih/vim-go'
+    -- git
+    use {'lewis6991/gitsigns.nvim'}
+
+    -- fuzzy search
+    use {'nvim-telescope/telescope.nvim', requires = {'nvim-lua/plenary.nvim'}}
+
+    -- bottom bar
+    use {'feline-nvim/feline.nvim'}
+
+    -- enforce default settings
+    use {'tpope/vim-sensible'}
+
+    -- parsers
+    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
     -- helm
-    Plug 'towolf/vim-helm'
+    use {'towolf/vim-helm'}
 
-    -- rust
-    Plug 'simrat39/rust-tools.nvim'
+    -- themes
+    use {'arcticicestudio/nord-vim'}
+    use {'askfiy/starlight'}
 
-vim.call('plug#end')
+    -- workspaces / project
+    use {'ahmedkhalf/project.nvim', requires = {'neovim/nvim-lspconfig'}}
+end)
 
-try_require('options')
+-----------------------------------------------------------------------------------------------------------------------
+-- OPTIONS
+-----------------------------------------------------------------------------------------------------------------------
+cmd('filetype plugin indent on')
+cmd('set mousehide') -- hide mouse when characters are typed
+cmd('syntax enable')
+opt.autoindent = true -- auto indent for new line
+opt.backspace = { 'indent', 'eol', 'start' } -- backspace behaviors
+opt.backup = false -- no .bak
+opt.cmdheight = 2 -- height of :command line
+opt.colorcolumn = { 120 } -- display a color column when line is longer than 120 chars
+opt.completeopt = { 'menuone', 'noselect' }
+opt.cursorline = true -- show cursor line
+opt.encoding = 'utf-8'
+opt.expandtab = true -- expand tab
+opt.fileencoding = 'utf-8'
+opt.fileencodings = { 'utf-8' }
+opt.hidden = true
+opt.hlsearch = true -- highlight search
+opt.ignorecase = false -- search with no ignore case
+opt.inccommand = 'nosplit' -- live substitute preview
+opt.incsearch = false -- no incremental search
+opt.list = true -- show tabs with listchars
+opt.mouse = 'nv' -- enable mouse under normal and visual mode
+opt.number = true
+opt.ruler = true -- show ruler line
+opt.shiftwidth = 4 -- auto indent shift width
+opt.shortmess:append('c') -- status line e.g. CTRL+G
+opt.showmatch = true -- show bracket match
+opt.signcolumn = 'yes' -- show sign column (column of the line number)
+opt.softtabstop = 4 -- soft tab stop
+opt.splitbelow = true -- split to below
+opt.splitright = true -- split to right
+opt.swapfile = false -- no .swap
+opt.tabstop = 4 -- tab stop
+opt.undofile = true -- use undo file
+opt.updatetime = 300 -- time (in ms) to write to swap file
+opt.whichwrap = 'b,s,<,>,[,]' -- cursor is able to move from end of line to next line
+opt.wildmenu = true -- wildmenu, auto complete for commands
+opt.wildmode = { 'longest', 'full' }
+if not has('gui_running') then
+    opt.t_Co = 256
+end
+if has('termguicolors') then
+    cmd('let &t_8f = "\\<Esc>[38;2;%lu;%lu;%lum"')
+    cmd('let &t_8b = "\\<Esc>[48;2;%lu;%lu;%lum"')
+    opt.termguicolors = true
+end
 
-try_require('mappings')
+-----------------------------------------------------------------------------------------------------------------------
+-- MAPPINGS
+-----------------------------------------------------------------------------------------------------------------------
+vim.g.mapleader = ","
 
-try_require('plugins.cmp')
-try_require('plugins.gitsigns')
-try_require('plugins.gotopreview')
-try_require('plugins.lsp_config_pylsp')
-try_require('plugins.lspconfig')
-try_require('plugins.telescope')
-try_require('plugins.tree')
-try_require('plugins.treesitter')
+-----------------------------------------------------------------------------------------------------------------------
+-- telescope
+-----------------------------------------------------------------------------------------------------------------------
+set_keymap('n', '<C-p>','<cmd>Telescope find_files<cr>')
+set_keymap('n', '<leader>fd', '<cmd>Telescope git_files<cr>')
+set_keymap('n', '<leader>fg', '<cmd>Telescope live_grep<cr>')
+set_keymap('n', '<leader>fb', '<cmd>Telescope buffers<cr>')
+set_keymap('n', '<leader>fh', '<cmd>Telescope help_tags<cr>')
+set_keymap('n', '<leader>fl', '<cmd>Telescope lsp_document_symbols<cr>')
+set_keymap('n', '<leader>fk', '<cmd>Telescope keymaps<cr>')
+set_keymap('n', '<leader>fm', '<cmd>Telescope heading<cr>')
+require('telescope').load_extension('projects')
+
+-----------------------------------------------------------------------------------------------------------------------
+-- nvim-tree
+-----------------------------------------------------------------------------------------------------------------------
+nvim_set_keymap('n', '<C-n>', ':NvimTreeToggle<CR>', {noremap = true})
+require('nvim-tree').setup{
+    sync_root_with_cwd = true,
+    respect_buf_cwd = true,
+    update_focused_file = {
+        enable = true,
+        update_root = true
+    }
+}
+
+-----------------------------------------------------------------------------------------------------------------------
+-- gitsigns
+-----------------------------------------------------------------------------------------------------------------------
+require('gitsigns').setup{
+    numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
+}
+
+-----------------------------------------------------------------------------------------------------------------------
+-- nvim-treesitter
+-----------------------------------------------------------------------------------------------------------------------
+require'nvim-treesitter.configs'.setup {
+  -- A list of parser names, or "all"
+  ensure_installed = "all",
+
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  -- Automatically install missing parsers when entering buffer
+  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+  auto_install = true,
+
+  highlight = {
+    -- `false` will disable the whole extension
+    enable = true,
+
+    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
+    -- the name of the parser)
+    -- list of language that will be disabled
+    -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
+    disable = function(lang, buf)
+        local max_filesize = 100 * 1024 -- 100 KB
+        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+        if ok and stats and stats.size > max_filesize then
+            return true
+        end
+    end,
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
+
+-- goto-preview
+require('goto-preview').setup {
+  width = 120; -- Width of the floating window
+  height = 15; -- Height of the floating window
+  border = {"↖", "─" ,"┐", "│", "┘", "─", "└", "│"}; -- Border characters of the floating window
+  default_mappings = true; -- Bind default mappings
+  debug = false; -- Print debug information
+  opacity = nil; -- 0-100 opacity level of the floating window where 100 is fully transparent.
+  resizing_mappings = false; -- Binds arrow keys to resizing the floating window.
+  post_open_hook = nil; -- A function taking two arguments, a buffer and a window to be ran as a hook.
+  -- These two configs can also be passed down to the goto-preview definition and implementation calls for one off "peak" functionality.
+  focus_on_open = true; -- Focus the floating window when opening it.
+  dismiss_on_move = false; -- Dismiss the floating window when moving the cursor.
+  force_close = true, -- passed into vim.api.nvim_win_close's second argument. See :h nvim_win_close
+  bufhidden = "wipe", -- the bufhidden option to set on the floating window. See :h bufhidden
+}
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+  vim.keymap.set('n', '<space>wl', function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, bufopts)
+  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+end
+
+local lsp_flags = {
+  -- This is the default in Nvim 0.7+
+  debounce_text_changes = 150,
+}
+require('lspconfig')['pyright'].setup{
+    on_attach = on_attach,
+    flags = lsp_flags,
+}
+require('lspconfig')['tsserver'].setup{
+    on_attach = on_attach,
+    flags = lsp_flags,
+}
+require('lspconfig')['rust_analyzer'].setup{
+    on_attach = on_attach,
+    flags = lsp_flags,
+    -- Server-specific settings...
+    settings = {
+      ["rust-analyzer"] = {}
+    }
+}
+
+-- snippets
+require("luasnip.loaders.from_vscode").lazy_load()
+
+local cmp = require'cmp'
+cmp.setup({
+    snippet = {
+      expand = function(args)
+        require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      end,
+    },
+    window = {},
+    mapping = cmp.mapping.preset.insert({
+    ['<Tab>'] = function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
+        else
+          fallback()
+        end
+      end,
+      ['<S-Tab>'] = function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        else
+          fallback()
+        end
+      end,
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    }),
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'luasnip' },
+    }, {
+      { name = 'buffer' },
+    })
+    })
+
+    -- Set configuration for specific filetype.
+    cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+    }, {
+      { name = 'buffer' },
+    })
+    })
+
+    -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+    cmp.setup.cmdline({ '/', '?' }, {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer' }
+    }
+    })
+
+    -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+    cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+})
+
+-----------------------------------------------------------------------------------------------------------------------
+-- starlight
+-----------------------------------------------------------------------------------------------------------------------
+require('starlight').setup()
+
+-----------------------------------------------------------------------------------------------------------------------
+-- goto-preview
+-----------------------------------------------------------------------------------------------------------------------
+require('goto-preview').setup {
+  width = 140; -- Width of the floating window
+  height = 20; -- Height of the floating window
+  default_mappings = true; -- Bind default mappings
+}
+
+-----------------------------------------------------------------------------------------------------------------------
+-- feline
+-----------------------------------------------------------------------------------------------------------------------
+require('feline').setup()
+
+-----------------------------------------------------------------------------------------------------------------------
+-- workspaces
+-----------------------------------------------------------------------------------------------------------------------
+require('project_nvim').setup({
+     manual_mode = false,
+     detection_methods = { "lsp", "pattern" },
+     silent_chdir = true,
+     show_hidden = true,
+   })
