@@ -38,3 +38,8 @@
   tags:
     - settings
     - settings_elixir
+
+- include: rust.yaml
+  tags:
+    - settings
+    - settings_rust

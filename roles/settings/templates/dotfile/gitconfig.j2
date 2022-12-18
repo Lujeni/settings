@@ -6,6 +6,7 @@
 [user]
     name = THEBAULT Julien
     email = julien@thebault.co
+    signingKey = 47C04A69CFACEFBE
 
 [color]
     branch = auto
@@ -50,3 +51,6 @@
     ll = log --decorate=short --abbrev-commit --oneline --graph --all
     pr = pull --rebase
     bta-pack = "!set -e; GIT_DIR=\"$(git rev-parse --git-dir)\"; du -Dxsh \"$GIT_DIR\"; rm -f \"$GIT_DIR\"/objects/pack/tmp_pack_*; [ -d \"$GIT_DIR\"/svn ] && git svn gc; git gc --aggressive --prune=0; rm -f \"$GIT_DIR\"/info/refs \"$GIT_DIR\"/objects/info/packs; find -H \"$GIT_DIR\" -xdev ! -path \"$GIT_DIR/refs\" -empty -delete; du -Dxsh \"$GIT_DIR\";"
+
+[commit]
+    gpgsign = true

@@ -43,3 +43,18 @@
     state: present
     regexp: '^{{ user }}'
     line: "{{ user }}  ALL = NOPASSWD: ALL"
+
+- name: system | root user authenticate
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: '^{{ user }}'
+    line: "Defaults:{{ user }} !authenticate"
+
+- name: system | ansible-galaxy kubernetes (for helm)
+  shell: ansible-galaxy collection install kubernetes.core
+
+- name: system | install snap packages
+  community.general.snap:
+    name: "{{ item }}"
+  loop: "{{ system_snap_package }}"

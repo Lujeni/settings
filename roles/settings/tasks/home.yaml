@@ -76,21 +76,9 @@
   become: yes
   become_user: "{{ user }}"
 
-#- name: home | krew plugins
-#  ansible.builtin.command: "kubectl krew install {{ item }}"
-#  loop:
-#    - deprecations
-#    - outdated
-#    - view-secret
-#  become: yes
-#  become_user: "{{ user }}"
+- name: home | helm plugin install
+  shell: "helm plugin install {{ item }}"
+  loop:
+    - https://github.com/jkroepke/helm-secrets
+  failed_when: false
 
-- name: home | create virtualenv ansible
-  pip:
-    name: ansible
-    virtualenv: "{{ home }}/venv/ansible"
-
-- name: home | create virtualenv cruft
-  pip:
-    name: cruft
-    virtualenv: "{{ home }}/venv/cruft"

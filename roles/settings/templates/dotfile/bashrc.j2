@@ -16,6 +16,9 @@ if test -f $HOME/.gpg-agent-info && \
 else
     eval `gpg-agent --daemon -s > $HOME/.gpg-agent-info`
 fi
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpg-connect-agent updatestartuptty /bye
 
 # go
 export PATH=$PATH:/usr/local/go/bin

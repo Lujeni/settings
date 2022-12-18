@@ -1,6 +1,6 @@
 - name: neovim | ppa
   ansible.builtin.apt_repository:
-    repo: ppa:neovim-ppa/unstable 
+    repo: ppa:neovim-ppa/unstable
 
 - name: neovim | install
   apt:
@@ -8,15 +8,6 @@
     state: latest
   loop:
     - neovim
-
-- name: neovim | install pyright
-  community.general.snap:
-    name: pyright
-    classic: yes
-
-- name: neovim | install pylsp
-  pip:
-    name: python-lsp-server
 
 - name: neovim | configuration directory
   file:
@@ -51,3 +42,11 @@
     mode: 0775
   loop:
     - {"src": "neovim/init.lua.j2", "dest": ".config/nvim/init.lua"}
+
+- name: neovim | symlink
+  ansible.builtin.file:
+    src: /usr/bin/nvim
+    dest: /usr/bin/vim
+    owner: root
+    group: root
+    state: link

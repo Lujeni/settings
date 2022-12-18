@@ -18,52 +18,57 @@ system_apt_repository:
 system_package:
   - ansible
   - apt-transport-https
+  - build-essential
   - ca-certificates
+  - cryptsetup # yubi
   - curl
+  - dirmngr # yubi
   - feh
+  - gcc
   - git
   - gnupg
+  - gnupg-agent # yubi
+  - gnupg2 # yubi
   - golang
   - helm
+  - hopenpgp-tools # yubi
   - htop
   - iotop
   - jq
   - keychain
   - kubectl
-  - libclipboard-perl # urxvt
+  - libbz2-dev # pyenv
+  - libffi-dev # pyenv
+  - libncurses-dev # pyenv
+  - libreadline-dev # pyenv
+  - libsqlite3-dev # pyenv
   - lsb-release
+  - lzma-dev # pyenv
+  - make
   - openvpn
+  - pcscd # yubi
   - pip
   - pnmixer
-  - rxvt-unicode
+  - python-is-python3
+  - scdaemon # yubi
   - scrot
+  - secure-delete # yubi
   - ssh
   - tig
   - tree
   - unp
   - virtualenv
   - xclip
-  - libffi-dev # pyenv
-  - libsqlite3-dev # pyenv
-  - libncurses-dev # pyenv
-  - libbz2-dev # pyenv
-  - libreadline-dev # pyenv
-  - lzma-dev # pyenv
+  - yubikey-personalization  # yubi
+
+system_snap_package:
+  - mattermost-desktop
 
 docker_repo_prefix: lujeni
 
 docker_images:
   - aws
-  - cheese
   - chrome
-  - dbeaver
-  - discord
-  - mattermost-desktop
-  - remmina
-  - robomongo
-  - terraform
-  - weechat
-  - ykperso
 
 docker_images_version: 1.0.0
 

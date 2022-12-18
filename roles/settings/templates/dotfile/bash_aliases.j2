@@ -1,4 +1,6 @@
 # {{ ansible_managed }}
+alias vim="nvim"
+
 alias ansible-galaxy="source ~/venv/ansible/bin/activate && ansible-galaxy"
 alias ansible-playbook-vault="source ~/venv/ansible/bin/activate && ansible-playbook --vault-password-file ~/.ansible-vault-password"
 alias ansible-playbook="source ~/venv/ansible/bin/activate && ansible-playbook"
@@ -22,20 +24,34 @@ alias terraform-1m="cd ~/works/repos/numberly/team-infrastructure/terraform-numb
 alias terraform-diva="cd ~/works/repos/numberly/team-infrastructure/terraform-diva"
 
 # aws-google-saml
-alias aws-numberly-production='docker exec chrome gsts --aws-role-arn arn:aws:iam::569381709489:role/AdminWithSAML --sp-id 97839510104 --idp-id C04he5wkr --username julien.thebault@numberly.com --aws-session-duration 43200 --aws-profile default'
-alias aws-diva-staging='docker exec chrome gsts --aws-role-arn arn:aws:iam::315989535748:role/AdminWithSAML --sp-id 97839510104 --idp-id C04he5wkr --username julien.thebault@numberly.com --aws-session-duration 43200 --aws-profile diva-staging'
+alias aws-numberly-production='docker exec chrome gsts --aws-role-arn arn:aws:iam::569381709489:role/AdminWithSAML --sp-id 97839510104 --idp-id C04he5wkr --username julien.thebault@numberly.com --aws-session-dur
+ation 43200 --aws-profile default'
+
+alias aws-diva-staging='docker exec chrome gsts --aws-role-arn arn:aws:iam::315989535748:role/AdminWithSAML --sp-id 97839510104 --idp-id C04he5wkr --username julien.thebault@numberly.com --aws-session-duration 4
+3200 --aws-profile diva-staging'
+alias aws-diva-production='docker exec chrome gsts --aws-role-arn arn:aws:iam::307361919139:role/AdminWithSAML --sp-id 97839510104 --idp-id C04he5wkr --username julien.thebault@numberly.com --aws-session-duratio
+n 43200 --aws-profile diva-production'
 
 # azure auth
 alias az-uea-production="az aks get-credentials --name nbly-production-kubernetes1 --resource-group rg-dubai --overwrite-existing"
 
 # kubernetes
 alias stern-par5="stern --context kubernetes1-pr-par5"
-alias stern-pa7="stern --context k8s-pr-1"
+alias stern-old="stern --context k8s-pr-1"
+alias stern-pa7="stern --context kubernetes1-pr-pa7"
 alias kubectl-par5="kubectl --context kubernetes1-pr-par5"
-alias kubectl-pa7="kubectl --context k8s-pr-1"
+alias kubectl-old="kubectl --context k8s-pr-1"
+alias kubectl-pa7="kubectl --context kubernetes1-pr-pa7"
+
+stern-full(){
+    (stern-par5 ${1} --tail=10 |egrep -iv "healthz|metrics" & stern-old ${1} --tail=10 |egrep -iv "healthz|metrics" & stern-pa7 {$1} --tail=10 |egrep -iv "healthz|metrics")
+}
 
 # kerberos
 alias kerberos-jthe="kinit jthe -kt /home/lujeni/works/certificates/keytabs/jthe.keytab"
 
 # vault
-alias vault-login='VAULT_ADDR=https://vault1.numberly.in:8200 vault login -method=ldap username=jthe'
+alias vault-login='VAULT_ADDR=https://vault1.numberly.in:8200 vault login -method=ldap username=jthe -format=json |jq -r .auth.client_token > .vault-token'
+
+# vpn
+alias vpn="sudo openvpn /etc/openvpn/jthe.ovpn"
