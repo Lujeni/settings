@@ -58,3 +58,8 @@
   community.general.snap:
     name: "{{ item }}"
   loop: "{{ system_snap_package }}"
+
+- name: system | install pip packages
+  ansible.builtin.pip:
+    name: "{{ item }}"
+  loop: "{{ system_pip_package }}"

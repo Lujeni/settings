@@ -1,6 +1,6 @@
 - name: neovim | ppa
   ansible.builtin.apt_repository:
-    repo: ppa:neovim-ppa/unstable
+    repo: ppa:neovim-ppa/stable
 
 - name: neovim | install
   apt:
