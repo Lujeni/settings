@@ -14,3 +14,9 @@
 - name: rust | install
   shell: /tmp/sh.rustup.rs -y
   when: cargo_exists is failed
+
+- name: rust | install rust-analyzer
+  ansible.builtin.shell: |
+    set -o pipefail rustup component add rust-analyzer
+  args:
+    executable: /bin/bash
