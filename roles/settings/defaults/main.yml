@@ -21,6 +21,7 @@ system_package:
   - build-essential
   - ca-certificates
   - curl
+  - exa
   - feh
   - gcc
   - git
