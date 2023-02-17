@@ -53,6 +53,8 @@ require('packer').startup(function(use)
     after = 'nvim-treesitter',
   }
 
+  use 'nathom/filetype.nvim'
+
   -- Git related plugins
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
@@ -459,3 +461,18 @@ require("nvim-tree").setup({
   },
 });
 nvim_set_keymap('n', '<C-n>', ':NvimTreeToggle<CR>', {noremap = true})
+
+-- In init.lua or filetype.nvim's config file
+-- regex is fishy
+require("filetype").setup({
+    overrides = {
+        complex = {
+            [".*/handlers/.*yaml"] = "yaml.ansible",
+            [".*/handlers/.*yml"] = "yaml.ansible",
+            [".*/meta/.*yaml"] = "yaml.ansible",
+            [".*/meta/.*yml"] = "yaml.ansible",
+            [".*/tasks/.*yaml"] = "yaml.ansible",
+            [".*/tasks/.*yml"] = "yaml.ansible",
+        },
+    },
+})

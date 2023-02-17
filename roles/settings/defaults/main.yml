@@ -17,6 +17,7 @@ system_apt_repository:
 
 system_package:
   - ansible
+  - ansible-lint
   - apt-transport-https
   - build-essential
   - ca-certificates
