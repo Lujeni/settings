@@ -33,7 +33,6 @@ system_package:
   - iotop
   - jq
   - keychain
-  - kubectl
   - libbz2-dev # pyenv
   - libffi-dev # pyenv
   - libncurses-dev # pyenv
@@ -64,7 +63,9 @@ docker_repo_prefix: lujeni
 
 docker_images:
   - aws
+  - azure
   - chrome
+  - remmina
 
 docker_images_version: 1.0.0
 

@@ -27,48 +27,6 @@ del_stopped(){
 	fi
 }
 
-mattermost-desktop(){
-	del_stopped mattermost-desktop
-
-	docker run -d \
-		--memory 2gb \
-        --cpus=1 \
-        --device /dev/dri \
-        --device /dev/snd \
-        --name mattermost-desktop \
-        --net host \
-        -e "DISPLAY=unix${DISPLAY}" \
-        -v "$HOME/docker/data/mattermost-desktop/config:/root/.config/Mattermost" \
-        -v "$HOME/docker/data/mattermost-desktop/downloads:/root/Downloads" \
-        -v /dev/shm:/dev/shm \
-        -v /etc/localtime:/etc/localtime:ro \
-        -v /tmp/.X11-unix:/tmp/.X11-unix \
-        ${DOCKER_REPO_PREFIX}/mattermost-desktop:{{ docker_images_version }} "$@"
-
-	# exit current shell
-	exit 0
-}
-
-discord(){
-    del_stopped discord
-
-    docker run -d \
-		--memory 1gb \
-        --device /dev/dri \
-        --device /dev/snd \
-        --device /dev/video0 \
-        --group-add audio \
-        --group-add video \
-        --name discord \
-        --net host \
-        -e "DISPLAY=unix${DISPLAY}" \
-        -v "$HOME/docker/data/discord/:/root/.config/discord" \
-        -v /etc/hosts:/etc/hosts \
-        -v /etc/localtime:/etc/localtime:ro \
-        -v /tmp/.X11-unix:/tmp/.X11-unix \
-        ${DOCKER_REPO_PREFIX}/discord:{{ docker_images_version }} "$@"
-}
-
 chrome(){
     del_stopped chrome
     
@@ -95,40 +53,6 @@ chrome(){
         ${DOCKER_REPO_PREFIX}/chrome:{{ docker_images_version }} --user-data-dir=/home/chrome/data
 }
 
-weechat(){
-    del_stopped weechat
-    
-    docker run --rm -it \
-		-v /etc/localtime:/etc/localtime:ro \
-		-v "${HOME}/docker/data/weechat:/home/user/.weechat" \
-		${DOCKER_REPO_PREFIX}/weechat:{{ docker_images_version }}
-}
-
-cheese(){
-	del_stopped cheese
-
-	docker run -d \
-		--device /dev/dri \
-		--device /dev/snd \
-		--device /dev/video0 \
-		--name cheese \
-		-e "DISPLAY=unix${DISPLAY}" \
-		-v "${HOME}/docker/data/cheese:/root/Pictures" \
-		-v /etc/localtime:/etc/localtime:ro \
-		-v /tmp/.X11-unix:/tmp/.X11-unix \
-		${DOCKER_REPO_PREFIX}/cheese:{{ docker_images_version }}
-}
-
-ykperso(){
-	del_stopped ykperso
-
-	docker run --rm -it \
-		--device /dev/bus/usb \
-		--device /dev/usb \
-		--name ykperso \
-		-v /etc/localtime:/etc/localtime:ro \
-		${DOCKER_REPO_PREFIX}/ykperso:{{ docker_images_version }} bash
-}
 
 remmina(){
 	del_stopped remmina
@@ -143,22 +67,6 @@ remmina(){
 		-v /etc/localtime:/etc/localtime:ro \
 		-v /tmp/.X11-unix:/tmp/.X11-unix \
 		${DOCKER_REPO_PREFIX}/remmina:{{ docker_images_version }}
-}
-
-terraform-dock(){
-	del_stopped terraform
-
-	docker run -it --rm \
-        --name terraform \
-        --net host \
-        -v "${HOME}/.aws:/root/.aws:ro" \
-        -v "${HOME}/.vault-token:/root/.vault-token:ro" \
-        -v "$(pwd):/usr/src/repo" \
-        -v /tmp:/tmp \
-        --workdir /usr/src/repo \
-        --log-driver none \
-        -e SSH_AUTH_SOCK \
-        ${DOCKER_REPO_PREFIX}/terraform:{{ docker_images_version }} "$@"
 }
 
 azure(){
@@ -185,51 +93,12 @@ aws(){
         ${DOCKER_REPO_PREFIX}/aws:{{ docker_images_version}} "$@"
 }
 
-
-dbeaver(){
-	del_stopped dbeaver
-
-	docker run -d \
-		--name dbeaver \
-		--net host \
-		-e "DISPLAY=unix${DISPLAY}" \
-		-e GDK_DPI_SCALE \
-		-e GDK_SCALE \
-		-v "${HOME}/docker/data/dbeaver:/root" \
-		-v /etc/localtime:/etc/localtime:ro \
-		-v /tmp/.X11-unix:/tmp/.X11-unix \
-		${DOCKER_REPO_PREFIX}/dbeaver:{{ docker_images_version }} dbeaver
-}
-
-keepass(){
-	del_stopped keepass
-
-	docker run -d \
-		--name keepass \
-		--net host \
-		-e "DISPLAY=unix${DISPLAY}" \
-		-e GDK_DPI_SCALE \
-		-e GDK_SCALE \
-		-v "${HOME}/docker/data/keepass:/root" \
-		-v /etc/localtime:/etc/localtime:ro \
-		-v /tmp/.X11-unix:/tmp/.X11-unix \
-		${DOCKER_REPO_PREFIX}/keepass:{{ docker_images_version }}
-}
-
-robomongo(){
-	del_stopped robomongo
-
-	docker run -d \
-		--name robomongo \
-		--net host \
-		-e "DISPLAY=unix${DISPLAY}" \
-        -v "${HOME}/docker/data/robomongo/certificates/:/root/certificates/" \
-		-e GDK_SCALE \
-		-v "${HOME}/docker/data/robomongo:/root/.3T" \
-        -v "${HOME}/docker/data/robomongo/config:/root/.config/3T" \
-		-v /etc/localtime:/etc/localtime:ro \
-		-v /tmp/.X11-unix:/tmp/.X11-unix \
-		${DOCKER_REPO_PREFIX}/robomongo:{{ docker_images_version }} /opt/robo3t/bin/robo3t
+kubectl(){
+    docker run -it --rm \
+        -v "${HOME}/.kube/config:/.kube/config" \
+        --log-driver none \
+        --name kubectl \
+        bitnami/kubectl:1.26.1-debian-11-r11 "$@"
 }
 
 dmongo(){
