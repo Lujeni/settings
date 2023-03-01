@@ -1,3 +1,20 @@
+- name: docker | x11docker directory
+  ansible.builtin.file:
+    path: /opt/x11docker
+    state: directory
+    mode: 0755
+
+- name: docker | x11docker get
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/mviereck/x11docker/master/x11docker
+    dest: /opt/x11docker/installer
+    mode: 0755
+
+- name: docker | x11docker install
+  ansible.builtin.shell: /opt/x11docker/installer --update
+  args:
+    executable: /bin/bash
+
 - name: docker | install
   apt:
     package: "{{ item }}"
