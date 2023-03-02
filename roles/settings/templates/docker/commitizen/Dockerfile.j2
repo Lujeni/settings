@@ -1,0 +1,15 @@
+# {{ ansible_managed }}
+FROM alpine:latest
+
+RUN apk --no-cache add \
+	ca-certificates \
+	python3 \
+	py3-pip \
+	git \
+	&& pip3 install Commitizen
+
+RUN adduser -D appuser
+USER appuser
+RUN mkdir /tmp/repository
+
+ENTRYPOINT [ "cz" ]

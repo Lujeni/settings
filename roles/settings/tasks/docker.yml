@@ -59,17 +59,6 @@
     mode: 0644
   loop: "{{ docker_images }}"
 
-- name: docker | deploy | mattermost extra directory
-  file:
-    path: "{{ home }}/docker/data/mattermost-desktop/{{ item }}"
-    group: "{{ group }}" # NOTE: chrome user in Docker image
-    owner: "{{ user }}" # NOTE: chrome user in Docker image
-    mode: 0755
-    state: directory
-  loop:
-    - config
-    - downloads
-
 - name: docker | deploy | chrome extra directory
   file:
     path: "{{ home }}/docker/data/chrome/{{ item }}"
@@ -96,8 +85,8 @@
     owner: "{{ user }}"
     mode: 0775
 
-      # - name: docker | build
-      #   shell: |
-      #     cd {{ home }}/docker/dockerfiles/{{ item }} && \
-      #     docker build . -t {{ docker_repo_prefix }}/{{ item }}:{{ docker_images_version }}
-      #   loop: "{{ docker_images }}"
+- name: docker | build
+  ansible.builtin.shell: docker build . -f {{ home }}/docker/dockerfiles/{{ item }}/Dockerfile -t {{ docker_repo_prefix }}/{{ item }}:{{ docker_images_version }}
+  loop: "{{ docker_images }}"
+  args:
+    executable: /bin/bash

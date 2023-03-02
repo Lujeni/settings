@@ -69,22 +69,9 @@ remmina(){
 		${DOCKER_REPO_PREFIX}/remmina:{{ docker_images_version }}
 }
 
-azure(){
-	del_stopped azure
-
-	docker run -it --rm \
-        --name azure \
-        --net host \
-        -v "${HOME}/.ssh:/root/.ssh mcr.microsoft.com/azure-cli" \
-        -v "$(pwd):/usr/src/repo" \
-        -v /tmp:/tmp \
-        --workdir /usr/src/repo \
-        --log-driver none \
-        -e SSH_AUTH_SOCK \
-        ${DOCKER_REPO_PREFIX}/azure:{{ docker_images_version }} "$@"
-}
-
 aws(){
+    del_stopped aws
+
     docker run -it --rm \
         -v "${HOME}/.aws:/root/.aws" \
         -v "${HOME}/.vault-token:/root/.vault-token:ro" \
@@ -93,7 +80,21 @@ aws(){
         ${DOCKER_REPO_PREFIX}/aws:{{ docker_images_version}} "$@"
 }
 
+commitizen(){
+    del_stopped commitizen
+
+    docker run -it --rm \
+        --log-driver none \
+        --name commitizen \
+        -v "$(pwd):/tmp/repository" \
+        -v "${HOME}/.gitconfig:/root/.gitconfig" \
+        --workdir /tmp/repository \
+        ${DOCKER_REPO_PREFIX}/commitizen:{{ docker_images_version}} "$@"
+}
+
 kubectl(){
+    del_stopped kubectl
+
     docker run -it --rm \
         -v "${HOME}/.kube/config:/.kube/config" \
         --log-driver none \

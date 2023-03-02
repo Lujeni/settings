@@ -63,8 +63,8 @@ docker_repo_prefix: lujeni
 
 docker_images:
   - aws
-  - azure
   - chrome
+  - commitizen
   - remmina
 
 docker_images_version: 1.0.0

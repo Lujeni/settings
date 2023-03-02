@@ -82,3 +82,7 @@
     - https://github.com/jkroepke/helm-secrets
   failed_when: false
 
+- name: home | commitizen install
+  ansible.builtin.pip:
+    name: commitizen
+    virtualenv: "{{ home }}/venv/commitizen"
