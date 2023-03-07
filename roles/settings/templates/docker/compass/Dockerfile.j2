@@ -1,0 +1,11 @@
+# {{ ansible_managed }}
+FROM x11docker/kde-plasma
+
+RUN sudo apt-get update -y
+RUN sudo apt-get install -y libsecret-1-0 libgconf-2-4 libnss3 wget libgtk2.0-0 libnotify4 xdg-utils gnome-keyring
+RUN wget https://downloads.mongodb.com/compass/mongodb-compass_1.35.0_amd64.deb
+RUN sudo dpkg -i mongodb-compass_*.deb
+RUN groupadd --gid 1000 appuser \
+    && useradd --uid 1000 --gid appuser --shell /bin/bash --create-home appuser
+USER appuser
+CMD ["/usr/bin/mongodb-compass", "--no-sandbox"]

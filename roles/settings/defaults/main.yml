@@ -65,6 +65,7 @@ docker_images:
   - aws
   - chrome
   - commitizen
+  - compass
   - remmina
 
 docker_images_version: 1.0.0

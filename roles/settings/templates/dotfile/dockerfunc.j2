@@ -29,7 +29,6 @@ del_stopped(){
 
 chrome(){
     del_stopped chrome
-    
     docker run -d \
         --name chrome \
         --device /dev/dri \
@@ -55,23 +54,21 @@ chrome(){
 
 
 remmina(){
-	del_stopped remmina
-
-	docker run -d \
-		--name remmina \
-		--net host \
-		-e "DISPLAY=unix${DISPLAY}" \
-		-e GDK_DPI_SCALE \
-		-e GDK_SCALE \
-		-v "${HOME}/docker/data/remmina:/root/.remmina" \
-		-v /etc/localtime:/etc/localtime:ro \
-		-v /tmp/.X11-unix:/tmp/.X11-unix \
-		${DOCKER_REPO_PREFIX}/remmina:{{ docker_images_version }}
+    del_stopped remmina
+    docker run -d \
+        --name remmina \
+        --net host \
+        -e "DISPLAY=unix${DISPLAY}" \
+        -e GDK_DPI_SCALE \
+        -e GDK_SCALE \
+        -v "${HOME}/docker/data/remmina:/root/.remmina" \
+        -v /etc/localtime:/etc/localtime:ro \
+        -v /tmp/.X11-unix:/tmp/.X11-unix \
+        ${DOCKER_REPO_PREFIX}/remmina:{{ docker_images_version }}
 }
 
 aws(){
     del_stopped aws
-
     docker run -it --rm \
         -v "${HOME}/.aws:/root/.aws" \
         -v "${HOME}/.vault-token:/root/.vault-token:ro" \
@@ -82,7 +79,6 @@ aws(){
 
 commitizen(){
     del_stopped commitizen
-
     docker run -it --rm \
         --log-driver none \
         --name commitizen \
@@ -92,9 +88,22 @@ commitizen(){
         ${DOCKER_REPO_PREFIX}/commitizen:{{ docker_images_version}} "$@"
 }
 
+compass(){
+    del_stopped compass
+    docker run -d \
+            --name compass \
+            --net host \
+            -e "DISPLAY=unix${DISPLAY}" \
+            -e GDK_DPI_SCALE \
+            -e GDK_SCALE \
+            -v "${HOME}/docker/data/compass:/home/appuser/.config/MongoDB Compass/" \
+            -v /etc/localtime:/etc/localtime:ro \
+            -v /tmp/.X11-unix:/tmp/.X11-unix \
+            ${DOCKER_REPO_PREFIX}/compass:1.0.0
+}
+
 kubectl(){
     del_stopped kubectl
-
     docker run -it --rm \
         -v "${HOME}/.kube/config:/.kube/config" \
         --log-driver none \
