@@ -86,3 +86,8 @@
   ansible.builtin.pip:
     name: commitizen
     virtualenv: "{{ home }}/venv/commitizen"
+
+- name: home | cruft install
+  ansible.builtin.pip:
+    name: cruft
+    virtualenv: "{{ home }}/venv/cruft"
