@@ -111,6 +111,15 @@ kubectl(){
         bitnami/kubectl:1.26.1-debian-11-r11 "$@"
 }
 
+k9s(){
+    del_stopped k9s
+    docker run -it --rm \
+        -v "${HOME}/.kube/config:/root/.kube/config" \
+        --log-driver none \
+        --name kubectl \
+        quay.io/derailed/k9s
+}
+
 dmongo(){
     docker run -it \
         -p 27017:27017 \
