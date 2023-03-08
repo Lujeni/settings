@@ -1,0 +1,25 @@
+# {{ ansible_managed }}
+FROM debian:bullseye
+
+RUN apt-get update && apt-get install -y \
+	apt-transport-https \
+	ca-certificates \
+	curl \
+	gpg \
+	jq \
+	software-properties-common \
+	sudo
+
+RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+RUN sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+
+RUN sudo apt-get update && sudo apt-get install vault -y
+
+RUN groupadd -g {{ guid }} {{ user }}
+RUN useradd -m -u {{ uuid }} -g {{ guid }} -o -s /bin/bash {{ user }}
+
+RUN rm -rf /var/lib/apt/lists/*
+RUN apt-get purge --auto-remove -y
+
+USER {{ user }}
+ENTRYPOINT ["vault"]

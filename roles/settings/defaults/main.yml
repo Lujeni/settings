@@ -5,6 +5,10 @@ user: lujeni
 
 group: lujeni
 
+uuid: 1000
+
+guid: 1000
+
 system_apt_key:
   - "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
   - "https://baltocdn.com/helm/signing.asc"
@@ -67,6 +71,7 @@ docker_images:
   - commitizen
   - compass
   - remmina
+  - vault
 
 docker_images_version: 1.0.0
 
