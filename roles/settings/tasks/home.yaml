@@ -85,7 +85,7 @@
 - name: home | helm plugin install
   shell: "helm plugin install {{ item }}"
   loop:
-    - https://github.com/jkroepke/helm-secrets
+    - https://github.com/jkroepke/helm-secrets --version v3.15.0
   failed_when: false
 
 - name: home | commitizen install
