@@ -17,6 +17,12 @@
     - {"src": "dotfile/gitignore_global.j2", "dest": ".gitignore_global"}
     - {"src": "dotfile/ssh_config.j2", "dest": ".ssh/config"}
 
+- name: home | aliases for everyone
+  ansible.builtin.file:
+    src: "{{ home }}/.bash_aliases"
+    dest: "/etc/profile.d/00-aliases.sh"
+    state: link
+
 - name: home | git prompt
   shell: "git clone https://github.com/magicmonty/bash-git-prompt.git {{ home }}/.bash-git-prompt --depth=1"
   failed_when: false # dirty, maybe check if the file exists
