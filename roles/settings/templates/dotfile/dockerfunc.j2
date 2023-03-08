@@ -72,7 +72,6 @@ aws(){
     docker run -it --rm \
         -v "${HOME}/.aws:/root/.aws" \
         -v "${HOME}/.vault-token:/root/.vault-token:ro" \
-        --log-driver none \
         --name aws \
         ${DOCKER_REPO_PREFIX}/aws:{{ docker_images_version}} "$@"
 }
@@ -80,7 +79,6 @@ aws(){
 commitizen(){
     del_stopped commitizen
     docker run -it --rm \
-        --log-driver none \
         --name commitizen \
         -v "$(pwd):/tmp/repository" \
         -v "${HOME}/.gitconfig:/root/.gitconfig" \
@@ -105,18 +103,14 @@ compass(){
 kubectl(){
     del_stopped kubectl
     docker run -it --rm \
-        -v "${HOME}/.kube/config:/.kube/config" \
-        --log-driver none \
-        --name kubectl \
+        -v "${HOME}/.kube/config:/home/lujeni/.kube/config" \
         ${DOCKER_REPO_PREFIX}/kubectl:1.0.0 "$@"
 }
 
 k9s(){
-    del_stopped k9s
     docker run -it --rm \
         -v "${HOME}/.kube/config:/root/.kube/config" \
-        --log-driver none \
-        --name kubectl \
+        --name k9s \
         quay.io/derailed/k9s
 }
 
@@ -124,7 +118,6 @@ dvault(){
     del_stopped vault
     docker run -it --rm \
         -v "${HOME}/.vault-token:/root/.vault-token" \
-        --log-driver none \
         --name vault \
         --cap-add=CAP_IPC_LOCK \
         ${DOCKER_REPO_PREFIX}/vault:1.0.0 "$@"

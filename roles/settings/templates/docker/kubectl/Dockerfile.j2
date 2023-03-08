@@ -21,4 +21,5 @@ RUN rm -rf /var/lib/apt/lists/*
 RUN apt-get purge --auto-remove -y
 
 USER {{ user }}
+RUN mkdir /home/{{ user }}/.kube
 ENTRYPOINT ["kubectl"]
