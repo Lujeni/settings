@@ -108,7 +108,7 @@ kubectl(){
         -v "${HOME}/.kube/config:/.kube/config" \
         --log-driver none \
         --name kubectl \
-        bitnami/kubectl:1.26.1-debian-11-r11 "$@"
+        ${DOCKER_REPO_PREFIX}/kubectl:1.0.0 "$@"
 }
 
 k9s(){
@@ -120,7 +120,7 @@ k9s(){
         quay.io/derailed/k9s
 }
 
-vault(){
+dvault(){
     del_stopped vault
     docker run -it --rm \
         -v "${HOME}/.vault-token:/root/.vault-token" \

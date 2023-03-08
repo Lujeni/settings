@@ -70,6 +70,7 @@ docker_images:
   - chrome
   - commitizen
   - compass
+  - kubectl
   - remmina
   - vault
 

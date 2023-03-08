@@ -54,7 +54,8 @@ stern-full(){
 alias kerberos-jthe="kinit jthe -kt /home/lujeni/works/certificates/keytabs/jthe.keytab"
 
 # vault
-alias vault-login='vault login -address=https://vault1.numberly.in:8200 -method=ldap username=jthe -format=json |jq -r .auth.client_token > ~/.vault-token'
+alias vault='dvault login -address=https://vault1.numberly.in:8200'
+alias vault-login='vault login -address=https://vault1.numberly.in:8200 -method=ldap username=jthe -format=json'
 
 # vpn
 alias vpn="sudo openvpn /etc/openvpn/jthe.ovpn"

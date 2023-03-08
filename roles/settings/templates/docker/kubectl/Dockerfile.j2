@@ -1,0 +1,24 @@
+# {{ ansible_managed }}
+FROM debian:bullseye
+
+RUN apt-get update && apt-get install -y \
+	apt-transport-https \
+	ca-certificates \
+	curl \
+	software-properties-common \
+	sudo
+RUN mkdir /etc/apt/keyrings
+
+RUN sudo curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+RUN echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+RUN sudo apt-get update && sudo apt-get install kubectl -y
+
+RUN groupadd -g {{ guid }} {{ user }}
+RUN useradd -m -u {{ uuid }} -g {{ guid }} -o -s /bin/bash {{ user }}
+
+RUN rm -rf /var/lib/apt/lists/*
+RUN apt-get purge --auto-remove -y
+
+USER {{ user }}
+ENTRYPOINT ["kubectl"]
