@@ -88,6 +88,11 @@
     - https://github.com/jkroepke/helm-secrets --version v3.15.0
   failed_when: false
 
+- name: home | ansible install
+  ansible.builtin.pip:
+    name: ansible
+    virtualenv: "{{ home }}/venv/ansible"
+
 - name: home | commitizen install
   ansible.builtin.pip:
     name: commitizen
