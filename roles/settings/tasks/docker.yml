@@ -69,11 +69,19 @@
   loop:
     - data
     - downloads
- 
+
 - name: docker | deploy | chrome local font
   template:
     src: "docker/chrome/local.conf"
     dest: "{{ home }}/docker/dockerfiles/chrome/local.conf"
+    group: "{{ group }}"
+    owner: "{{ user }}"
+    mode: 0644
+
+- name: docker | deploy | chrome seccomp
+  template:
+    src: "docker/chrome/seccomp.json"
+    dest: "/etc/docker/seccomp-chrome.json"
     group: "{{ group }}"
     owner: "{{ user }}"
     mode: 0644
