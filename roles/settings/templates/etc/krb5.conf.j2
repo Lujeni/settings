@@ -1,0 +1,25 @@
+# {{ ansible_managed }}
+
+[libdefaults]
+default_realm = MILLEMERCIS.COM
+dns_lookup_kdc = false
+dns_lookup_realm = false
+ticket_lifetime = 86400
+renew_lifetime = 604800
+forwardable = true
+default_tgs_enctypes = rc4-hmac aes256-cts
+default_tkt_enctypes = rc4-hmac aes256-cts
+permitted_enctypes = rc4-hmac aes256-cts
+udp_preference_limit = 1
+kdc_timeout = 10000
+
+[realms]
+MILLEMERCIS.COM = {
+    kdc = ad-par5.numberly.in
+    kdc = ad-pa7.numberly.in
+    admin_server = ad-par5.numberly.in
+}
+
+[domain_realm]
+.millemercis.com = MILLEMERCIS.COM
+millemercis.com = MILLEMERCIS.COM
