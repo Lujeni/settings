@@ -1,10 +1,10 @@
-- name: home | dot file
+- name: Home | dot file
   template:
     src: "{{ item.src }}"
     dest: "{{ home }}/{{ item.dest }}"
     owner: "{{ user }}"
     group: "{{ group }}"
-    mode: 0644
+    mode: "0644"
   loop:
     - {"src": "dotfile/Xresources.j2", "dest": ".Xresources"}
     - {"src": "dotfile/bash_aliases.j2", "dest": ".bash_aliases"}
@@ -17,29 +17,46 @@
     - {"src": "dotfile/gitignore_global.j2", "dest": ".gitignore_global"}
     - {"src": "dotfile/ssh_config.j2", "dest": ".ssh/config"}
 
-- name: home | aliases for everyone
+- name: Home | create default directory
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+  loop:
+    - "{{ home }}/works/"
+    - "{{ home }}/works/gitlab"
+    - "{{ home }}/works/github"
+    - "{{ home }}/works/github/lujeni"
+    - "{{ home }}/works/issues"
+    - "{{ home }}/works/structure"
+    - "{{ home }}/works/certificates"
+    - "{{ home }}/works/certificates/keytabs/"
+
+- name: Home | aliases for everyone
   ansible.builtin.file:
     src: "{{ home }}/.bash_aliases"
     dest: "/etc/profile.d/00-aliases.sh"
     state: link
 
-- name: home | git prompt
+- name: Home | git prompt
   shell: "git clone https://github.com/magicmonty/bash-git-prompt.git {{ home }}/.bash-git-prompt --depth=1"
   failed_when: false # dirty, maybe check if the file exists
   changed_when: false
 
-- name: home | nerd-fonts
+- name: Home | nerd-fonts
   shell: "git clone https://github.com/ryanoasis/nerd-fonts.git {{ home }}/nerd-fonts --depth=1"
   failed_when: false # dirty, maybe check if the file exists
   changed_when: false
 
-- name: home | kubectx clone
+- name: Home | kubectx clone
   git:
     repo: https://github.com/ahmetb/kubectx
     dest: /opt/kubectx
     update: yes
 
-- name: home | kubectx binary
+- name: Home | kubectx binary
   file:
     src: "/opt/kubectx/{{ item }}"
     dest: "/usr/local/bin/{{ item }}"
@@ -50,7 +67,7 @@
     - kubens
     - kubectx
 
-- name: home | kubectx completion
+- name: Home | kubectx completion
   file:
     src: "/opt/kubectx/completion/{{ item }}.bash"
     dest: "{{ home }}/.completion_{{ item }}"
@@ -61,7 +78,7 @@
     - kubens
     - kubectx
 
-- name: home | kubectl aliases based on ahmetb
+- name: Home | kubectl aliases based on ahmetb
   get_url:
     url: https://rawgit.com/ahmetb/kubectl-alias/master/.kubectl_aliases
     dest: "{{ home }}/.kubectl_aliases"
@@ -69,7 +86,7 @@
     owner: "{{ user }}"
     group: "{{ group }}"
 
-- name: home | krew deploy
+- name: Home | krew deploy
   template:
     src: "opt/krew.sh.j2"
     dest: "/opt/krew.sh"
@@ -77,33 +94,33 @@
     group: "{{ group }}"
     mode: 0755
 
-- name: home | krew install
+- name: Home | krew install
   ansible.builtin.shell: /opt/krew.sh
   become: yes
   become_user: "{{ user }}"
 
-- name: home | helm plugin install
+- name: Home | helm plugin install
   shell: "helm plugin install {{ item }}"
   loop:
     - https://github.com/jkroepke/helm-secrets --version v3.15.0
   failed_when: false
 
-- name: home | ansible install
+- name: Home | ansible install
   ansible.builtin.pip:
     name: ansible
     virtualenv: "{{ home }}/venv/ansible"
 
-- name: home | commitizen install
+- name: Home | commitizen install
   ansible.builtin.pip:
     name: commitizen
     virtualenv: "{{ home }}/venv/commitizen"
 
-- name: home | cruft install
+- name: Home | cruft install
   ansible.builtin.pip:
     name: cruft
     virtualenv: "{{ home }}/venv/cruft"
 
-- name: home | pyenv install python major version
+- name: Home | pyenv install python major version
   ansible.builtin.command: "pyenv install {{ item }}"
   loop:
     - 3.7.16

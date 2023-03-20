@@ -18,7 +18,7 @@ alias ansible-1m="cd ~/works/repos/numberly/team-infrastructure/ansible"
 alias dmp="cd ~/works/repos/numberly/team-dmp/"
 alias nmp="cd ~/works/repos/numberly/team-nmp/backend"
 alias data-ops="cd ~/works/repos/numberly/team-data-ops"
-alias github="cd ~/perso/repos/github/lujeni"
+alias github="cd ~/works/github/lujeni"
 
 # terraform
 alias terrascan="source ~/venv/terraform/bin/activate && terrascan"
@@ -49,7 +49,7 @@ stern-full(){
 }
 
 # kerberos
-alias kerberos-jthe="kinit jthe -kt /home/lujeni/works/certificates/keytabs/jthe.keytab"
+alias kerberos-jthe="kinit jthe -kt /home/{{ user }}/works/certificates/keytabs/jthe.keytab"
 
 # vault
 alias vault='dvault login -address=https://vault1.numberly.in:8200'
