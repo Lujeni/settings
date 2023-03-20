@@ -102,3 +102,12 @@
   ansible.builtin.pip:
     name: cruft
     virtualenv: "{{ home }}/venv/cruft"
+
+- name: home | pyenv install python major version
+  ansible.builtin.command: "pyenv install {{ item }}"
+  loop:
+    - 3.7.16
+    - 3.8.16
+    - 3.9.16
+    - 3.10.10
+    - 3.11.2

@@ -44,6 +44,10 @@ system_package:
   - libsqlite3-dev # pyenv
   - lsb-release
   - lzma-dev # pyenv
+  - liblzma-dev # pyenv
+  - python-tk # pyenv
+  - python3-tk # pyenv
+  - tk-dev # pyenv
   - make
   - nodejs
   - npm
