@@ -38,15 +38,19 @@ alias az-uea-production="az aks get-credentials --name nbly-production-kubernete
 
 # kubernetes
 alias stern-par5="stern --context kubernetes1-pr-par5"
+alias stern-dev="stern --context kubernetes1-dv-par5"
 alias stern-old="stern --context k8s-pr-1"
 alias stern-pa7="stern --context kubernetes1-pr-pa7"
+#
 alias kubectl-par5="kubectl --context kubernetes1-pr-par5"
+alias kubectl-dev="kubectl --context kubernetes1-dv-par5"
 alias kubectl-old="kubectl --context k8s-pr-1"
 alias kubectl-pa7="kubectl --context kubernetes1-pr-pa7"
-
-stern-full(){
-    (stern-par5 ${1} --tail=10 |egrep -iv "healthz|metrics" & stern-old ${1} --tail=10 |egrep -iv "healthz|metrics" & stern-pa7 {$1} --tail=10 |egrep -iv "healthz|metrics")
-}
+#
+alias k9s-par5="k9s --context kubernetes1-pr-par5"
+alias k9s-dev="k9s --context kubernetes1-dv-par5"
+alias k9s-old="k9s --context k8s-pr-1"
+alias k9s-pa7="k9s --context kubernetes1-pr-pa7"
 
 # kerberos
 alias kerberos-jthe="kinit jthe -kt /home/{{ user }}/works/certificates/keytabs/jthe.keytab"

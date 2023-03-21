@@ -110,8 +110,7 @@ kubectl(){
 k9s(){
     docker run -it --rm \
         -v "${HOME}/.kube/config:/root/.kube/config" \
-        --name k9s \
-        quay.io/derailed/k9s
+        quay.io/derailed/k9s "$@"
 }
 
 dvault(){
