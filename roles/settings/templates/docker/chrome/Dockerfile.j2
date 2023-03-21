@@ -27,8 +27,8 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 RUN apt-get update -y && apt-get install -y nodejs
 
 # gsts
-RUN npm install --global gsts
-RUN npm install --global playwright@1.29.1
+RUN npm install --global gsts@5.0.0
+RUN npm install --global playwright@1.30
 
 # cleanup
 RUN rm -rf /var/lib/apt/lists/*
@@ -40,6 +40,5 @@ RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
 
 USER chrome
 RUN npx playwright install
-
 ENTRYPOINT [ "google-chrome" ]
 CMD [ "--user-data-dir=/home/chrome/data" ]
