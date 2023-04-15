@@ -43,3 +43,8 @@
   tags:
     - settings
     - settings_rust
+
+- include: alacritty.yaml
+  tags:
+    - settings
+    - settings_alacritty

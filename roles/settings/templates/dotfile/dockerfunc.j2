@@ -94,10 +94,26 @@ compass(){
             -e "DISPLAY=unix${DISPLAY}" \
             -e GDK_DPI_SCALE \
             -e GDK_SCALE \
-            -v "${HOME}/docker/data/compass:/home/appuser/.config/MongoDB Compass/" \
+            -v "${HOME}/docker/data/compass:/home/{{ user }}/.config/" \
             -v /etc/localtime:/etc/localtime:ro \
             -v /tmp/.X11-unix:/tmp/.X11-unix \
             ${DOCKER_REPO_PREFIX}/compass:1.0.0
+}
+
+robomongo(){
+    del_stopped robomongo
+    docker run -d \
+            --name robomongo \
+            --net host \
+            -e "DISPLAY=unix${DISPLAY}" \
+            -e GDK_DPI_SCALE \
+            -e GDK_SCALE \
+            -v "${HOME}/works/certificates/:/home/{{ user }}/certificates/" \
+	    -v "${HOME}/docker/data/robomongo:/home/{{ user }}/.3T" \
+            -v "${HOME}/docker/data/robomongo/config:/home/{{ user }}/.config/3T" \
+            -v /etc/localtime:/etc/localtime:ro \
+            -v /tmp/.X11-unix:/tmp/.X11-unix \
+            ${DOCKER_REPO_PREFIX}/robomongo:1.0.0
 }
 
 kubectl(){

@@ -1,0 +1,18 @@
+# {{ ansible_managed }}
+
+FROM x11docker/kde-plasma
+
+RUN sudo apt-get update -y && sudo apt-get install -y libgl-dev qt5dxcb-plugin wget unp
+
+RUN wget https://download.studio3t.com/studio-3t/linux/2023.2.0/studio-3t-linux-x64.tar.gz
+RUN unp studio-3t-linux-x64.tar.gz
+RUN echo | bash studio-3t-linux-x64.sh 
+
+RUN groupadd --gid {{ guid }} {{ user }} \
+    && useradd --uid {{ uuid }} --gid {{ user }} --shell /bin/bash --create-home {{ user }}
+
+RUN rm -rf /var/lib/apt/lists/*
+RUN apt-get purge --auto-remove -y
+
+USER {{ user }}
+CMD ["/usr/local/studio3t"]

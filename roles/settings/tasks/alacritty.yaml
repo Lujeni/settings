@@ -24,3 +24,6 @@
     owner: "{{ user }}"
     group: "{{ group }}"
     mode: 0775
+
+- name: Alacritty | install starship
+  ansible.builtin.shell: "curl -sS https://starship.rs/install.sh > /tmp/starship.sh"

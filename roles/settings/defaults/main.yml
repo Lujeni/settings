@@ -23,6 +23,7 @@ system_package:
   - ansible
   - ansible-lint
   - apt-transport-https
+  - bat
   - build-essential
   - ca-certificates
   - curl
@@ -76,6 +77,7 @@ docker_images:
   - compass
   - kubectl
   - remmina
+  - robomongo
   - vault
 
 docker_images_version: 1.0.0

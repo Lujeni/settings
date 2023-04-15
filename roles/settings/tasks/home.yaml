@@ -50,6 +50,9 @@
   failed_when: false # dirty, maybe check if the file exists
   changed_when: false
 
+- name: Home | nerf-fonts install
+  ansible.builtin.shell: "{{ home }}/nerd-fonts/install.sh"
+
 - name: Home | kubectx clone
   git:
     repo: https://github.com/ahmetb/kubectx
