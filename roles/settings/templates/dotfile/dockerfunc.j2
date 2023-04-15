@@ -67,15 +67,6 @@ remmina(){
         ${DOCKER_REPO_PREFIX}/remmina:{{ docker_images_version }}
 }
 
-aws(){
-    del_stopped aws
-    docker run -it --rm \
-        -v "${HOME}/.aws:/root/.aws" \
-        -v "${HOME}/.vault-token:/root/.vault-token:ro" \
-        --name aws \
-        ${DOCKER_REPO_PREFIX}/aws:{{ docker_images_version}} "$@"
-}
-
 commitizen(){
     del_stopped commitizen
     docker run -it --rm \
@@ -114,13 +105,6 @@ robomongo(){
             -v /etc/localtime:/etc/localtime:ro \
             -v /tmp/.X11-unix:/tmp/.X11-unix \
             ${DOCKER_REPO_PREFIX}/robomongo:1.0.0
-}
-
-kubectl(){
-    del_stopped kubectl
-    docker run -it --rm \
-        -v "${HOME}/.kube/config:/home/lujeni/.kube/config" \
-        ${DOCKER_REPO_PREFIX}/kubectl:1.0.0 "$@"
 }
 
 k9s(){

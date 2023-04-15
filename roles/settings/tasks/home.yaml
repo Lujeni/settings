@@ -25,6 +25,7 @@
     owner: "{{ user }}"
     group: "{{ group }}"
   loop:
+    - "{{ home }}/.aws/"
     - "{{ home }}/works/"
     - "{{ home }}/works/gitlab"
     - "{{ home }}/works/github"
@@ -85,9 +86,9 @@
   get_url:
     url: https://rawgit.com/ahmetb/kubectl-alias/master/.kubectl_aliases
     dest: "{{ home }}/.kubectl_aliases"
-    mode: 0400
     owner: "{{ user }}"
     group: "{{ group }}"
+    mode: "0400"
 
 - name: Home | krew deploy
   template:
@@ -95,7 +96,7 @@
     dest: "/opt/krew.sh"
     owner: "{{ user }}"
     group: "{{ group }}"
-    mode: 0755
+    mode: "0755"
 
 - name: Home | krew install
   ansible.builtin.shell: /opt/krew.sh
@@ -108,20 +109,23 @@
     - https://github.com/jkroepke/helm-secrets --version v3.15.0
   failed_when: false
 
-- name: Home | ansible install
+- name: Home | venv install
   ansible.builtin.pip:
-    name: ansible
-    virtualenv: "{{ home }}/venv/ansible"
+    name: "{{ item  }}"
+    virtualenv: "{{ home }}/venv/{{ item }}"
+  loop:
+    - ansible
+    - awscli
+    - commitizen
+    - cruft
 
-- name: Home | commitizen install
-  ansible.builtin.pip:
-    name: commitizen
-    virtualenv: "{{ home }}/venv/commitizen"
-
-- name: Home | cruft install
-  ansible.builtin.pip:
-    name: cruft
-    virtualenv: "{{ home }}/venv/cruft"
+- name: Home | AWS gsts config
+  template:
+    src: "aws/config.j2"
+    dest: "/{{ home }}/.aws/config"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: "0755"
 
 - name: Home | pyenv install python major version
   ansible.builtin.command: "pyenv install {{ item }}"
@@ -131,3 +135,4 @@
     - 3.9.16
     - 3.10.10
     - 3.11.2
+

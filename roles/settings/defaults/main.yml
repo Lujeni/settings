@@ -71,13 +71,10 @@ system_snap_package:
 docker_repo_prefix: lujeni
 
 docker_images:
-  - aws
   - chrome
   - commitizen
   - compass
-  - kubectl
   - remmina
-  - robomongo
   - vault
 
 docker_images_version: 1.0.0

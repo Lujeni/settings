@@ -16,6 +16,8 @@ RUN apt-get update && apt-get install -y \
 	libpulse0 \
 	libv4l-0 \
 	fonts-symbola \
+	python \
+	pip \
 	--no-install-recommends
 # chrome
 RUN curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
@@ -27,6 +29,7 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 RUN apt-get update -y && apt-get install -y nodejs
 
 # gsts
+RUN pip install awscli
 RUN npm install --global gsts@5.0.0
 RUN npm install --global playwright@1.30
 

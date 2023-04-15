@@ -19,16 +19,14 @@ alias more='batcat'
 
 # terraform
 alias terrascan="source ~/venv/terraform/bin/activate && terrascan"
-alias terrascan="source ~/venv/terraform/bin/activate && terrascan"
 alias terraform-1m="cd ~/works/repos/numberly/team-infrastructure/terraform-numberly"
 alias terraform-diva="cd ~/works/repos/numberly/team-infrastructure/terraform-diva"
 
-# aws-google-saml
-alias aws-numberly-production='docker exec chrome gsts --cache-dir /home/chrome/.aws--playwright-engine-executable-path /home/chrome/.cache/ms-playwright/chromium-1045/chrome-linux/chrome --aws-role-arn arn:aws:iam::569381709489:role/AdminWithSAML --region eu-west-3 --sp-id 97839510104 --idp-id C04he5wkr --username julien.thebault@numberly.com --aws-session-duration 43200 --aws-profile default'
-
-# k8s-eks
-alias aws-diva-staging='docker exec chrome gsts --cache-dir /home/chrome/.aws --playwright-engine-executable-path /home/chrome/.cache/ms-playwright/chromium-1045/chrome-linux/chrome --aws-role-arn arn:aws:iam::315989535748:role/AdminWithSAML --region eu-west-3 --sp-id 97839510104 --idp-id C04he5wkr --username julien.thebault@numberly.com --aws-session-duration 43200 --aws-profile diva-staging'
-alias aws-diva-production='docker exec chrome gsts --cache-dir /home/chrome/.aws --playwright-engine-executable-path /home/chrome/.cache/ms-playwright/chromium-1045/chrome-linux/chrome --aws-role-arn arn:aws:iam::307361919139:role/AdminWithSAML --region eu-west-3 --sp-id 97839510104 --idp-id C04he5wkr --username julien.thebault@numberly.com --aws-session-duration 43200 --aws-profile diva-production'
+# aws
+alias aws="~/venv/awscli/bin/aws"
+alias aws-numberly="docker exec chrome aws sts get-caller-identity"
+alias aws-diva-staging="docker exec chrome aws sts get-caller-identity"
+alias aws-diva-production="docker exec chrome aws sts get-caller-identity"
 
 # k8s-azure
 alias az-uea-production="az aks get-credentials --name nbly-production-kubernetes1 --resource-group rg-dubai --overwrite-existing"
