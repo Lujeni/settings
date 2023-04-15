@@ -62,8 +62,8 @@
 - name: docker | deploy | chrome extra directory
   file:
     path: "{{ home }}/docker/data/chrome/{{ item }}"
-    group: "999" # NOTE: chrome user in Docker image
-    owner: "999" # NOTE: chrome user in Docker image
+    group: "{{ group }}"
+    owner: "{{ user }}"
     mode: 0755
     state: directory
   loop:
@@ -89,7 +89,7 @@
 - name: docker | deploy | chrome volume rights
   file:
     path: "{{ home }}/docker/data/chrome/"
-    group: "999"
+    group: "{{ group }}"
     owner: "{{ user }}"
     mode: 0775
 

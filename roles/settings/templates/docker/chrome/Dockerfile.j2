@@ -34,7 +34,7 @@ RUN npm install --global playwright@1.30
 RUN rm -rf /var/lib/apt/lists/*
 RUN apt-get purge --auto-remove -y curl
 
-RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
+RUN groupadd -g {{ guid }} -r chrome && useradd -u {{ uuid }} -r -g chrome -G audio,video chrome \
     && mkdir -p /home/chrome/Downloads && mkdir -p /home/chrome/data \
     && chown -R chrome:chrome /home/chrome
 
