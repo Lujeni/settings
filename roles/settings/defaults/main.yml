@@ -29,6 +29,7 @@ system_package:
   - curl
   - exa
   - feh
+  - ripgrep
   - gcc
   - git
   - gnupg

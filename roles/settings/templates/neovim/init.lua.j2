@@ -53,6 +53,10 @@ require('packer').startup(function(use)
     after = 'nvim-treesitter',
   }
 
+  use {
+    'windwp/nvim-autopairs',
+  }
+
   use 'nathom/filetype.nvim'
 
   use 'gelguy/wilder.nvim'
@@ -458,11 +462,12 @@ require("nvim-tree").setup({
   renderer = {
     group_empty = true,
   },
-  filters = {
-    dotfiles = true,
-  },
 });
 nvim_set_keymap('n', '<C-n>', ':NvimTreeToggle<CR>', {noremap = true})
+
+
+-- Autopair
+require("nvim-autopairs").setup({})
 
 -- In init.lua or filetype.nvim's config file
 -- regex is fishy
