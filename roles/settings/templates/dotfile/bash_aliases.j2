@@ -19,9 +19,9 @@ alias more='batcat'
 
 # aws
 alias aws="~/venv/awscli/bin/aws"
-alias aws-numberly="docker exec chrome aws sts get-caller-identity"
-alias aws-diva-staging="docker exec chrome aws sts get-caller-identity"
-alias aws-diva-production="docker exec chrome aws sts get-caller-identity"
+alias aws-diva-production='docker exec chrome /bin/bash -c "AWS_PROFILE=diva-production aws sts get-caller-identity"'
+alias aws-diva-staging='docker exec chrome /bin/bash -c "AWS_PROFILE=diva-staging aws sts get-caller-identity"'
+alias aws-numberly='docker exec chrome /bin/bash -c "AWS_PROFILE=default aws sts get-caller-identity"'
 
 # k8s-azure
 alias az-uea-production="az aks get-credentials --name nbly-production-kubernetes1 --resource-group rg-dubai --overwrite-existing"

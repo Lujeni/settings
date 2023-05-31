@@ -30,7 +30,7 @@ RUN apt-get update -y && apt-get install -y nodejs
 
 # gsts
 RUN pip install awscli
-RUN npm install --global gsts@5.0.0
+RUN npm install --global @jontg/gsts
 RUN npm install --global playwright@1.30
 
 # cleanup
