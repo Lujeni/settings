@@ -1,0 +1,10 @@
+FROM lujeni/yubikey:1.0.0
+
+ARG TERRAFORM_VERSION=1.4.6
+
+RUN apt-get update -y && apt-get install unzip wget -y
+RUN wget --progress=dot:mega https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+RUN unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip && mv terraform /usr/local/bin/ && chmod +x /usr/local/bin/terraform
+RUN terraform --version
+
+RUN mkdir /root/.aws

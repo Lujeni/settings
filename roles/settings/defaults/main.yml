@@ -72,10 +72,12 @@ system_snap_package:
 docker_repo_prefix: lujeni
 
 docker_images:
-  - chrome
+  - yubikey
+    #  - chrome
   - commitizen
   - compass
   - remmina
+  - terraform
   - vault
 
 docker_images_version: 1.0.0

@@ -135,3 +135,23 @@ dmemcached(){
         --net host \
         memcached
 }
+
+terraform(){
+    del_stopped terraform
+
+    docker run -it --rm \
+        --name terraform \
+        --net host \
+        -v "${HOME}/.aws:/root/.aws:ro" \
+        -v "$(pwd):/usr/src/repo" \
+        -v "/sys/bus/usb/:/sys/bus/usb/" \
+        -v "/dev/bus/usb:/dev/bus/usb" \
+        -v "/sys/devices/:/sys/devices/" \
+        -v "/dev/hidraw12/:/dev/hidraw12/" \
+        -v "${HOME}/.aws:/home/chrome/.aws" \
+        --privileged \
+        --workdir /usr/src/repo \
+        --log-driver none \
+        -e SSH_AUTH_SOCK \
+        ${DOCKER_REPO_PREFIX}/terraform:{{ docker_images_version }} "$@"
+}

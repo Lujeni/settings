@@ -1,36 +1,35 @@
-- name: docker | x11docker directory
+- name: Docker | x11docker directory
   ansible.builtin.file:
     path: /opt/x11docker
     state: directory
-    mode: 0755
+    mode: "0755"
 
-- name: docker | x11docker get
+- name: Docker | x11docker get
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/mviereck/x11docker/master/x11docker
     dest: /opt/x11docker/installer
-    mode: 0755
+    mode: "0755"
 
-- name: docker | x11docker install
+- name: Docker | x11docker install
   ansible.builtin.shell: /opt/x11docker/installer --update
   args:
     executable: /bin/bash
 
-- name: docker | install
+- name: Docker | install
   apt:
     package: "{{ item }}"
-    state: latest
   loop:
     - docker-ce
     - docker-ce-cli
     - containerd.io
 
-- name: docker | adding existing user to docker group
+- name: Docker | adding existing user to docker group
   user:
     name: "{{ user }}"
     groups: docker
     append: yes
 
-- name: docker | enabled
+- name: Docker | enabled
   ansible.builtin.service:
     name: "{{ item }}"
     state: started
@@ -39,7 +38,7 @@
     - docker
     - containerd
 
-- name: docker | data
+- name: Docker | data
   file:
     path: "{{ home }}/docker/{{ item[0] }}/{{ item[1] }}"
     group: "{{ group }}"
@@ -50,16 +49,16 @@
     - ["data", "dockerfiles"]
     - "{{ docker_images }}"
 
-- name: docker | deploy
+- name: Docker | deploy
   template:
     src: "docker/{{ item }}/Dockerfile.j2"
     dest: "{{ home }}/docker/dockerfiles/{{ item }}/Dockerfile"
     group: "{{ group }}"
     owner: "{{ user }}"
-    mode: 0644
+    mode: "0644"
   loop: "{{ docker_images }}"
 
-- name: docker | deploy | chrome extra directory
+- name: Docker | deploy | chrome extra directory
   file:
     path: "{{ home }}/docker/data/chrome/{{ item }}"
     group: "{{ group }}"
@@ -70,7 +69,18 @@
     - data
     - downloads
 
-- name: docker | deploy | chrome local font
+- name: Docker | deploy | yubikey extra
+  template:
+    src: "docker/yubikey/{{ item }}"
+    dest: "{{ home }}/docker/dockerfiles/yubikey/{{ item}}"
+    group: "{{ group }}"
+    owner: "{{ user }}"
+    mode: "0644"
+  loop:
+    - gpg.pub
+    - bashrc
+
+- name: Docker | deploy | chrome local font
   template:
     src: "docker/chrome/local.conf"
     dest: "{{ home }}/docker/dockerfiles/chrome/local.conf"
@@ -78,7 +88,7 @@
     owner: "{{ user }}"
     mode: 0644
 
-- name: docker | deploy | chrome seccomp
+- name: Docker | deploy | chrome seccomp
   template:
     src: "docker/chrome/seccomp.json"
     dest: "/etc/docker/seccomp-chrome.json"
@@ -86,14 +96,14 @@
     owner: "{{ user }}"
     mode: 0644
 
-- name: docker | deploy | chrome volume rights
+- name: Docker | deploy | chrome volume rights
   file:
     path: "{{ home }}/docker/data/chrome/"
     group: "{{ group }}"
     owner: "{{ user }}"
     mode: 0775
 
-- name: docker | build
+- name: Docker | build
   ansible.builtin.shell: docker build . -f {{ home }}/docker/dockerfiles/{{ item }}/Dockerfile -t {{ docker_repo_prefix }}/{{ item }}:{{ docker_images_version }}
   loop: "{{ docker_images }}"
   args:
