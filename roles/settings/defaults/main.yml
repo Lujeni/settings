@@ -76,6 +76,7 @@ docker_images:
     #  - chrome
   - commitizen
   - compass
+  - python-mssql
   - remmina
   - terraform
   - vault

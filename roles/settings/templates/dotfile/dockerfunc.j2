@@ -155,3 +155,18 @@ terraform(){
         -e SSH_AUTH_SOCK \
         ${DOCKER_REPO_PREFIX}/terraform:{{ docker_images_version }} "$@"
 }
+
+dmssql(){
+    del_stopped python_mssql
+
+    docker run -it --rm \
+        --name python_mssql \
+        --net host \
+        -v "$(pwd):/usr/src/repo" \
+        -v "/etc/odbc.ini:/etc/odbc.ini" \
+        -v "/etc/krb5.conf:/etc/krb5.conf" \
+        -v "/tmp/krb5_cache:/tmp/krb5cc_0" \
+        --workdir /usr/src/repo \
+        --log-driver none \
+        ${DOCKER_REPO_PREFIX}/python-mssql:{{ docker_images_version }} bash
+}
