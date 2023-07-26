@@ -170,3 +170,14 @@ dmssql(){
         --log-driver none \
         ${DOCKER_REPO_PREFIX}/python-mssql:{{ docker_images_version }} bash
 }
+
+dpgsql-11(){
+    del_stopped dpgsql_11
+
+    docker run -it \
+        -p 5432:5432 \
+        --net host \
+        --name dpgsql_11 \
+        -e POSTGRES_PASSWORD=mysecretpassword \
+        postgres:11.19-alpine
+}
