@@ -9,39 +9,13 @@
   loop:
     - neovim
 
-- name: neovim | configuration directory
-  file:
-    path: "{{ home }}/.config/nvim"
+- name: neovim | copy
+  ansible.builtin.copy:
+    src: files/nvim
+    dest: "{{ home }}/.config/"
     owner: "{{ user }}"
     group: "{{ group }}"
-    mode: 0775
-    state: directory
-
-- name: neovim | configuration directory lua
-  file:
-    path: "{{ home }}/.config/nvim/lua"
-    owner: "{{ user }}"
-    group: "{{ group }}"
-    mode: 0775
-    state: directory
-
-- name: neovim | configuration directory lua plugins
-  file:
-    path: "{{ home }}/.config/nvim/lua/plugins"
-    owner: "{{ user }}"
-    group: "{{ group }}"
-    mode: 0775
-    state: directory
-
-- name: neovim | files
-  template:
-    src: "{{ item.src }}"
-    dest: "{{ home }}/{{ item.dest }}"
-    owner: "{{ user }}"
-    group: "{{ group }}"
-    mode: 0775
-  loop:
-    - {"src": "neovim/init.lua.j2", "dest": ".config/nvim/init.lua"}
+    mode: "0644"
 
 - name: neovim | symlink
   ansible.builtin.file:
