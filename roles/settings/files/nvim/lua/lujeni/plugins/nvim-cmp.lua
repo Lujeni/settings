@@ -8,6 +8,7 @@ return {
     "onsails/lspkind.nvim",
     "rafamadriz/friendly-snippets",
     "saadparwaiz1/cmp_luasnip",
+    "lukas-reineke/cmp-rg"
   },
   config = function()
     local cmp = require("cmp")
@@ -35,10 +36,11 @@ return {
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
       }),
       sources = cmp.config.sources({
-        { name = "nvim_lsp" },
-        { name = "luasnip" },
         { name = "buffer" },
+        { name = "luasnip" },
+        { name = "nvim_lsp" },
         { name = "path" },
+        { name = "rg" },
       }),
       -- configure lspkind for vs-code like pictograms in completion menu
       formatting = {
