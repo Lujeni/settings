@@ -8,6 +8,7 @@ return {
   },
   config = function()
     local treesitter = require("nvim-treesitter.configs")
+    local commentstring = require("ts_context_commentstring")
     treesitter.setup({
       highlight = {
         enable = true,
@@ -24,6 +25,9 @@ return {
         enable_autocmd = false,
       },
       auto_install = true,
+    })
+    commentstring.setup({
+      enable_autocmd = false
     })
   end
 }
