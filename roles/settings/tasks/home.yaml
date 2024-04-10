@@ -128,7 +128,7 @@
     mode: "0755"
 
 - name: Home | pyenv install python major version
-  ansible.builtin.command: "pyenv install {{ item }}"
+  ansible.builtin.command: "{{ home }}/.pyenv/bin/pyenv install {{ item }}"
   loop:
     - 3.7.16
     - 3.8.16

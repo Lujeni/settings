@@ -29,7 +29,6 @@ system_package:
   - curl
   - exa
   - feh
-  - ripgrep
   - gcc
   - git
   - gnupg
@@ -41,26 +40,26 @@ system_package:
   - keychain
   - libbz2-dev # pyenv
   - libffi-dev # pyenv
+  - liblzma-dev # pyenv
   - libncurses-dev # pyenv
   - libreadline-dev # pyenv
   - libsqlite3-dev # pyenv
   - lsb-release
   - lzma-dev # pyenv
-  - liblzma-dev # pyenv
-  - python-tk # pyenv
-  - python3-tk # pyenv
-  - tk-dev # pyenv
   - make
-  - nodejs
-  - npm
   - openvpn
   - pip
   - pnmixer
   - python-is-python3
+  - python-tk # pyenv
+  - python3-tk # pyenv
   - python3.10-venv # nvim mason
+  - ripgrep
   - scrot
   - ssh
   - tig
+  - tk-dev # pyenv
+  - tmux
   - tree
   - unp
   - virtualenv
