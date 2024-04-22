@@ -5,7 +5,6 @@
 - name: neovim | install
   apt:
     package: "{{ item }}"
-    state: latest
   loop:
     - neovim
 

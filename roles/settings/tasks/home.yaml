@@ -16,6 +16,7 @@
     - {"src": "dotfile/gitconfig.j2", "dest": ".gitconfig"}
     - {"src": "dotfile/gitignore_global.j2", "dest": ".gitignore_global"}
     - {"src": "dotfile/ssh_config.j2", "dest": ".ssh/config"}
+    - {"src": "dotfile/tmux.conf.j2", "dest": ".tmux.conf"}
 
 - name: Home | create default directory
   ansible.builtin.file:
@@ -135,4 +136,9 @@
     - 3.9.16
     - 3.10.10
     - 3.11.2
+  failed_when: false
 
+- name: Home | tmux plugin manager
+  shell: "git clone https://github.com/tmux-plugins/tpm {{ home }}/.tmux/plugins/tpm"
+  failed_when: false
+  changed_when: false
