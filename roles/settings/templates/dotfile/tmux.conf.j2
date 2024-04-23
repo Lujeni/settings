@@ -1,31 +1,45 @@
 # {{ ansible_managed }}
-unbind r
-bind r source-file ~/.tmux.conf
+set -g prefix C-w
 
-set -g mouse on
-setw -g mode-keys vi
-# Address vim mode switching delay (http://superuser.com/a/252717/65504)
-set -s escape-time 0
-# Increase scrollback buffer size from 2000 to 50000 lines
-set -g history-limit 50000
-# Increase tmux messages display duration from 750ms to 4s
-set -g display-time 4000
-# Refresh 'status-left' and 'status-right' more often, from every 15s to 5s
-set -g status-interval 5
-# Upgrade $TERM
-set -g default-terminal "screen-256color"
-set -ag terminal-overrides ",*:RGB"
-# Focus events enabled for terminals that support them
-set -g focus-events on
-# Super useful when using "grouped sessions" and multi-monitor setup
-setw -g aggressive-resize on
+bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
 
 bind-key h select-pane -L
 bind-key j select-pane -D
 bind-key k select-pane -U
 bind-key l select-pane -R
 
+bind-key v split-window -v
+bind-key / split-window -h
+
+set -g mouse on
+
+setw -g mode-keys vi
+
+# Address vim mode switching delay (http://superuser.com/a/252717/65504)
+set -s escape-time 0
+
+# Increase scrollback buffer size from 2000 to 50000 lines
+set -g history-limit 50000
+
+# Increase tmux messages display duration from 750ms to 4s
+set -g display-time 4000
+
+# Refresh 'status-left' and 'status-right' more often, from every 15s to 5s
+set -g status-interval 5
+
+# Upgrade $TERM
+set -g default-terminal "screen-256color"
+set -ag terminal-overrides ",*:RGB"
+
+# Focus events enabled for terminals that support them
+set -g focus-events on
+
+# Super useful when using "grouped sessions" and multi-monitor setup
+setw -g aggressive-resize on
+
 # List of plugins
+set -g @plugin 'catppuccin/tmux'
+set -g @plugin 'jimeh/tmuxifier'
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'christoomey/vim-tmux-navigator'
 
