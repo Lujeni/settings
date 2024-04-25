@@ -26,7 +26,7 @@
     owner: "{{ user }}"
     group: "{{ group }}"
   loop:
-    - "{{ home }}/.tmux/layouts/"
+    - "{{ home }}/.config/tmuxp/"
     - "{{ home }}/.aws/"
     - "{{ home }}/works/"
     - "{{ home }}/works/gitlab"

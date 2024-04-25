@@ -60,6 +60,7 @@ system_package:
   - tig
   - tk-dev # pyenv
   - tmux
+  - tmuxp
   - tree
   - unp
   - virtualenv
