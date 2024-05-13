@@ -22,6 +22,8 @@ return {
         "bashls",
         "cssls",
         "dockerls",
+        "elixirls",
+        "helm_ls",
         "helm_ls",
         "html",
         "lua_ls",
