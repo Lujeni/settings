@@ -68,6 +68,14 @@ return {
         capabilities = capabilities,
         on_attach = on_attach,
       })
+      lspconfig["elixirls"].setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
+      lspconfig["pyright"].setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
       lspconfig["helm_ls"].setup({
         capabilities = capabilities,
         on_attach = on_attach,
@@ -80,19 +88,11 @@ return {
         capabilities = capabilities,
         on_attach = on_attach,
       })
-      lspconfig["volar"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-      })
       lspconfig["rust_analyzer"].setup({
         capabilities = capabilities,
         on_attach = on_attach,
       })
       lspconfig["terraformls"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-      })
-      lspconfig["tsserver"].setup({
         capabilities = capabilities,
         on_attach = on_attach,
       })

@@ -23,6 +23,7 @@ return {
         "cssls",
         "dockerls",
         "elixirls",
+        "lexical",
         "helm_ls",
         "helm_ls",
         "html",
@@ -30,8 +31,6 @@ return {
         "pyright",
         "rust_analyzer",
         "terraformls",
-        "tsserver",
-        "volar", -- vuejs
       },
       automatic_installation = true,
     })
