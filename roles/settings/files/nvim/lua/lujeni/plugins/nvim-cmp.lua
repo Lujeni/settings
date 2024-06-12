@@ -9,13 +9,11 @@ return {
     "onsails/lspkind.nvim",
     "rafamadriz/friendly-snippets",
     "saadparwaiz1/cmp_luasnip",
-    "zbirenbaum/copilot-cmp",
   },
   config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
     local lspkind = require("lspkind")
-    require("copilot_cmp").setup()
 
     require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -38,20 +36,21 @@ return {
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
       }),
       sources = cmp.config.sources({
-        { name = "copilot", group_index = 1, priority = 100},
         { name = "buffer", group_index = 2},
         { name = "luasnip", group_index = 3},
         { name = "nvim_lsp", group_index = 3},
         { name = "path", group_index = 3},
         { name = "rg", group_index = 3},
       }),
+      experimental = {
+        ghost_text = true,
+      },
       -- configure lspkind for vs-code like pictograms in completion menu
       formatting = {
         format = lspkind.cmp_format({
           ellipsis_char = "...",
           max_width = 50,
           mode = "symbol",
-          symbol_map = { Copilot = "" },
         }),
       },
     })
