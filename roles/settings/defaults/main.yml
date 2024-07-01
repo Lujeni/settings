@@ -42,6 +42,7 @@ system_package:
   - libffi-dev # pyenv
   - liblzma-dev # pyenv
   - libncurses-dev # pyenv
+  - libncurses5-dev # asdf
   - libreadline-dev # pyenv
   - libsqlite3-dev # pyenv
   - lsb-release
