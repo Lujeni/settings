@@ -19,8 +19,8 @@
 
 - name: alacritty | configuration file
   template:
-    src: "alacritty/alacritty.yml.j2"
-    dest: "{{ home }}/.config/alacritty/alacritty.yml"
+    src: "alacritty/alacritty.toml.j2"
+    dest: "{{ home }}/.config/alacritty/alacritty.toml"
     owner: "{{ user }}"
     group: "{{ group }}"
     mode: 0775
