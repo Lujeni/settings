@@ -28,6 +28,7 @@ system_package:
   - ca-certificates
   - curl
   - exa
+  - fd-find
   - feh
   - gcc
   - git
