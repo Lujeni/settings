@@ -6,17 +6,19 @@
     group: "{{ group }}"
     mode: "0644"
   loop:
-    - {"src": "dotfile/Xresources.j2", "dest": ".Xresources"}
-    - {"src": "dotfile/bash_aliases.j2", "dest": ".bash_aliases"}
-    - {"src": "dotfile/bash_profile.j2", "dest": ".bash_profile"}
-    - {"src": "dotfile/bashrc.j2", "dest": ".bashrc"}
-    - {"src": "dotfile/dockerfunc.j2", "dest": ".dockerfunc"}
-    - {"src": "dotfile/exports.j2", "dest": ".exports"}
-    - {"src": "dotfile/func.j2", "dest": ".func"}
-    - {"src": "dotfile/gitconfig.j2", "dest": ".gitconfig"}
-    - {"src": "dotfile/gitignore_global.j2", "dest": ".gitignore_global"}
-    - {"src": "dotfile/ssh_config.j2", "dest": ".ssh/config"}
-    - {"src": "dotfile/tmux.conf.j2", "dest": ".tmux.conf"}
+    - { "src": "dotfile/Xresources.j2", "dest": ".Xresources" }
+    - { "src": "dotfile/bash_aliases.j2", "dest": ".bash_aliases" }
+    - { "src": "dotfile/bash_profile.j2", "dest": ".bash_profile" }
+    - { "src": "dotfile/bashrc.j2", "dest": ".bashrc" }
+    - { "src": "dotfile/dockerfunc.j2", "dest": ".dockerfunc" }
+    - { "src": "dotfile/exports.j2", "dest": ".exports" }
+    - { "src": "dotfile/func.j2", "dest": ".func" }
+    - { "src": "dotfile/gitconfig.j2", "dest": ".gitconfig" }
+    - { "src": "dotfile/gitconfig-gitlab.j2", "dest": ".gitconfig-gitlab" }
+    - { "src": "dotfile/gitconfig-github.j2", "dest": ".gitconfig-github" }
+    - { "src": "dotfile/gitignore_global.j2", "dest": ".gitignore_global" }
+    - { "src": "dotfile/ssh_config.j2", "dest": ".ssh/config" }
+    - { "src": "dotfile/tmux.conf.j2", "dest": ".tmux.conf" }
 
 - name: Home | create default directory
   ansible.builtin.file:
