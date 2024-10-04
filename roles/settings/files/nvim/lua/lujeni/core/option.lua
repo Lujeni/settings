@@ -18,6 +18,7 @@ opt.inccommand = "nosplit" -- Preview incremental substitute, Default: "none"
 opt.incsearch = true -- Default: true
 opt.laststatus = 0 -- Hide the status line, Default: 2 (always show status line)
 opt.list = true -- Show some invisible characters (tabs, etc.), Default: false
+opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 opt.mouse = "a" -- Enable mouse mode in all modes, Default: ""
 opt.number = true -- Print line number, Default: false
 opt.pumblend = 10 -- Popup blend transparency, Default: 0
@@ -49,8 +50,10 @@ opt.wrap = false -- Disable line wrap, Default: true
 
 vim.g.markdown_recommended_style = 0 -- Disable the default recommended markdown settings, Default: Not set
 vim.g.mapleader = "," -- Set the map leader key, Default: "\\"
+vim.g.maplocalleader = ","
 vim.g.loaded_netrw = 1 -- Disable netrw, Default: Not set
 vim.g.loaded_netrwPlugin = 1 -- Disable netrwPlugin, Default: Not set
 vim.g.loaded_python3_provider = 0 -- Disable python3 provider, Default: Not set
+vim.g.have_nerd_front = true
 
 vim.loader.enable() -- Enable module loader, Default: false (This is a new feature in some newer versions of Neovim)
