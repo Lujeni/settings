@@ -3,10 +3,10 @@
     excludesfile = ~/.gitignore_global
     editor = vim
 
-[includeIf "gitdir:~/works/gitlab/"]
+[includeIf "hasconfig:remote.*.url:git@gitlab.*:*/**"]
   path = .gitconfig-gitlab
 
-[includeIf "gitdir:~/works/github/"]
+[includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
   path = .gitconfig-github
 
 [color]
@@ -32,9 +32,6 @@
 
 [push]
     default = matching
-
-[commit]
-    gpgsign = true
 
 [branch]
     sort = -committerdate
